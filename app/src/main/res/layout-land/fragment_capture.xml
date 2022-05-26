@@ -19,57 +19,68 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
-    <ImageView
-        android:id="@+id/iv_selected_image"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+    <ImageButton
+        android:id="@+id/ib_take_image"
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
         android:layout_marginEnd="16dp"
+        android:adjustViewBounds="true"
+        android:background="@android:color/transparent"
         android:contentDescription="@string/take_photo"
+        android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_take_camera" />
 
-    <ImageView
-        android:id="@+id/iv_switch_camera"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+    <ImageButton
+        android:id="@+id/ib_switch_camera"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@drawable/bg_button_circle"
         android:contentDescription="@string/switch_camera"
-        app:layout_constraintBottom_toTopOf="@+id/iv_selected_image"
-        app:layout_constraintEnd_toEndOf="@+id/iv_selected_image"
-        app:layout_constraintStart_toStartOf="@+id/iv_selected_image"
+        app:layout_constraintBottom_toTopOf="@+id/ib_take_image"
+        app:layout_constraintEnd_toEndOf="@+id/ib_take_image"
+        app:layout_constraintStart_toStartOf="@+id/ib_take_image"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_flip_camera" />
 
-    <ImageView
-        android:id="@+id/iv_open_gallery"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+    <ImageButton
+        android:id="@+id/ib_open_gallery"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@drawable/bg_button_circle"
         android:contentDescription="@string/open_gallery"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/iv_selected_image"
-        app:layout_constraintStart_toStartOf="@+id/iv_selected_image"
-        app:layout_constraintTop_toBottomOf="@+id/iv_selected_image"
+        app:layout_constraintEnd_toEndOf="@+id/ib_take_image"
+        app:layout_constraintStart_toStartOf="@+id/ib_take_image"
+        app:layout_constraintTop_toBottomOf="@+id/ib_take_image"
         app:srcCompat="@drawable/ic_photo_galery" />
 
-    <ImageView
-        android:id="@+id/iv_close"
+    <ImageButton
+        android:id="@+id/ib_close"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginBottom="24dp"
+        android:background="@android:color/transparent"
         android:contentDescription="@string/close"
+        android:minWidth="48dp"
+        android:minHeight="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/ic_close" />
 
-    <ImageView
-        android:id="@+id/iv_flash"
+    <ImageButton
+        android:id="@+id/ib_flash"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
+        android:background="@android:color/transparent"
         android:contentDescription="@string/flash"
+        android:minWidth="48dp"
+        android:minHeight="48dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_flash_off" />
@@ -90,9 +101,11 @@
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
+        android:progressTint="@color/black_pearl"
         android:rotation="180"
+        android:thumbTint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/iv_open_gallery"
+        app:layout_constraintEnd_toStartOf="@+id/ib_open_gallery"
         app:layout_constraintTop_toTopOf="@+id/guideline" />
 
     <TextView
@@ -129,9 +142,9 @@
         android:text="@string/title_detection"
         android:textColor="@color/white"
         android:textSize="22sp"
-        app:layout_constraintBottom_toTopOf="@+id/iv_close"
-        app:layout_constraintEnd_toEndOf="@+id/iv_close"
-        app:layout_constraintStart_toStartOf="@+id/iv_close"
-        app:layout_constraintTop_toBottomOf="@+id/iv_flash" />
+        app:layout_constraintBottom_toTopOf="@+id/ib_close"
+        app:layout_constraintEnd_toEndOf="@+id/ib_close"
+        app:layout_constraintStart_toStartOf="@+id/ib_close"
+        app:layout_constraintTop_toBottomOf="@+id/ib_flash" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,22 +1,27 @@
 package com.bangkit.capstone.lukaku.ui.main
 
 import android.animation.ObjectAnimator
+import android.content.Intent
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.Menu
 import android.view.View
 import android.view.ViewTreeObserver
 import android.view.animation.AnticipateInterpolator
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate.*
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.animation.doOnEnd
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.bangkit.capstone.lukaku.R
 import com.bangkit.capstone.lukaku.databinding.ActivityMainBinding
+import com.bangkit.capstone.lukaku.utils.Constants.KEY_EVENT_ACTION
+import com.bangkit.capstone.lukaku.utils.Constants.KEY_EVENT_EXTRA
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -30,20 +35,19 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        installSplashScreenWithAnim().apply {
-            lifecycleScope.launch {
-                viewModel.getThemeSetting().collect { isDarkModeActive ->
-                    val theme = if (isDarkModeActive == true) {
-                        MODE_NIGHT_YES
-                    } else MODE_NIGHT_NO
-
-                    setDefaultNightMode(theme)
-                }
-            }
-            setupPreDrawListener()
-        }
-
+        installSplashScreenWithAnim(savedInstanceState)
         supportActionBar?.hide()
+
+        lifecycleScope.launch {
+            viewModel.getThemeSetting().collect { isDarkModeActive ->
+                val theme = if (isDarkModeActive == true) {
+                    AppCompatDelegate.MODE_NIGHT_YES
+                } else AppCompatDelegate.MODE_NIGHT_NO
+
+                AppCompatDelegate.setDefaultNightMode(theme)
+            }
+        }
+        setupPreDrawListener()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -60,6 +64,17 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         navController.navigateUp()
         return true
+    }
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        return when (keyCode) {
+            KeyEvent.KEYCODE_VOLUME_DOWN -> {
+                val intent = Intent(KEY_EVENT_ACTION).apply { putExtra(KEY_EVENT_EXTRA, keyCode) }
+                LocalBroadcastManager.getInstance(this).sendBroadcast(intent)
+                true
+            }
+            else -> super.onKeyDown(keyCode, event)
+        }
     }
 
     private fun setupPreDrawListener() {
@@ -81,22 +96,24 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
-    private fun installSplashScreenWithAnim() {
-        installSplashScreen().setOnExitAnimationListener { splashScreenView ->
-            // Create custom animation.
-            splashScreenView.iconView.animate().rotation(180F).duration = 500L
-            val slideUp = ObjectAnimator.ofFloat(
-                splashScreenView.iconView,
-                View.TRANSLATION_Y,
-                0f,
-                -splashScreenView.iconView.height.toFloat()
-            )
-
-            slideUp.apply {
-                interpolator = AnticipateInterpolator()
-                duration = 500L
-                doOnEnd { splashScreenView.remove() }
-                start()
+    private fun installSplashScreenWithAnim(savedInstanceState: Bundle?) {
+        installSplashScreen().also {
+            if (savedInstanceState == null) {
+                it.setOnExitAnimationListener { splashScreenView ->
+                    // Create custom animation.
+                    splashScreenView.iconView.animate().rotation(180F).duration = 500L
+                    ObjectAnimator.ofFloat(
+                        splashScreenView.iconView,
+                        View.TRANSLATION_Y,
+                        0f,
+                        -splashScreenView.iconView.height.toFloat()
+                    ).apply {
+                        interpolator = AnticipateInterpolator()
+                        duration = 500L
+                        doOnEnd { splashScreenView.remove() }
+                        start()
+                    }
+                }
             }
         }
     }

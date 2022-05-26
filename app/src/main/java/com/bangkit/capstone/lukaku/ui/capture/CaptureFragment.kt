@@ -1,55 +1,76 @@
 package com.bangkit.capstone.lukaku.ui.capture
 
-import android.Manifest.permission.*
+import android.Manifest.permission.CAMERA
 import android.annotation.SuppressLint
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
-import android.util.DisplayMetrics
 import android.view.*
+import android.view.KeyEvent.KEYCODE_UNKNOWN
+import android.view.KeyEvent.KEYCODE_VOLUME_DOWN
+import android.view.ScaleGestureDetector.SimpleOnScaleGestureListener
 import android.view.WindowManager.LayoutParams.ROTATION_ANIMATION_CROSSFADE
 import android.widget.SeekBar
 import androidx.activity.result.contract.ActivityResultContracts.RequestMultiplePermissions
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
-import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity.RESULT_OK
 import androidx.camera.core.*
-import androidx.camera.core.CameraSelector.DEFAULT_BACK_CAMERA
-import androidx.camera.core.CameraSelector.DEFAULT_FRONT_CAMERA
+import androidx.camera.core.CameraSelector.*
 import androidx.camera.core.ImageCapture.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
+import androidx.core.view.WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.navigation.fragment.findNavController
 import com.bangkit.capstone.lukaku.R
 import com.bangkit.capstone.lukaku.databinding.FragmentCaptureBinding
 import com.bangkit.capstone.lukaku.ui.capture.CaptureFragmentDirections.actionCaptureFragmentToViewerFragment
+import com.bangkit.capstone.lukaku.utils.*
+import com.bangkit.capstone.lukaku.utils.Constants.ANIMATION_FAST_MILLIS
+import com.bangkit.capstone.lukaku.utils.Constants.ANIMATION_SLOW_MILLIS
+import com.bangkit.capstone.lukaku.utils.Constants.DECIMAL_FORMAT
 import com.bangkit.capstone.lukaku.utils.Constants.IMAGE_TYPE
-import com.bangkit.capstone.lukaku.utils.createFile
-import com.bangkit.capstone.lukaku.utils.toast
-import com.bangkit.capstone.lukaku.utils.uriToFile
+import com.bangkit.capstone.lukaku.utils.Constants.KEY_EVENT_ACTION
+import com.bangkit.capstone.lukaku.utils.Constants.KEY_EVENT_EXTRA
 import java.io.File
 import java.text.DecimalFormat
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
-import kotlin.math.abs
-import kotlin.math.max
-import kotlin.math.min
 
 class CaptureFragment : Fragment(), View.OnClickListener {
 
     private var _binding: FragmentCaptureBinding? = null
     private val binding get() = _binding!!
 
+    private lateinit var broadcastManager: LocalBroadcastManager
     private lateinit var cameraExecutor: ExecutorService
-    private lateinit var cameraControl: CameraControl
-    private lateinit var cameraInfo: CameraInfo
 
-    private var cameraSelector: CameraSelector = DEFAULT_BACK_CAMERA
+    private var cameraProvider: ProcessCameraProvider? = null
+    private var cameraControl: CameraControl? = null
     private var imageCapture: ImageCapture? = null
-    private var flashFlag: Boolean = false
+    private var cameraInfo: CameraInfo? = null
+    private var lensFacing: Int = LENS_FACING_BACK
+    private var preview: Preview? = null
+    private var isFlash: Boolean = false
+    private var camera: Camera? = null
 
-    private val requestPermissions = registerForActivityResult(RequestMultiplePermissions()) {
+    private val viewModel: CaptureViewModel by viewModels()
+
+    private val requestPermissions = registerForActivityResult(
+        RequestMultiplePermissions()
+    ) {
         it.entries.forEach { permission ->
             when (permission.key) {
                 CAMERA -> {
@@ -64,12 +85,24 @@ class CaptureFragment : Fragment(), View.OnClickListener {
         }
     }
 
-    private val launcherGallery = registerForActivityResult(StartActivityForResult()) {
-        if (it.resultCode == AppCompatActivity.RESULT_OK) {
+    private val launcherGallery = registerForActivityResult(
+        StartActivityForResult()
+    ) {
+        if (it.resultCode == RESULT_OK) {
             val imageUri: Uri = it.data?.data as Uri
             val imageFile = uriToFile(imageUri, requireContext())
 
             onNavigate(imageFile)
+        }
+    }
+
+    private val volumeReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            when (intent.getIntExtra(KEY_EVENT_EXTRA, KEYCODE_UNKNOWN)) {
+                KEYCODE_VOLUME_DOWN -> {
+                    binding.ibTakeImage.simulateClick()
+                }
+            }
         }
     }
 
@@ -85,139 +118,169 @@ class CaptureFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        requestPermissions.launch(REQUIRED_PERMISSIONS)
         cameraExecutor = Executors.newSingleThreadExecutor()
+        broadcastManager = LocalBroadcastManager.getInstance(view.context)
 
-        binding.apply {
-            ivSelectedImage.setOnClickListener(this@CaptureFragment)
-            ivSwitchCamera.setOnClickListener(this@CaptureFragment)
-            ivClose.setOnClickListener(this@CaptureFragment)
-            ivFlash.setOnClickListener(this@CaptureFragment)
-            ivOpenGallery.setOnClickListener(this@CaptureFragment)
+        val filter = IntentFilter().apply { addAction(KEY_EVENT_ACTION) }
+        broadcastManager.registerReceiver(volumeReceiver, filter)
+
+        if (savedInstanceState == null) {
+            binding.viewFinder.post(this@CaptureFragment::startCamera)
         }
+
+        onSubscribe()
+        startListener()
     }
 
     override fun onResume() {
         super.onResume()
         setAnimation()
-        startCamera()
-        zoomCamera()
+        behaviorSystemUI(true)
+
+        requestPermissions.launch(REQUIRED_PERMISSIONS)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+        behaviorSystemUI()
+
         _binding = null
         cameraExecutor.shutdown()
+        broadcastManager.unregisterReceiver(volumeReceiver)
     }
 
-    override fun onClick(p0: View) {
-        when (p0.id) {
-            R.id.iv_selected_image -> takePhoto()
-            R.id.iv_switch_camera -> swichCamera()
-            R.id.iv_close -> requireActivity().onBackPressed()
-            R.id.iv_flash -> setFlash()
-            R.id.iv_open_gallery -> startGallery()
+    override fun onStop() {
+        super.onStop()
+        viewModel.apply {
+            mutableLensFacing.value = lensFacing
+            mutableIsFlash.value = isFlash
+        }
+    }
+
+    override fun onClick(view: View) {
+        when (view.id) {
+            R.id.ib_take_image -> takePhoto()
+            R.id.ib_switch_camera -> swichCamera()
+            R.id.ib_close -> requireActivity().onBackPressed()
+            R.id.ib_flash -> swichFlash()
+            R.id.ib_open_gallery -> startGallery()
+        }
+    }
+
+    private fun onSubscribe() {
+        viewModel.apply {
+            getCameraProvider().observe(viewLifecycleOwner) {
+                cameraProvider = it
+            }
+
+            getLensFacing().observe(viewLifecycleOwner) {
+                lensFacing = it
+                onBindCamera()
+            }
+
+            isFlash().observe(viewLifecycleOwner) {
+                isFlash = it
+                updateCameraFlash()
+            }
+
+            getCamera().observe(viewLifecycleOwner) {
+                camera = it
+                cameraInfo = camera?.cameraInfo
+                cameraControl = camera?.cameraControl
+
+                updateCameraFlash()
+                zoomCamera()
+            }
+        }
+    }
+
+    private fun startListener() {
+        binding.apply {
+            ibTakeImage.setOnClickListener(this@CaptureFragment)
+            ibSwitchCamera.setOnClickListener(this@CaptureFragment)
+            ibClose.setOnClickListener(this@CaptureFragment)
+            ibFlash.setOnClickListener(this@CaptureFragment)
+            ibOpenGallery.setOnClickListener(this@CaptureFragment)
         }
     }
 
     private fun startGallery() {
-        val intent = Intent()
-        intent.action = Intent.ACTION_GET_CONTENT
-        intent.type = IMAGE_TYPE
+        val intent = Intent().apply {
+            action = Intent.ACTION_GET_CONTENT
+            type = IMAGE_TYPE
+        }
+
         val chooser = Intent.createChooser(intent, getString(R.string.title_gallery))
         launcherGallery.launch(chooser)
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private fun startCamera() {
-        val cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
+        ProcessCameraProvider.getInstance(requireContext()).let {
+            cameraProvider = it.get()
+            viewModel.mutableCameraProvider.value = cameraProvider
 
-        cameraProviderFuture.addListener({
-            binding.apply {
-                val displayMetrics =
-                    DisplayMetrics().also { viewFinder.display.getRealMetrics(it) }
-                val aspectRatio =
-                    aspectRatio(displayMetrics.widthPixels, displayMetrics.heightPixels)
-                val rotation = viewFinder.display.rotation
-
-                val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
-                val preview = Preview.Builder()
-                    .setTargetAspectRatio(aspectRatio)
-                    .setTargetRotation(rotation)
-                    .build()
-                    .also { it.setSurfaceProvider(viewFinder.surfaceProvider) }
-
-                imageCapture = Builder()
-                    .setCaptureMode(CAPTURE_MODE_MINIMIZE_LATENCY)
-                    .setTargetAspectRatio(aspectRatio)
-                    .setTargetRotation(rotation)
-                    .build()
-
-                try {
-                    cameraProvider.unbindAll()
-                    val camera = cameraProvider.bindToLifecycle(
-                        this@CaptureFragment,
-                        cameraSelector,
-                        preview,
-                        imageCapture
+            it.addListener({
+                lensFacing = when {
+                    hasBackCamera() -> LENS_FACING_BACK
+                    hasFrontCamera() -> LENS_FACING_FRONT
+                    else -> throw IllegalStateException(
+                        getString(R.string.error_camera_availability)
                     )
-
-                    cameraControl = camera.cameraControl
-                    cameraInfo = camera.cameraInfo
-
-                    flashControl()
-
-                    val listener =
-                        object : ScaleGestureDetector.SimpleOnScaleGestureListener() {
-                            override fun onScale(detector: ScaleGestureDetector): Boolean {
-                                val ratio = (cameraInfo.zoomState.value?.zoomRatio)
-                                val scale = detector.scaleFactor
-                                cameraControl.setZoomRatio(scale * ratio!!)
-                                zoomControl()
-                                return true
-                            }
-                        }
-
-                    val scaleGestureDetector = ScaleGestureDetector(context, listener)
-
-                    viewFinder.setOnTouchListener { _, p1 ->
-                        when (p1.action) {
-                            MotionEvent.ACTION_DOWN -> return@setOnTouchListener true
-                            MotionEvent.ACTION_UP -> {
-                                val factory = viewFinder.meteringPointFactory
-                                val point = factory.createPoint(p1.x, p1.y)
-                                val action = FocusMeteringAction.Builder(point).build()
-                                cameraControl.startFocusAndMetering(action)
-
-                                return@setOnTouchListener true
-                            }
-                            else -> {
-                                scaleGestureDetector.onTouchEvent(p1)
-
-                                return@setOnTouchListener false
-                            }
-                        }
-                    }
-
-                } catch (exc: Exception) {
-                    requireActivity().toast(getString(R.string.error_camera_start))
                 }
+
+                imageCapture?.flashMode = when {
+                    isFlash -> FLASH_MODE_ON
+                    else -> FLASH_MODE_OFF
+                }
+
+                updateCameraFlip()
+                updateCameraFlash()
+                onBindCamera()
+            }, ContextCompat.getMainExecutor(requireContext()))
+        }
+    }
+
+    private fun onBindCamera() {
+        val screenAspectRatio = AspectRatio.RATIO_16_9
+        val cameraProvider = cameraProvider
+            ?: throw IllegalStateException(getString(R.string.error_camera_initialization))
+        val cameraSelector = CameraSelector.Builder()
+            .requireLensFacing(lensFacing)
+            .build()
+
+        preview = Preview.Builder()
+            .setTargetAspectRatio(screenAspectRatio)
+            .build().also {
+                it.setSurfaceProvider(binding.viewFinder.surfaceProvider)
             }
-        }, ContextCompat.getMainExecutor(requireContext()))
+
+        imageCapture = ImageCapture.Builder()
+            .setCaptureMode(CAPTURE_MODE_MINIMIZE_LATENCY)
+            .setTargetAspectRatio(screenAspectRatio)
+            .build()
+
+        cameraProvider.unbindAll()
+
+        try {
+            camera = cameraProvider.bindToLifecycle(
+                this,
+                cameraSelector,
+                preview,
+                imageCapture
+            )
+            viewModel.mutableCamera.value = camera
+
+        } catch (exc: Exception) {
+            requireActivity().toast(getString(R.string.error_camera_start))
+        }
     }
 
     private fun setAnimation() {
         requireActivity().window.attributes.rotationAnimation = ROTATION_ANIMATION_CROSSFADE
     }
 
-    private fun aspectRatio(width: Int, height: Int): Int {
-        val previewRatio = max(width, height).toDouble() / min(width, height)
-        if (abs(previewRatio - RATIO_4_3_VALUE) <= abs(previewRatio - RATIO_16_9_VALUE)) {
-            return AspectRatio.RATIO_4_3
-        }
-        return AspectRatio.RATIO_16_9
-    }
-
+    @SuppressLint("ClickableViewAccessibility")
     private fun zoomCamera() {
         binding.seekBarZoom.setOnSeekBarChangeListener(object :
             SeekBar.OnSeekBarChangeListener {
@@ -226,7 +289,7 @@ class CaptureFragment : Fragment(), View.OnClickListener {
                 progress: Int,
                 fromUser: Boolean
             ) {
-                cameraControl.setLinearZoom(progress / 100.toFloat())
+                cameraControl?.setLinearZoom(progress.toFloat() / 100)
                 zoomControl()
             }
 
@@ -234,51 +297,103 @@ class CaptureFragment : Fragment(), View.OnClickListener {
 
             override fun onStopTrackingTouch(seekBar: SeekBar?) {}
         })
+
+        val listener = object : SimpleOnScaleGestureListener() {
+            override fun onScale(detector: ScaleGestureDetector): Boolean {
+                val ratio = cameraInfo?.zoomState?.value?.zoomRatio as Float
+                val scale = detector.scaleFactor
+                cameraControl?.setZoomRatio(scale * ratio)
+                zoomControl()
+                return true
+            }
+        }
+
+        val scaleGestureDetector = ScaleGestureDetector(context, listener)
+
+        binding.viewFinder.setOnTouchListener { _, event ->
+            when (event.action) {
+                MotionEvent.ACTION_DOWN -> return@setOnTouchListener true
+                MotionEvent.ACTION_UP -> {
+                    if (hasFlashCamera() && isFlash) {
+                        binding.root.apply {
+                            postDelayed({
+                                cameraControl?.enableTorch(true)
+                                postDelayed({
+                                    cameraControl?.enableTorch(false)
+                                }, ANIMATION_FAST_MILLIS)
+                            }, ANIMATION_SLOW_MILLIS)
+                        }
+                    }
+
+                    val factory = binding.viewFinder.meteringPointFactory
+                    val point = factory.createPoint(event.x, event.y)
+                    val action = FocusMeteringAction.Builder(point).build()
+                    cameraControl?.startFocusAndMetering(action)
+
+                    return@setOnTouchListener true
+                }
+                MotionEvent.ACTION_MOVE -> {
+                    scaleGestureDetector.onTouchEvent(event)
+                    return@setOnTouchListener true
+                }
+                else -> return@setOnTouchListener false
+            }
+        }
+
+        zoomControl(true)
     }
 
-    private fun zoomControl() {
-        val ratio = cameraInfo.zoomState.value?.zoomRatio
-        val liner = (cameraInfo.zoomState.value?.linearZoom)
-        val dFormat = DecimalFormat("#.##")
+    private fun zoomControl(isUpdate: Boolean = false) {
+        val state = cameraInfo?.zoomState?.value
+        val ratio = state?.zoomRatio as Float
+        val liner = state.linearZoom
+        val dFormat = DecimalFormat(DECIMAL_FORMAT)
 
         val zoomStatus =
             String.format(getString(R.string.zoom_status), dFormat.format(ratio))
-        val visibility = if (ratio!! >= 1.01) View.VISIBLE else View.INVISIBLE
+        val visibility = if (ratio >= 1.01) View.VISIBLE else View.INVISIBLE
+
+        if (isUpdate) camera?.cameraControl?.setZoomRatio(ratio)
 
         binding.apply {
-            seekBarZoom.progress = (liner!! * 100).toInt()
+            seekBarZoom.progress = (liner * 100).toInt()
             tvZoom.text = zoomStatus
             tvZoom.visibility = visibility
         }
     }
 
-    private fun flashControl() {
-        val isVisible = if (cameraInfo.hasFlashUnit()) View.VISIBLE else View.INVISIBLE
-        val iconFlash = if (flashFlag) R.drawable.ic_flash_on else R.drawable.ic_flash_off
-
-        cameraControl.enableTorch(flashFlag)
-        binding.ivFlash.apply {
-            visibility = isVisible
-            setImageResource(iconFlash)
-        }
-    }
-
     private fun takePhoto() {
-        val imageCapture = imageCapture ?: return
-        val imageFile = createFile(requireActivity().application)
-        val outputOptions = OutputFileOptions.Builder(imageFile).build()
-
-        imageCapture.takePicture(
-            outputOptions,
-            ContextCompat.getMainExecutor(requireContext()),
-            object : OnImageSavedCallback {
-                override fun onError(exc: ImageCaptureException) {
-                    requireActivity().toast(getString(R.string.error_camera_take))
-                }
-
-                override fun onImageSaved(output: OutputFileResults) = onNavigate(imageFile)
+        imageCapture?.let {
+            val imageFile = createFile(requireActivity().application)
+            val metadata = Metadata().apply {
+                isReversedHorizontal = lensFacing == LENS_FACING_FRONT
             }
-        )
+
+            val outputOptions = OutputFileOptions.Builder(imageFile)
+                .setMetadata(metadata)
+                .build()
+
+            it.takePicture(
+                outputOptions, cameraExecutor, object : OnImageSavedCallback {
+                    override fun onError(exc: ImageCaptureException) {
+                        requireActivity().toast(getString(R.string.error_camera_take))
+                    }
+
+                    override fun onImageSaved(output: OutputFileResults) {
+                        onNavigate(imageFile)
+                    }
+
+                })
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                binding.root.apply {
+                    postDelayed({
+                        foreground = ColorDrawable(Color.WHITE)
+                        postDelayed({ foreground = null }, ANIMATION_FAST_MILLIS)
+                    }, ANIMATION_SLOW_MILLIS)
+                }
+            }
+        }
     }
 
     private fun onNavigate(imageFile: File) {
@@ -288,26 +403,79 @@ class CaptureFragment : Fragment(), View.OnClickListener {
         }
     }
 
-    private fun setFlash() {
-        flashFlag = !flashFlag
-        flashControl()
-    }
-
     private fun swichCamera() {
-        cameraSelector =
-            if (cameraSelector == DEFAULT_BACK_CAMERA) DEFAULT_FRONT_CAMERA
-            else DEFAULT_BACK_CAMERA
+        lensFacing = if (LENS_FACING_FRONT == lensFacing) {
+            LENS_FACING_BACK
+        } else LENS_FACING_FRONT
 
-        startCamera()
+        onBindCamera()
+        updateCameraFlash()
+        zoomControl()
     }
 
-    companion object {
-        private val REQUIRED_PERMISSIONS = arrayOf(
-            CAMERA,
-            READ_EXTERNAL_STORAGE,
-            WRITE_EXTERNAL_STORAGE
+    private fun updateCameraFlip() {
+        try {
+            binding.ibSwitchCamera.isEnabled =
+                hasBackCamera() && hasFrontCamera()
+        } catch (exception: CameraInfoUnavailableException) {
+            binding.ibSwitchCamera.isEnabled = false
+        }
+    }
+
+    private fun swichFlash() {
+        isFlash = !isFlash
+        updateCameraFlash()
+    }
+
+    private fun updateCameraFlash() {
+        imageCapture?.flashMode = when {
+            isFlash -> FLASH_MODE_ON
+            else -> FLASH_MODE_OFF
+        }
+
+        val iconFlash = if (isFlash) {
+            R.drawable.ic_flash_on
+        } else R.drawable.ic_flash_off
+
+        try {
+            binding.ibFlash.apply {
+                setImageResource(iconFlash)
+                isEnabled = hasFlashCamera()
+                visibility = if (hasFlashCamera()) View.VISIBLE else View.INVISIBLE
+            }
+        } catch (exception: CameraInfoUnavailableException) {
+            binding.ibFlash.apply {
+                isEnabled = false
+                visibility = View.INVISIBLE
+            }
+        }
+    }
+
+    private fun hasFlashCamera(): Boolean {
+        return cameraInfo?.hasFlashUnit() ?: false
+    }
+
+    private fun hasBackCamera(): Boolean {
+        return cameraProvider?.hasCamera(DEFAULT_BACK_CAMERA) ?: false
+    }
+
+    private fun hasFrontCamera(): Boolean {
+        return cameraProvider?.hasCamera(DEFAULT_FRONT_CAMERA) ?: false
+    }
+
+    private fun behaviorSystemUI(isHide: Boolean = false) {
+        WindowCompat.setDecorFitsSystemWindows(requireActivity().window, !isHide)
+        val controller = WindowInsetsControllerCompat(
+            requireActivity().window,
+            binding.root
         )
-        private const val RATIO_4_3_VALUE = 4.0 / 3.0
-        private const val RATIO_16_9_VALUE = 16.0 / 9.0
+        val typesBar = WindowInsetsCompat.Type.systemBars()
+
+        if (isHide) {
+            controller.let {
+                it.hide(typesBar)
+                it.systemBarsBehavior = BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+            }
+        } else controller.show(typesBar)
     }
 }

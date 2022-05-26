@@ -26,6 +26,8 @@
     <string name="error_camera_start">Failed to bring up the camera.</string>
     <string name="error_camera_permission">Not getting permissions.</string>
     <string name="error_camera_take">Failed to take picture.</string>
+    <string name="error_camera_initialization">Camera initialization failed.</string>
+    <string name="error_camera_availability">Back and front camera are unavailable.</string>
     <string name="take_photo">Take Photo</string>
     <string name="switch_camera">Switch camera</string>
     <string name="open_gallery">Open gallery</string>
