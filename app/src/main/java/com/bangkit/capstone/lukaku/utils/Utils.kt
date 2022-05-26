@@ -1,13 +1,18 @@
 package com.bangkit.capstone.lukaku.utils
 
+import android.Manifest
 import android.app.Application
 import android.content.ContentResolver
 import android.content.Context
 import android.net.Uri
 import android.os.Environment
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Toast
 import com.bangkit.capstone.lukaku.R
+import com.bangkit.capstone.lukaku.utils.Constants.ANIMATION_FAST_MILLIS
+import com.bangkit.capstone.lukaku.utils.Constants.FILENAME_FORMAT
+import com.bangkit.capstone.lukaku.utils.Constants.PHOTO_EXTENSION
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import java.io.File
@@ -17,7 +22,7 @@ import java.io.OutputStream
 import java.text.SimpleDateFormat
 import java.util.*
 
-private const val FILENAME_FORMAT = "dd-MMM-yyyy"
+val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
 
 val timeStamp: String = SimpleDateFormat(
     FILENAME_FORMAT,
@@ -26,7 +31,7 @@ val timeStamp: String = SimpleDateFormat(
 
 fun createTempFile(context: Context): File {
     val storageDir: File? = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-    return File.createTempFile(timeStamp, ".jpg", storageDir)
+    return File.createTempFile(timeStamp, PHOTO_EXTENSION, storageDir)
 }
 
 fun createFile(application: Application): File {
@@ -38,7 +43,7 @@ fun createFile(application: Application): File {
         mediaDir != null && mediaDir.exists()
     ) mediaDir else application.filesDir
 
-    return File(outputDirectory, "$timeStamp.jpg")
+    return File(outputDirectory, "$timeStamp$PHOTO_EXTENSION")
 }
 
 fun ImageView.loadCircleImage(imageSource: Uri?) {
@@ -77,4 +82,14 @@ fun uriToFile(uri: Uri, context: Context): File {
     inputStream.close()
 
     return imageFile
+}
+
+fun ImageButton.simulateClick(delay: Long = ANIMATION_FAST_MILLIS) {
+    performClick()
+    isPressed = true
+    invalidate()
+    postDelayed({
+        invalidate()
+        isPressed = false
+    }, delay)
 }
