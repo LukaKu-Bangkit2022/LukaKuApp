@@ -66,6 +66,12 @@ fun <T> ImageView.loadImage(image: T) {
         .into(this)
 }
 
+fun ImageView.loadCircleImage(context: Context, imageSource: String?) {
+    Glide.with(context)
+        .load(imageSource)
+        .into(this)
+}
+
 fun Context.toast(message: CharSequence) = Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 
 fun uriToFile(uri: Uri, context: Context): File {

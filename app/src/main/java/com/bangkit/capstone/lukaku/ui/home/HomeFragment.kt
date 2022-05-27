@@ -6,9 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bangkit.capstone.lukaku.R
+import com.bangkit.capstone.lukaku.adapters.ArticleAdapter
 import com.bangkit.capstone.lukaku.adapters.HeadlineAdapter
 import com.bangkit.capstone.lukaku.data.resources.HeadlineData
 import com.bangkit.capstone.lukaku.databinding.FragmentHomeBinding
@@ -18,17 +21,24 @@ import com.bangkit.capstone.lukaku.utils.ViewPager.autoScroll
 import com.bangkit.capstone.lukaku.utils.ViewPager.mediator
 import com.bangkit.capstone.lukaku.utils.ViewPager.transformer
 import com.bangkit.capstone.lukaku.utils.loadCircleImage
+import com.bangkit.capstone.lukaku.utils.toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import me.ibrahimsn.lib.SmoothBottomBar
 
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+    private val viewModel: HomeViewModel by viewModels()
     private lateinit var bottomBar: SmoothBottomBar
     private lateinit var auth: FirebaseAuth
+    private lateinit var articleAdapter: ArticleAdapter
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -55,6 +65,8 @@ class HomeFragment : Fragment() {
         goToViewMore()
         goToNotifications()
         goToProfile()
+        initRecyclerView()
+        getAllArticle()
     }
 
     override fun onResume() {
@@ -90,6 +102,27 @@ class HomeFragment : Fragment() {
             transformer()
             autoScroll(viewLifecycleOwner.lifecycleScope, INTERVAL)
             mediator(binding.tabLayout, title)
+        }
+    }
+
+    private fun getAllArticle() {
+        lifecycleScope.launch {
+            viewModel.getAllArticle().collect { result ->
+                result.onSuccess { response ->
+                    articleAdapter.differ.submitList(response.toList())
+                }
+                result.onFailure {
+                    requireActivity().toast(getString(R.string.article_error_message))
+                }
+            }
+        }
+    }
+
+    private fun initRecyclerView() {
+        binding.rvArticles.apply {
+            articleAdapter = ArticleAdapter()
+            adapter = articleAdapter
+            layoutManager = LinearLayoutManager(requireActivity())
         }
     }
 

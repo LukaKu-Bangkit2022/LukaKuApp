@@ -42,7 +42,11 @@
         <action
             android:id="@+id/action_onboardingFragment_to_navigation_home"
             app:destination="@id/navigation_home"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
             app:launchSingleTop="true"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
             app:popUpTo="@id/nav_graph"
             app:popUpToInclusive="true" />
     </fragment>
@@ -54,9 +58,11 @@
         <action
             android:id="@+id/action_signFragment_to_navigation_home"
             app:destination="@id/navigation_home"
-            app:enterAnim="@android:anim/fade_in"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
             app:launchSingleTop="true"
-            app:popEnterAnim="@android:anim/fade_out"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
             app:popUpTo="@id/signFragment"
             app:popUpToInclusive="true" />
     </fragment>
@@ -85,15 +91,17 @@
         <action
             android:id="@+id/action_navigation_profile_to_appSettingsFragment"
             app:destination="@id/appSettingsFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@android:anim/fade_out"
-            app:popEnterAnim="@android:anim/fade_in"
-            app:popExitAnim="@anim/slide_out_left" />
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
             android:id="@+id/action_navigation_profile_to_signFragment"
             app:destination="@id/signFragment"
-            app:enterAnim="@android:anim/fade_in"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
             app:launchSingleTop="true"
+            app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@android:anim/fade_out"
             app:popUpTo="@id/nav_graph"
             app:popUpToInclusive="true" />
@@ -106,14 +114,26 @@
         <action
             android:id="@+id/action_navigation_home_to_articlesFragment"
             app:destination="@id/articlesFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
             app:popUpTo="@id/navigation_home" />
         <action
             android:id="@+id/action_navigation_home_to_notificationFragment"
             app:destination="@id/notificationFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
             app:popUpTo="@id/navigation_home" />
         <action
             android:id="@+id/action_navigation_home_to_navigation_profile"
             app:destination="@id/navigation_profile"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
             app:popUpTo="@id/navigation_home" />
     </fragment>
     <fragment
