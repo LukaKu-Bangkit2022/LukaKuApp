@@ -9,9 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bangkit.capstone.lukaku.R
 import com.bangkit.capstone.lukaku.data.models.ArticleResponseItem
 import com.bangkit.capstone.lukaku.databinding.ItemListArticleBinding
-import com.bangkit.capstone.lukaku.utils.loadCircleImage
 import com.bangkit.capstone.lukaku.utils.loadImage
-import com.bumptech.glide.Glide
 
 class ArticleAdapter : RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>() {
     private val callback = object : DiffUtil.ItemCallback<ArticleResponseItem>() {
@@ -29,7 +27,8 @@ class ArticleAdapter : RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>() 
     val differ = AsyncListDiffer(this, callback)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
-        val binding = ItemListArticleBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ItemListArticleBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ArticleViewHolder(parent.context, binding)
     }
 
@@ -47,11 +46,23 @@ class ArticleAdapter : RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>() 
             binding.apply {
                 tvContent.text = item.category
                 ivPhoto.loadImage(item.imageUrl)
-                tvTitle.text = item.definition
+                tvTitle.text = item.title
                 tvDate.text = context.getString(R.string.line, item.publishedAt)
                 tvAuthor.text = item.author
                 tvDescription.text = item.definition_description
+
+                root.setOnClickListener {
+                    onItemClickListener?.let {
+                        it(item)
+                    }
+                }
             }
         }
+    }
+
+    private var onItemClickListener: ((ArticleResponseItem) -> Unit)? = null
+
+    fun setOnItemClickListener(listener: (ArticleResponseItem) -> Unit) {
+        onItemClickListener = listener
     }
 }

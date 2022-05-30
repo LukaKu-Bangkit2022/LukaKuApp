@@ -87,7 +87,7 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_content"
-            android:layout_width="70dp"
+            android:layout_width="85dp"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_content"
             android:fontFamily="@font/lato"
@@ -99,7 +99,7 @@
             app:layout_constraintStart_toStartOf="@+id/iv_photo"
             app:layout_constraintTop_toTopOf="@+id/iv_photo"
             tools:ignore="SmallSp"
-            tools:text="Health" />
+            tools:text="Kesehatan" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

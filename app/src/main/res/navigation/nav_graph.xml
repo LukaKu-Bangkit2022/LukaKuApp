@@ -135,6 +135,10 @@
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim"
             app:popUpTo="@id/navigation_home" />
+        <action
+            android:id="@+id/action_navigation_home_to_detailArticleFragment"
+            app:destination="@id/detailArticleFragment"
+            app:popUpTo="@id/navigation_home" />
     </fragment>
     <fragment
         android:id="@+id/articlesFragment"
@@ -146,4 +150,9 @@
         android:name="com.bangkit.capstone.lukaku.ui.notifications.NotificationFragment"
         android:label="fragment_notification"
         tools:layout="@layout/fragment_notification" />
+    <fragment
+        android:id="@+id/detailArticleFragment"
+        android:name="com.bangkit.capstone.lukaku.ui.article.detail.DetailArticleFragment"
+        android:label="fragment_detail_article"
+        tools:layout="@layout/fragment_detail_article" />
 </navigation>

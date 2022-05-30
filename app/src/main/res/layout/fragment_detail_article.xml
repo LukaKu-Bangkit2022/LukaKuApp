@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.article.detail.DetailArticleFragment">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimaryVariant"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            app:contentScrim="?attr/colorPrimaryVariant"
+            app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed|snap"
+            app:statusBarScrim="?attr/colorPrimaryVariant"
+            app:toolbarId="@id/mainToolbar">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/ivPhoto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:transitionName="photo"
+                app:layout_collapseMode="parallax"
+                app:shapeAppearanceOverlay="@style/RoundImageView"
+                tools:src="@tools:sample/backgrounds/scenic" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/image_shadow" />
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/mainToolbar"
+                android:layout_width="wrap_content"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/Theme.AppCompat.Light">
+
+                <ImageView
+                    android:id="@+id/ivBack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/back"
+                    android:src="@drawable/ic_arrow_back_white" />
+
+            </androidx.appcompat.widget.Toolbar>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="16dp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/nunito_extrabold"
+                    android:maxLines="2"
+                    android:paddingBottom="4dp"
+                    android:textColor="?attr/colorPrimaryVariant"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:transitionName="title"
+                    app:layout_constraintBottom_toTopOf="@+id/tvDate"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:text="5 Jenis Luka yang wajib kamu tahu" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvDate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/lato"
+                    android:textColor="?attr/colorPrimaryVariant"
+                    android:transitionName="date"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:text="30 April 2022" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvAuthor"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginTop="4dp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/lato"
+                    android:textColor="?attr/colorPrimaryVariant"
+                    android:transitionName="author"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tvDate"
+                    tools:text="Nuryadin Abutani" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_content"
+                    android:layout_width="115dp"
+                    android:layout_height="25dp"
+                    android:background="@drawable/bg_content"
+                    android:fontFamily="@font/lato"
+                    android:gravity="center"
+                    android:padding="4dp"
+                    android:textColor="@color/white_smoke"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:transitionName="category"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:ignore="SmallSp"
+                    tools:text="Kesehatan" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="16dp">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvDefinition"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_extrabold"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Pengertian Luka Bakar" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvDefinitionDescription"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/lato"
+                android:transitionName="definition_description"
+                app:layout_constraintEnd_toEndOf="@+id/tvDefinition"
+                app:layout_constraintStart_toStartOf="@+id/tvDefinition"
+                app:layout_constraintTop_toBottomOf="@+id/tvDefinition"
+                tools:text="Luka bakar adalah cedera di kulit yang disebabkan oleh panas, baik dari api, paparan bahan kimia, radiasi sinar matahari, maupun sengatan listrik. Luka bakar perlu segera diobati karena dapat menimbulkan infeksi pada kulit. Luka bakar merupakan salah satu cedera yang umum terjadi. Hal ini bisa terjadi karena kelalaian atau kecelakaan. Luka bakar biasanya terjadi di permukaan kulit. Meski demikian, luka bakar yang parah juga dapat menembus lapisan dalam kulit sehingga merusak jaringan di bawahnya." />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvSymptom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/nunito_extrabold"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@id/tvDefinitionDescription"
+                app:layout_constraintStart_toStartOf="@id/tvDefinitionDescription"
+                app:layout_constraintTop_toBottomOf="@id/tvDefinitionDescription"
+                tools:text="Gejala dan Penyebab Luka Bakar" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvSymptomDescription"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/lato"
+                app:layout_constraintEnd_toEndOf="@+id/tvSymptom"
+                app:layout_constraintStart_toStartOf="@+id/tvSymptom"
+                app:layout_constraintTop_toBottomOf="@+id/tvSymptom"
+                tools:text="Secara umum, gejala luka bakar dibedakan berdasarkan derajat luka bakar. Pada luka bakar derajat satu, gejala yang umum terjadi adalah kemerahan pada kulit dan nyeri. Sementara itu, luka bakar derajat tiga bisa menyebabkan kerusakan saraf hingga mati rasa. Ada berbagai faktor yang menyebabkan luka bakar, misalnya kontak langsung dengan api, cairan panas, dan bahan kimia seperti asam kuat atau alkali. Alat yang digunakan pada radioterapi dalam pengobatan kanker juga bisa menyebabkan luka bakar bila tidak digunakan secara hati-hati." />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvTreatment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/nunito_extrabold"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@id/tvSymptomDescription"
+                app:layout_constraintStart_toStartOf="@id/tvSymptomDescription"
+                app:layout_constraintTop_toBottomOf="@id/tvSymptomDescription"
+                tools:text="Pengobatan dan Pencegahan Luka Bakar" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvTreatmentDescription"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/lato"
+                app:layout_constraintEnd_toEndOf="@+id/tvTreatment"
+                app:layout_constraintStart_toStartOf="@+id/tvTreatment"
+                app:layout_constraintTop_toBottomOf="@+id/tvTreatment"
+                tools:text="Pengobatan luka bakar tergantung pada area yang terkena dan tingkat keparahannya. Luka bakar ringan yang disebabkan oleh paparan sinar matahari biasanya diobati secara mandiri di rumah. Sementara itu, luka bakar yang serius memerlukan penanganan oleh dokter di rumah sakit. Pencegahan luka bakar adalah dengan menghindari penyebabnya. Upaya yang bisa dilakukan untuk mencegah luka bakar antara lain tidak meninggalkan kompor dalam keadaan menyala, tidak meletakkan peralatan listrik dekat air, dan menjauhkan anak dari sumber api atau benda panas seperti air mendidih." />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

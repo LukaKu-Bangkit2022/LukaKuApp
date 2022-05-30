@@ -13,4 +13,5 @@ object Constants {
     const val ANIMATION_FAST_MILLIS = 50L
     const val ANIMATION_SLOW_MILLIS = 100L
     const val DECIMAL_FORMAT = "#.##"
+    const val EXTRA_ARTICLE = "EXTRA_ARTICLE"
 }

@@ -68,6 +68,7 @@
     <string name="updates">Updates</string>
     <string name="messages">Messages</string>
     <string name="drugstore">Drugstore</string>
-    <string name="line">%s |</string>
+    <string name="line">%s \t|</string>
     <string name="article_error_message">Something is wrong.</string>
+    <string name="detail_photo_article">Detail Photo Article</string>
 </resources>

@@ -102,4 +102,9 @@
         <item name="android:textColor">@color/bunting</item>
         <item name="android:textAllCaps">true</item>
     </style>
+
+    <style name="RoundImageView">
+        <item name="cornerSizeBottomRight">8dp</item>
+        <item name="cornerSizeBottomLeft">8dp</item>
+    </style>
 </resources>

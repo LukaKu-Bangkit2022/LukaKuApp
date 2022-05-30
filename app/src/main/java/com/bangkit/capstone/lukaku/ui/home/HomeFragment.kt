@@ -16,6 +16,7 @@ import com.bangkit.capstone.lukaku.adapters.HeadlineAdapter
 import com.bangkit.capstone.lukaku.data.resources.HeadlineData
 import com.bangkit.capstone.lukaku.databinding.FragmentHomeBinding
 import com.bangkit.capstone.lukaku.utils.ActivityLifeObserver
+import com.bangkit.capstone.lukaku.utils.Constants.EXTRA_ARTICLE
 import com.bangkit.capstone.lukaku.utils.Constants.INTERVAL
 import com.bangkit.capstone.lukaku.utils.ViewPager.autoScroll
 import com.bangkit.capstone.lukaku.utils.ViewPager.mediator
@@ -66,7 +67,9 @@ class HomeFragment : Fragment() {
         goToNotifications()
         goToProfile()
         initRecyclerView()
+        onDetail()
         getAllArticle()
+
     }
 
     override fun onResume() {
@@ -141,6 +144,16 @@ class HomeFragment : Fragment() {
     private fun goToProfile() {
         binding.ivProfile.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_home_to_navigation_profile)
+        }
+    }
+
+    private fun onDetail() {
+        articleAdapter.setOnItemClickListener {
+            val bundle = Bundle().apply {
+                requireActivity().intent.putExtra(EXTRA_ARTICLE, it)
+            }
+
+            findNavController().navigate(R.id.action_navigation_home_to_detailArticleFragment, bundle)
         }
     }
 }

@@ -1,7 +1,6 @@
 package com.bangkit.capstone.lukaku.data.remote
 
-import com.bangkit.capstone.lukaku.BuildConfig.BASE_URL_CF
-import com.bangkit.capstone.lukaku.BuildConfig.DEBUG
+import com.bangkit.capstone.lukaku.BuildConfig.*
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
