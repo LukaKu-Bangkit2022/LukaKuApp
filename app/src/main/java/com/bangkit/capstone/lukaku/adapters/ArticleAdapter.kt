@@ -9,9 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bangkit.capstone.lukaku.R
 import com.bangkit.capstone.lukaku.data.models.ArticleResponseItem
 import com.bangkit.capstone.lukaku.databinding.ItemListArticleBinding
-import com.bangkit.capstone.lukaku.utils.loadCircleImage
 import com.bangkit.capstone.lukaku.utils.loadImage
-import com.bumptech.glide.Glide
 
 class ArticleAdapter : RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>() {
     private val callback = object : DiffUtil.ItemCallback<ArticleResponseItem>() {
@@ -26,10 +24,11 @@ class ArticleAdapter : RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>() 
         ): Boolean = oldItem == newItem
     }
 
-    val differ = AsyncListDiffer(this, callback)
+    private val differ = AsyncListDiffer(this, callback)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
-        val binding = ItemListArticleBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ItemListArticleBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ArticleViewHolder(parent.context, binding)
     }
 

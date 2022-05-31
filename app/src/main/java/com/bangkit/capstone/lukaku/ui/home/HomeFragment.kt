@@ -2,6 +2,7 @@ package com.bangkit.capstone.lukaku.ui.home
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -66,7 +67,7 @@ class HomeFragment : Fragment() {
         goToNotifications()
         goToProfile()
         initRecyclerView()
-        getAllArticle()
+//        getAllArticle()
     }
 
     override fun onResume() {
@@ -106,16 +107,16 @@ class HomeFragment : Fragment() {
     }
 
     private fun getAllArticle() {
-        lifecycleScope.launch {
-            viewModel.getAllArticle().collect { result ->
-                result.onSuccess { response ->
-                    articleAdapter.differ.submitList(response.toList())
-                }
-                result.onFailure {
-                    requireActivity().toast(getString(R.string.article_error_message))
-                }
-            }
-        }
+//        lifecycleScope.launch {
+//            viewModel.getAllArticle().collect { result ->
+//                result.onSuccess { response ->
+//                    articleAdapter.differ.submitList(response.toList())
+//                }
+//                result.onFailure {
+//                    requireActivity().toast(getString(R.string.article_error_message))
+//                }
+//            }
+//        }
     }
 
     private fun initRecyclerView() {

@@ -2,9 +2,10 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
-    id 'kotlin-kapt'
-    id 'dagger.hilt.android.plugin'
     id 'com.google.gms.google-services'
+    id 'kotlin-kapt'
+    id 'kotlin-parcelize'
+    id 'dagger.hilt.android.plugin'
     id 'androidx.navigation.safeargs'
 }
 
@@ -26,9 +27,11 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField("String", "BASE_URL_CF", BASE_URL_CF)
+            buildConfigField("String", "BASE_URL_PD", BASE_URL_PD)
         }
         debug {
             buildConfigField("String", "BASE_URL_CF", BASE_URL_CF)
+            buildConfigField("String", "BASE_URL_PD", BASE_URL_PD)
         }
     }
     compileOptions {
@@ -59,6 +62,7 @@ dependencies {
 
     // Lifecycle
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1'
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.4.1"
     implementation 'androidx.activity:activity-ktx:1.4.0'
 
     // Navigation Component
@@ -111,5 +115,5 @@ dependencies {
 
     // OkHttp
     implementation 'com.squareup.okhttp3:okhttp-bom:5.0.0-alpha.2'
-    implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2'
+    implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.6'
 }

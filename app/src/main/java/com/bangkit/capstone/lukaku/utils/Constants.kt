@@ -1,5 +1,7 @@
 package com.bangkit.capstone.lukaku.utils
 
+import com.bangkit.capstone.lukaku.R
+
 object Constants {
     const val ONBOARDING_PREF = "ONBOARDING_PREF"
     const val DATASTORE_PREF = "DATASTORE_PREF"
@@ -13,4 +15,5 @@ object Constants {
     const val ANIMATION_FAST_MILLIS = 50L
     const val ANIMATION_SLOW_MILLIS = 100L
     const val DECIMAL_FORMAT = "#.##"
+    const val ARG_SECTION_NUMBER = "section_number"
 }

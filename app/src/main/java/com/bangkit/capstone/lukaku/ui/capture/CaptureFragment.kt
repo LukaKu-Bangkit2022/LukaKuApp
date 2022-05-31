@@ -398,7 +398,10 @@ class CaptureFragment : Fragment(), View.OnClickListener {
 
     private fun onNavigate(imageFile: File) {
         lifecycleScope.launchWhenStarted {
-            val directions = actionCaptureFragmentToViewerFragment(imageFile)
+            val directions = actionCaptureFragmentToViewerFragment().apply {
+                image = imageFile
+            }
+
             findNavController().navigate(directions)
         }
     }
