@@ -8,14 +8,14 @@
     tools:context=".ui.onboarding.OnboardingFragment">
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
+        android:id="@+id/guideline_begin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.5" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
+        android:id="@+id/guideline_end"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -38,7 +38,7 @@
         style="@style/LogoMenu"
         android:contentDescription="@string/title_menu_1"
         android:src="@drawable/ic_detection"
-        app:layout_constraintBottom_toBottomOf="@id/guideline"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_begin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_skip" />
@@ -64,7 +64,7 @@
         style="@style/LogoMenu"
         android:contentDescription="@string/title_menu_2"
         android:src="@drawable/ic_health"
-        app:layout_constraintBottom_toBottomOf="@id/guideline"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_begin"
         app:layout_constraintStart_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_skip" />
 
@@ -89,7 +89,7 @@
         style="@style/LogoMenu"
         android:contentDescription="@string/title_menu_3"
         android:src="@drawable/ic_drug"
-        app:layout_constraintBottom_toBottomOf="@id/guideline"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_begin"
         app:layout_constraintStart_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_skip" />
 

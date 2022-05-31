@@ -69,7 +69,10 @@
     <string name="messages">Messages</string>
     <string name="drugstore">Drugstore</string>
     <string name="line">%s |</string>
+    <string name="piece">Rp %s</string>
     <string name="article_error_message">Something is wrong.</string>
+    <string name="medicine_error_message">Something is wrong.</string>
+    <string name="first_aids_error_message">Something is wrong.</string>
     <string name="tab_first_aid">First Aids</string>
     <string name="tab_medicine">Medicine</string>
     <string name="type_of_wound">Type of wound</string>
@@ -79,4 +82,9 @@
     <string name="status_detection_complete">Detection in progress…</string>
     <string name="status_detection_error">Something is wrong, please try again!</string>
     <string name="dialog_process">Are you sure you want to end this process?</string>
+    <string name="medicine_label">Recommended drugs found:</string>
+    <string name="save">SAVE</string>
+    <string name="product">PRODUCT</string>
+    <string name="detection_result">Detection Result</string>
+    <string name="first_aid_label">How to do first aid:</string>
 </resources>

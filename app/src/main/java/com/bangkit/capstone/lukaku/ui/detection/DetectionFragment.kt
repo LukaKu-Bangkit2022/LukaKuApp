@@ -123,6 +123,7 @@ class DetectionFragment : Fragment(), View.OnClickListener {
                 result.onFailure {
                     binding.apply {
                         lottieFinger.apply {
+                            pauseAnimation()
                             frame = 0
                             isClickable = true
                         }

@@ -30,7 +30,7 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <ImageView
-                        android:id="@+id/ivBack"
+                        android:id="@+id/iv_back"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="?attr/selectableItemBackgroundBorderless"
@@ -40,7 +40,7 @@
                         tools:ignore="RtlSymmetry" />
 
                     <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/tvNotifications"
+                        android:id="@+id/tv_detection"
                         style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

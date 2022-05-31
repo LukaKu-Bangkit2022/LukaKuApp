@@ -4,14 +4,17 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.bangkit.capstone.lukaku.data.models.DetectionResult
 import com.bangkit.capstone.lukaku.ui.result.ResultFragment.Companion.TAB_TITLES_RESULT
 import com.bangkit.capstone.lukaku.ui.result.aid.FirstAidFragment
 import com.bangkit.capstone.lukaku.ui.result.medicine.MedicineFragment
-import com.bangkit.capstone.lukaku.utils.Constants.ARG_SECTION_NUMBER
+import com.bangkit.capstone.lukaku.utils.Constants.ARG_RESULT
 
 class ResultPagerAdapter(
     fragmentActivity: FragmentActivity
 ) : FragmentStateAdapter(fragmentActivity) {
+
+    var detectionResult: DetectionResult? = null
 
     override fun getItemCount(): Int = TAB_TITLES_RESULT.size
 
@@ -24,7 +27,7 @@ class ResultPagerAdapter(
         }
 
         fragment.arguments = Bundle().apply {
-            putInt(ARG_SECTION_NUMBER, position)
+            putParcelable(ARG_RESULT, detectionResult)
         }
 
         return fragment

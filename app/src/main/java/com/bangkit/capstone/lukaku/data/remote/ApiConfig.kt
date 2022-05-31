@@ -1,7 +1,6 @@
 package com.bangkit.capstone.lukaku.data.remote
 
-import com.bangkit.capstone.lukaku.BuildConfig.BASE_URL_CF
-import com.bangkit.capstone.lukaku.BuildConfig.DEBUG
+import me.ibrahimsn.lib.BuildConfig.DEBUG
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.logging.HttpLoggingInterceptor.Level
@@ -10,31 +9,22 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class ApiConfig {
     companion object {
-        private const val tesBaseURL = "https://story-api.dicoding.dev/v1/"
+        const val baseURLTest = "https://story-api.dicoding.dev/v1/"
 
-        private val level = if (DEBUG) Level.BODY else Level.NONE
-        private val loggingInterceptor = HttpLoggingInterceptor().setLevel(level)
-        private val client = OkHttpClient.Builder()
-            .addInterceptor(loggingInterceptor)
-            .build()
+        inline fun <reified T> getApiService(baseUrl: String): T {
+            val level = if (DEBUG) Level.BODY else Level.NONE
+            val loggingInterceptor = HttpLoggingInterceptor().setLevel(level)
 
-        fun getApiService(): ApiService {
+            val client = OkHttpClient.Builder()
+                .addInterceptor(loggingInterceptor)
+                .build()
+
             val retrofit = Retrofit.Builder()
-                .baseUrl(BASE_URL_CF)
+                .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()
-            return retrofit.create(ApiService::class.java)
-        }
-
-        fun getApiService2(): ApiService2 {
-            val retrofit = Retrofit.Builder()
-//                .baseUrl(BASE_URL_PD)
-                .baseUrl(tesBaseURL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(client)
-                .build()
-            return retrofit.create(ApiService2::class.java)
+            return retrofit.create(T::class.java)
         }
     }
 }

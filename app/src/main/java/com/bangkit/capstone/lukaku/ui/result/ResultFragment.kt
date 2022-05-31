@@ -47,13 +47,6 @@ class ResultFragment : Fragment() {
 
     private fun setResult() {
         detectionResult?.apply {
-            val detectionResponse = detectionResponse
-            val firstAidResponse = firstAidResponse
-            val medicineResponse = medicineResponse
-
-            Log.d("XXX1:detectionResponse", detectionResponse.toString())
-            Log.d("XXX2:firstAidResponse", firstAidResponse?.toList().toString())
-            Log.d("XXX3:medicineResponse", medicineResponse?.toList().toString())
         }
 
         binding.apply {
@@ -63,6 +56,7 @@ class ResultFragment : Fragment() {
 
     private fun resultPager() {
         val sectionsPagerAdapter = ResultPagerAdapter(requireActivity())
+        sectionsPagerAdapter.detectionResult = detectionResult
 
         binding.apply {
             viewPager.adapter = sectionsPagerAdapter
