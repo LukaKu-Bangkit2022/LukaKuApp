@@ -193,4 +193,16 @@
             app:popUpTo="@id/navigation_detection"
             app:popUpToInclusive="true" />
     </fragment>
+    <fragment
+        android:id="@+id/drugDetailsFragment"
+        android:name="com.bangkit.capstone.lukaku.ui.drug.DrugDetailsFragment"
+        android:label="fragment_drug_details"
+        tools:layout="@layout/fragment_drug_details" >
+        <argument
+            android:name="drug_detail"
+            app:argType="com.bangkit.capstone.lukaku.data.models.MedicineResponseItem" />
+    </fragment>
+    <action
+        android:id="@+id/action_global_drugDetailsFragment"
+        app:destination="@id/drugDetailsFragment" />
 </navigation>

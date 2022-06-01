@@ -8,6 +8,9 @@
     android:layout_marginTop="8dp"
     android:layout_marginEnd="16dp"
     android:layout_marginBottom="8dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground"
     app:cardCornerRadius="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -29,9 +32,9 @@
             android:id="@+id/tv_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
             android:ellipsize="end"
             android:fontFamily="@font/lato_bold"
             android:maxLines="2"
@@ -71,13 +74,12 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_content"
-            android:layout_width="70dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/green"
             android:background="@drawable/bg_content"
+            android:backgroundTint="@color/green"
             android:fontFamily="@font/lato"
             android:gravity="center"
-            android:padding="4dp"
             android:textColor="@color/white_smoke"
             android:textSize="10sp"
             android:textStyle="bold"

@@ -55,7 +55,7 @@ class FirstAidFragment : Fragment() {
 
         if (firstAidList != null) {
             binding.rvFirstAids.apply {
-                firstAidsAdapter = FirstAidsAdapter(requireActivity(), firstAidList)
+                firstAidsAdapter = FirstAidsAdapter(firstAidList)
                 adapter = firstAidsAdapter
                 layoutManager = LinearLayoutManager(requireActivity())
             }

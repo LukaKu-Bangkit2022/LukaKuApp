@@ -1,25 +1,23 @@
 package com.bangkit.capstone.lukaku.adapters
 
-import android.app.Activity
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bangkit.capstone.lukaku.R
 import com.bangkit.capstone.lukaku.databinding.ItemListFirstAidBinding
 import com.bangkit.capstone.lukaku.utils.toast
 
-
 class FirstAidsAdapter(
-    private val context: Activity,
     private val firstAidItems: List<String>
 ) : RecyclerView.Adapter<FirstAidsAdapter.FirstAidsViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FirstAidsViewHolder {
         val binding =
             ItemListFirstAidBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return FirstAidsViewHolder(binding)
+        return FirstAidsViewHolder(binding, parent.context)
     }
 
     override fun onBindViewHolder(holder: FirstAidsViewHolder, position: Int) {
@@ -29,7 +27,8 @@ class FirstAidsAdapter(
     override fun getItemCount(): Int = firstAidItems.size
 
     inner class FirstAidsViewHolder(
-        private val binding: ItemListFirstAidBinding
+        private val binding: ItemListFirstAidBinding,
+        private val context: Context
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: String, position: Int) {
             val number = (position + 1).toString()
@@ -39,13 +38,12 @@ class FirstAidsAdapter(
                 tvDescription.text = item
 
                 tvDescription.setOnClickListener {
-
                     val clipboard =
                         context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-                    val clip = ClipData.newPlainText("Copied Number $number", item)
+                    val clip = ClipData.newPlainText("Copied", item)
                     clipboard.setPrimaryClip(clip)
 
-                    context.toast("Copied to clipboard")
+                    context.toast(context.getString(R.string.clipboard, number))
                 }
             }
         }

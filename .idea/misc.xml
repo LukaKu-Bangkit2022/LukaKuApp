@@ -62,6 +62,7 @@
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_articles.xml" value="0.1" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_capture.xml" value="0.25" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_detection.xml" value="0.14" />
+        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_drug_details.xml" value="0.22" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_first_aid.xml" value="0.25" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_home.xml" value="0.22" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_medicine.xml" value="0.2" />
@@ -69,12 +70,12 @@
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_notifs.xml" value="0.2" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_onboarding.xml" value="0.2" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_profile.xml" value="0.2" />
-        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_result.xml" value="0.2" />
+        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_result.xml" value="0.14" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_result_detection.xml" value="0.22" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_sign.xml" value="0.2" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_viewer.xml" value="0.25" />
-        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/item_list_article.xml" value="0.5" />
-        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/item_list_drug.xml" value="0.33" />
+        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/item_list_article.xml" value="0.75" />
+        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/item_list_drug.xml" value="0.22" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/item_list_first_aid.xml" value="0.33" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/item_list_headline.xml" value="0.22" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/item_list_history.xml" value="0.33" />

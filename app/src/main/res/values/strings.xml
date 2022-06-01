@@ -70,6 +70,7 @@
     <string name="drugstore">Drugstore</string>
     <string name="line">%s |</string>
     <string name="piece">Rp %s</string>
+    <string name="clipboard">Copied Number %s to clipboard</string>
     <string name="article_error_message">Something is wrong.</string>
     <string name="medicine_error_message">Something is wrong.</string>
     <string name="first_aids_error_message">Something is wrong.</string>
@@ -87,4 +88,6 @@
     <string name="product">PRODUCT</string>
     <string name="detection_result">Detection Result</string>
     <string name="first_aid_label">How to do first aid:</string>
+    <string name="more_action">More Action</string>
+    <string name="drug_description">Drug description</string>
 </resources>
