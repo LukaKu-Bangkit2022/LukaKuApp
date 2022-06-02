@@ -20,4 +20,14 @@ class ArticleRepositoryImpl @Inject constructor(
             emit(Result.failure(exception))
         }
     }.flowOn(Dispatchers.IO)
+
+    override suspend fun searchArticle(searchQuery: String): Flow<Result<ArticleResponse>> = flow {
+        try {
+            val response = apiService.searchArticles(searchQuery)
+            emit(Result.success(response))
+        } catch (exception: Exception) {
+            exception.printStackTrace()
+            emit(Result.failure(exception))
+        }
+    }
 }

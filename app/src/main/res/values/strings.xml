@@ -71,4 +71,5 @@
     <string name="line">%s \t|</string>
     <string name="article_error_message">Something is wrong.</string>
     <string name="detail_photo_article">Detail Photo Article</string>
+    <string name="search_articles">Search articles...</string>
 </resources>

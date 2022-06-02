@@ -112,7 +112,7 @@ class HomeFragment : Fragment() {
         lifecycleScope.launch {
             viewModel.getAllArticle().collect { result ->
                 result.onSuccess { response ->
-                    articleAdapter.differ.submitList(response.toList())
+                    articleAdapter.differ.submitList(response.take(5))
                 }
                 result.onFailure {
                     requireActivity().toast(getString(R.string.article_error_message))

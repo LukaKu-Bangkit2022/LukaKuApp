@@ -5,4 +5,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface ArticleRepository {
     suspend fun getAllArticle(): Flow<Result<ArticleResponse>>
+    suspend fun searchArticle(searchQuery: String): Flow<Result<ArticleResponse>>
 }

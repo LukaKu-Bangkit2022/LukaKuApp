@@ -60,7 +60,6 @@ class ProfileFragment : Fragment() {
         client = GoogleSignIn.getClient(requireActivity(), gso)
 
         setProfile()
-        getHistory()
 
         binding.ivSettings.setOnClickListener { showPopup(it) }
     }
@@ -128,18 +127,5 @@ class ProfileFragment : Fragment() {
         client.signOut()
 
         findNavController().navigate(R.id.action_navigation_profile_to_signFragment)
-    }
-
-    private fun Boolean.isNoHistory() = if (this) {
-        binding.lottieNoHistory.visibility = View.VISIBLE
-    } else {
-        binding.lottieNoHistory.visibility = View.INVISIBLE
-    }
-
-    private fun getHistory() {
-        // condition when success
-           // false.isNoHistory()
-        // condition when not success
-           true.isNoHistory()
     }
 }

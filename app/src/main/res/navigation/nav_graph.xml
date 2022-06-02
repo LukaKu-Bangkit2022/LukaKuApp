@@ -144,7 +144,11 @@
         android:id="@+id/articlesFragment"
         android:name="com.bangkit.capstone.lukaku.ui.article.ArticlesFragment"
         android:label="fragment_articles"
-        tools:layout="@layout/fragment_articles" />
+        tools:layout="@layout/fragment_articles" >
+        <action
+            android:id="@+id/action_articlesFragment_to_detailArticleFragment"
+            app:destination="@id/detailArticleFragment" />
+    </fragment>
     <fragment
         android:id="@+id/notificationFragment"
         android:name="com.bangkit.capstone.lukaku.ui.notifications.NotificationFragment"

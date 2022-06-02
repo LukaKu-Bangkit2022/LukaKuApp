@@ -51,11 +51,10 @@
         style="@style/TextDescSettings"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:layout_marginTop="20dp"
         android:text="@string/dark_mode"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tvTheme" />
+        app:layout_constraintTop_toBottomOf="@+id/tvTheme" />
 
     <com.google.android.material.divider.MaterialDivider
         android:id="@+id/div1"
@@ -83,8 +82,6 @@
         style="@style/TextDescSettings"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:layout_marginTop="20dp"
-        android:layout_weight="1"
         android:text="@string/change_language"
         app:drawableRightCompat="@drawable/ic_double_arrow_right"
         app:layout_constraintEnd_toEndOf="parent"
