@@ -81,7 +81,7 @@
     <string name="status">Complete the last step to see the result</string>
     <string name="status_detection">Detection in progress…</string>
     <string name="status_detection_complete">Detection in progress…</string>
-    <string name="status_detection_error">Something is wrong, please try again!</string>
+    <string name="status_detection_error">%s, please try again!</string>
     <string name="dialog_process">Are you sure you want to end this process?</string>
     <string name="medicine_label">Recommended drugs found:</string>
     <string name="save">SAVE</string>

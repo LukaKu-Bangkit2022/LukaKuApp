@@ -3,17 +3,19 @@ package com.bangkit.capstone.lukaku.data.models
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
-class DetectionResponse : ArrayList<DetectionResponseItem>()
+data class DetectionResponseError(
+    val error: String? = null
+)
 
 @Parcelize
-data class DetectionResponseItem(
-    val error: Boolean,
-    val message: String
+data class DetectionResponse(
+    val date: String? = null,
+    val name: String? = null
 ) : Parcelable
 
 @Parcelize
 data class DetectionResult(
-    val detectionResponse: DetectionResponseItem,
+    val detectionResponse: DetectionResponse? = null,
     val firstAidResponse: FirstAidResponse? = null,
     val medicineResponse: MedicineResponse? = null
 ) : Parcelable

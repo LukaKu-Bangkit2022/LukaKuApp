@@ -1,11 +1,10 @@
 package com.bangkit.capstone.lukaku.data.remote
 
 import com.bangkit.capstone.lukaku.data.models.ArticleResponse
-import com.bangkit.capstone.lukaku.data.models.DetectionResponseItem
+import com.bangkit.capstone.lukaku.data.models.DetectionResponse
 import com.bangkit.capstone.lukaku.data.models.FirstAidResponse
 import com.bangkit.capstone.lukaku.data.models.MedicineResponse
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import retrofit2.http.*
 
 interface ApiService {
@@ -14,22 +13,17 @@ interface ApiService {
 
     @GET("getfirstaid")
     suspend fun getFirstAids(
-        @Query("label") name: String
-    ): FirstAidResponse
+        @Query("label") label: String
+    ): FirstAidResponse? = null
 
     @GET("getmedicine")
     suspend fun getMedicine(
-        @Query("label") name: String
-    ): MedicineResponse
-}
+        @Query("label") label: String
+    ): MedicineResponse? = null
 
-interface ApiService2 {
     @Multipart
-    @POST("stories/guest")
+    @POST("predict")
     suspend fun detection(
-        @Part file: MultipartBody.Part,
-        @Part("description") description: RequestBody,
-        @Part("lat") lat: Double? = null,
-        @Part("lon") lon: Double? = null
-    ): DetectionResponseItem
+        @Part file: MultipartBody.Part
+    ): DetectionResponse
 }

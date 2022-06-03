@@ -24,7 +24,7 @@ class ArticleAdapter : RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>() 
         ): Boolean = oldItem == newItem
     }
 
-    private val differ = AsyncListDiffer(this, callback)
+    val differ = AsyncListDiffer(this, callback)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
         val binding =

@@ -20,11 +20,10 @@ import com.bangkit.capstone.lukaku.utils.bitmapToFile
 import com.bangkit.capstone.lukaku.utils.loadImage
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
-import okhttp3.RequestBody.Companion.toRequestBody
+
 
 @AndroidEntryPoint
 class DetectionFragment : Fragment(), View.OnClickListener {
@@ -107,17 +106,23 @@ class DetectionFragment : Fragment(), View.OnClickListener {
         }
 
         val photoFile = bitmapToFile(photo!!, requireContext())
-        val requestImageFile = photoFile.asRequestBody("image/jpeg".toMediaTypeOrNull())
-        val photoBody = MultipartBody.Part.createFormData("photo", photoFile.name, requestImageFile)
-
-        //Dummy
-        val description = "dummy test".toRequestBody("text/plain".toMediaType())
+        val photoFilePart = MultipartBody.Part.createFormData(
+            "file",
+            photoFile.name,
+            photoFile.asRequestBody("image/*".toMediaTypeOrNull())
+        )
 
         lifecycleScope.launch {
-            viewModel.detection(photoBody, description).observe(viewLifecycleOwner) { result ->
+            viewModel.detection(photoFilePart).observe(viewLifecycleOwner) { result ->
+                var message = ""
+
                 result.onSuccess {
                     binding.tvStatus.text = getString(R.string.status_detection_complete)
-                    onNavigateResult(result.getOrNull())
+
+                    val resultInfo = result.getOrNull()?.detectionResponse
+                    if (resultInfo != null) {
+                        onNavigateResult(result.getOrNull())
+                    } else message = "No label result"
                 }
 
                 result.onFailure {
@@ -131,9 +136,11 @@ class DetectionFragment : Fragment(), View.OnClickListener {
                             pauseAnimation()
                             frame = 0
                         }
-                        tvStatus.text = getString(R.string.status_detection_error)
                     }
+                    message = it.message.toString()
                 }
+                binding.tvStatus.text =
+                    getString(R.string.status_detection_error, message)
             }
         }
     }

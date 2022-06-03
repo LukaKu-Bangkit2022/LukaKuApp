@@ -2,7 +2,6 @@ package com.bangkit.capstone.lukaku.ui.result
 
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -46,11 +45,13 @@ class ResultFragment : Fragment() {
     }
 
     private fun setResult() {
-        detectionResult?.apply {
-        }
-
         binding.apply {
             ivPhoto.loadImage(photo)
+
+            detectionResult?.apply {
+                tvDateValue.text = detectionResponse?.date
+                tvTypeValue.text = detectionResponse?.name
+            }
         }
     }
 

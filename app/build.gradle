@@ -26,11 +26,9 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField("String", "BASE_URL_CF", BASE_URL_CF)
             buildConfigField("String", "BASE_URL_PD", BASE_URL_PD)
         }
         debug {
-            buildConfigField("String", "BASE_URL_CF", BASE_URL_CF)
             buildConfigField("String", "BASE_URL_PD", BASE_URL_PD)
         }
     }
