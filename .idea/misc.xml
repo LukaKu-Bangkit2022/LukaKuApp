@@ -62,9 +62,9 @@
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_app_settings.xml" value="0.1" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_articles.xml" value="0.1" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_capture.xml" value="0.25" />
-        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_detail_article.xml" value="0.12" />
+        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_detail_article.xml" value="0.33" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_detection.xml" value="0.14" />
-        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_drug_details.xml" value="0.22" />
+        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_drug_details.xml" value="0.33" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_first_aid.xml" value="0.25" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_home.xml" value="0.22" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_medicine.xml" value="0.2" />

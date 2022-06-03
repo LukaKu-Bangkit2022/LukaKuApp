@@ -2,7 +2,6 @@ package com.bangkit.capstone.lukaku.ui.detection
 
 import android.app.AlertDialog.Builder
 import android.content.Context
-import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,11 +11,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.bangkit.capstone.lukaku.R
 import com.bangkit.capstone.lukaku.data.models.DetectionResult
 import com.bangkit.capstone.lukaku.databinding.FragmentDetectionBinding
 import com.bangkit.capstone.lukaku.ui.detection.DetectionFragmentDirections.actionDetectionFragmentToResultFragment
-import com.bangkit.capstone.lukaku.utils.bitmapToFile
 import com.bangkit.capstone.lukaku.utils.loadImage
 import com.bangkit.capstone.lukaku.utils.withFirstUpperCase
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,6 +23,7 @@ import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
+import java.io.File
 
 
 @AndroidEntryPoint
@@ -33,11 +33,12 @@ class DetectionFragment : Fragment(), View.OnClickListener {
     private val binding get() = _binding!!
 
     private val viewModel: DetectionViewModel by viewModels()
-    private var photo: Bitmap? = null
+    private val args: DetectionFragmentArgs by navArgs()
+    private var photo: File? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        photo = DetectionFragmentArgs.fromBundle(arguments as Bundle).image
+        photo = args.image
     }
 
     override fun onCreateView(
@@ -106,46 +107,49 @@ class DetectionFragment : Fragment(), View.OnClickListener {
             tvStatus.text = getString(R.string.status_detection)
         }
 
-        val photoFile = bitmapToFile(photo!!, requireContext())
-        val photoFilePart = MultipartBody.Part.createFormData(
-            "file",
-            photoFile.name,
-            photoFile.asRequestBody("image/*".toMediaTypeOrNull())
-        )
+        val photoFilePart = photo?.let {
+            MultipartBody.Part.createFormData(
+                "file",
+                photo?.name,
+                it.asRequestBody("image/*".toMediaTypeOrNull())
+            )
+        }
 
         lifecycleScope.launch {
-            viewModel.detection(photoFilePart).observe(viewLifecycleOwner) { result ->
-                var message = ""
+            if (photoFilePart != null) {
+                viewModel.detection(photoFilePart).observe(viewLifecycleOwner) { result ->
+                    var message = ""
 
-                result.onSuccess {
-                    binding.tvStatus.text = getString(R.string.status_detection_complete)
+                    result.onSuccess {
+                        binding.tvStatus.text = getString(R.string.status_detection_complete)
 
-                    val resultInfo = result.getOrNull()?.detectionResponse
-                    if (resultInfo != null) {
-                        onNavigateResult(result.getOrNull())
-                    } else message = "No label result"
-                }
-
-                result.onFailure {
-                    binding.apply {
-                        lottieFinger.apply {
-                            pauseAnimation()
-                            frame = 0
-                            isClickable = true
-                        }
-                        lottieDetect.apply {
-                            pauseAnimation()
-                            frame = 0
-                        }
+                        val resultInfo = result.getOrNull()?.detectionResponse
+                        if (resultInfo != null) {
+                            onNavigateResult(result.getOrNull())
+                        } else message = "No label result"
                     }
-                    message = it.message.toString()
-                }
 
-                if (message.isNotEmpty()) {
-                    binding.tvStatus.text = getString(
-                        R.string.status_detection_error,
-                        message.withFirstUpperCase()
-                    )
+                    result.onFailure {
+                        binding.apply {
+                            lottieFinger.apply {
+                                pauseAnimation()
+                                frame = 0
+                                isClickable = true
+                            }
+                            lottieDetect.apply {
+                                pauseAnimation()
+                                frame = 0
+                            }
+                        }
+                        message = it.message.toString()
+                    }
+
+                    if (message.isNotEmpty()) {
+                        binding.tvStatus.text = getString(
+                            R.string.status_detection_error,
+                            message.withFirstUpperCase()
+                        )
+                    }
                 }
             }
         }

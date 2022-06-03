@@ -6,28 +6,31 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.navArgs
 import com.bangkit.capstone.lukaku.R
 import com.bangkit.capstone.lukaku.adapters.ResultPagerAdapter
 import com.bangkit.capstone.lukaku.data.models.DetectionResult
 import com.bangkit.capstone.lukaku.databinding.FragmentResultBinding
+import com.bangkit.capstone.lukaku.ui.viewer.ViewerFragmentArgs
 import com.bangkit.capstone.lukaku.utils.loadImage
 import com.bangkit.capstone.lukaku.utils.withDateFormat
 import com.bangkit.capstone.lukaku.utils.withFirstUpperCase
 import com.google.android.material.tabs.TabLayoutMediator
+import java.io.File
 
 class ResultFragment : Fragment() {
 
     private var _binding: FragmentResultBinding? = null
     private val binding get() = _binding!!
 
-    private var photo: Bitmap? = null
+    private var photo: File? = null
     private var detectionResult: DetectionResult? = null
+    private val args: ResultFragmentArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        photo = ResultFragmentArgs.fromBundle(arguments as Bundle).image
-        detectionResult = ResultFragmentArgs.fromBundle(arguments as Bundle)
-            .resultParcelable as DetectionResult
+        photo = args.image
+        detectionResult =  args.resultParcelable
     }
 
     override fun onCreateView(

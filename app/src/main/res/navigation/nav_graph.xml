@@ -24,7 +24,7 @@
             android:id="@+id/action_viewerFragment_to_detectionFragment"
             app:destination="@id/detectionFragment"
             app:popUpTo="@id/detectionFragment"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/appSettingsFragment"
@@ -174,7 +174,7 @@
         <argument
             android:name="image"
             android:defaultValue="@null"
-            app:argType="android.graphics.Bitmap"
+            app:argType="java.io.File"
             app:nullable="true" />
 
         <argument
@@ -186,13 +186,14 @@
     <fragment
         android:id="@+id/detectionFragment"
         android:name="com.bangkit.capstone.lukaku.ui.detection.DetectionFragment"
-        android:label="DetectionFragment">
+        android:label="DetectionFragment"
+        tools:layout="@layout/fragment_detection">
 
         <argument
             android:name="image"
             android:defaultValue="@null"
-            app:argType="android.graphics.Bitmap"
-            app:nullable="true" />
+            app:argType="java.io.File"
+            app:nullable="true"/>
         <action
             android:id="@+id/action_detectionFragment_to_resultFragment"
             app:destination="@id/resultFragment"

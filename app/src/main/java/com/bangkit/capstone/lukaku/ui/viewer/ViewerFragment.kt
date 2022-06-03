@@ -8,9 +8,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.bangkit.capstone.lukaku.R
 import com.bangkit.capstone.lukaku.databinding.FragmentViewerBinding
 import com.bangkit.capstone.lukaku.ui.viewer.ViewerFragmentDirections.actionViewerFragmentToDetectionFragment
+import com.bangkit.capstone.lukaku.utils.bitmapToFile
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 
@@ -20,10 +22,11 @@ class ViewerFragment : Fragment(), View.OnClickListener {
     private val binding get() = _binding!!
 
     private var imageFile: File? = null
+    private val args: ViewerFragmentArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        imageFile = ViewerFragmentArgs.fromBundle(arguments as Bundle).image
+        imageFile = args.image
     }
 
     override fun onCreateView(
@@ -68,7 +71,7 @@ class ViewerFragment : Fragment(), View.OnClickListener {
     private fun onNavigateContinue() {
         lifecycleScope.launchWhenStarted {
             val directions = actionViewerFragmentToDetectionFragment().apply {
-                image = binding.ivSelectedImage.output
+                image = bitmapToFile(binding.ivSelectedImage.output, requireContext())
             }
 
             findNavController().navigate(directions)
