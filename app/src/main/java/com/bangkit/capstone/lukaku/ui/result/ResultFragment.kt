@@ -11,6 +11,8 @@ import com.bangkit.capstone.lukaku.adapters.ResultPagerAdapter
 import com.bangkit.capstone.lukaku.data.models.DetectionResult
 import com.bangkit.capstone.lukaku.databinding.FragmentResultBinding
 import com.bangkit.capstone.lukaku.utils.loadImage
+import com.bangkit.capstone.lukaku.utils.withDateFormat
+import com.bangkit.capstone.lukaku.utils.withFirstUpperCase
 import com.google.android.material.tabs.TabLayoutMediator
 
 class ResultFragment : Fragment() {
@@ -49,8 +51,8 @@ class ResultFragment : Fragment() {
             ivPhoto.loadImage(photo)
 
             detectionResult?.apply {
-                tvDateValue.text = detectionResponse?.date
-                tvTypeValue.text = detectionResponse?.name
+                tvDateValue.text = detectionResponse?.date?.withDateFormat()
+                tvTypeValue.text = detectionResponse?.name?.withFirstUpperCase()
             }
         }
     }

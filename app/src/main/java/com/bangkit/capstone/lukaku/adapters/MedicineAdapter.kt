@@ -13,6 +13,8 @@ import com.bangkit.capstone.lukaku.data.models.MedicineResponseItem
 import com.bangkit.capstone.lukaku.databinding.ItemListDrugBinding
 import com.bangkit.capstone.lukaku.databinding.ItemListDrugBinding.inflate
 import com.bangkit.capstone.lukaku.utils.loadImage
+import com.bangkit.capstone.lukaku.utils.withCurrencyFormat
+import com.bangkit.capstone.lukaku.utils.withFirstUpperCase
 
 class MedicineAdapter : RecyclerView.Adapter<MedicineAdapter.MedicineViewHolder>() {
     private val callback = object : DiffUtil.ItemCallback<MedicineResponseItem>() {
@@ -46,10 +48,10 @@ class MedicineAdapter : RecyclerView.Adapter<MedicineAdapter.MedicineViewHolder>
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: MedicineResponseItem) {
             binding.apply {
-                tvContent.text = item.label
+                tvContent.text = item.label?.withFirstUpperCase()
                 ivImage.loadImage(item.imageUrl)
                 tvName.text = item.name
-                tvPiece.text = context.getString(R.string.piece, item.price)
+                tvPiece.text = item.price?.withCurrencyFormat()
                 tvDescription.text = item.description
                 tvDescription.setOnClickListener {
                     it.findNavController().navigate(

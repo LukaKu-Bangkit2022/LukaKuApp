@@ -18,6 +18,7 @@ import com.bangkit.capstone.lukaku.databinding.FragmentDetectionBinding
 import com.bangkit.capstone.lukaku.ui.detection.DetectionFragmentDirections.actionDetectionFragmentToResultFragment
 import com.bangkit.capstone.lukaku.utils.bitmapToFile
 import com.bangkit.capstone.lukaku.utils.loadImage
+import com.bangkit.capstone.lukaku.utils.withFirstUpperCase
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -141,8 +142,10 @@ class DetectionFragment : Fragment(), View.OnClickListener {
                 }
 
                 if (message.isNotEmpty()) {
-                    binding.tvStatus.text =
-                        getString(R.string.status_detection_error, message)
+                    binding.tvStatus.text = getString(
+                        R.string.status_detection_error,
+                        message.withFirstUpperCase()
+                    )
                 }
             }
         }

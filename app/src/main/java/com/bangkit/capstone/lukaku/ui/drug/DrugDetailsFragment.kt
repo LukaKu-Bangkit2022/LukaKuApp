@@ -5,10 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.bangkit.capstone.lukaku.R
 import com.bangkit.capstone.lukaku.data.models.MedicineResponseItem
 import com.bangkit.capstone.lukaku.databinding.FragmentDrugDetailsBinding
 import com.bangkit.capstone.lukaku.utils.loadImage
+import com.bangkit.capstone.lukaku.utils.withCurrencyFormat
+import com.bangkit.capstone.lukaku.utils.withFirstUpperCase
 
 class DrugDetailsFragment : Fragment() {
 
@@ -39,9 +40,9 @@ class DrugDetailsFragment : Fragment() {
     private fun onSetItems() {
         binding.apply {
             ivImage.loadImage(drugItem.imageUrl, 8)
-            tvContent.text = drugItem.label
+            tvContent.text = drugItem.label?.withFirstUpperCase()
             tvName.text = drugItem.name
-            tvPiece.text = context?.getString(R.string.piece, drugItem.price)
+            tvPiece.text = drugItem.price?.withCurrencyFormat()
             tvDescription.text = drugItem.description
 
             ivBack.setOnClickListener {
