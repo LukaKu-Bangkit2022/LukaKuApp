@@ -68,7 +68,7 @@ class HomeFragment : Fragment() {
         goToProfile()
         initRecyclerView()
         onDetail()
-        getAllArticle()
+//        getAllArticle()
 
     }
 

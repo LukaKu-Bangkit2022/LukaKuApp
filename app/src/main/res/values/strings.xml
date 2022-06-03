@@ -74,8 +74,8 @@
     <string name="search_articles">Search articles…</string>
     <string name="piece">Rp %s</string>
     <string name="clipboard">Copied Number %s to clipboard</string>
-    <string name="medicine_error_message">Something is wrong.</string>
-    <string name="first_aids_error_message">Something is wrong.</string>
+    <string name="medicine_error_message">No label result.</string>
+    <string name="first_aids_error_message">No label result.</string>
     <string name="tab_first_aid">First Aids</string>
     <string name="tab_medicine">Medicine</string>
     <string name="type_of_wound">Type of wound</string>

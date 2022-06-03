@@ -139,8 +139,11 @@ class DetectionFragment : Fragment(), View.OnClickListener {
                     }
                     message = it.message.toString()
                 }
-                binding.tvStatus.text =
-                    getString(R.string.status_detection_error, message)
+
+                if (message.isNotEmpty()) {
+                    binding.tvStatus.text =
+                        getString(R.string.status_detection_error, message)
+                }
             }
         }
     }

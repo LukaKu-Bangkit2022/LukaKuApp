@@ -22,9 +22,10 @@ class FirstAidFragment : Fragment() {
 
     private var detectionResult: DetectionResult? = null
     private var firstAidResponse: FirstAidResponse? = null
-    private var firstAidResponseItem: FirstAidResponseItem? = null
 
     private lateinit var firstAidsAdapter: FirstAidsAdapter
+    private lateinit var firstAidResponseItem: FirstAidResponseItem
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,23 +45,24 @@ class FirstAidFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         firstAidResponse = detectionResult?.firstAidResponse
-        firstAidResponseItem = firstAidResponse?.get(0)
 
         getFirstAids()
     }
 
     private fun getFirstAids() {
-        val firstAidContent = firstAidResponseItem?.firstaid
-        val firstAidList = firstAidContent?.split("*")?.toList()
+        if (firstAidResponse?.size != 0) {
+            firstAidResponseItem = firstAidResponse!![0]
 
-        if (firstAidList != null) {
-            binding.rvFirstAids.apply {
-                firstAidsAdapter = FirstAidsAdapter(firstAidList)
-                adapter = firstAidsAdapter
-                layoutManager = LinearLayoutManager(requireActivity())
-            }
-        } else {
-            context?.toast(getString(R.string.first_aids_error_message))
-        }
+            val firstAidContent = firstAidResponseItem.firstaid
+            val firstAidList = firstAidContent?.split("*")?.toList()
+
+            if (!firstAidList.isNullOrEmpty()) {
+                binding.rvFirstAids.apply {
+                    firstAidsAdapter = FirstAidsAdapter(firstAidList)
+                    adapter = firstAidsAdapter
+                    layoutManager = LinearLayoutManager(requireActivity())
+                }
+            } else context?.toast(getString(R.string.first_aids_error_message))
+        } else context?.toast(getString(R.string.first_aids_error_message))
     }
 }

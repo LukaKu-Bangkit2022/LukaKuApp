@@ -9,8 +9,8 @@ class MedicineResponse : ArrayList<MedicineResponseItem>()
 data class MedicineResponseItem(
     val price: String? = null,
     val imageUrl: String? = null,
-    val name: String,
+    val name: String? = null,
     val description: String? = null,
-    val id: Int,
-    val label: String
+    val id: Int? = null,
+    val label: String? = null
 ): Parcelable
