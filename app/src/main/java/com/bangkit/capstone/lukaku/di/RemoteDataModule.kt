@@ -1,6 +1,6 @@
 package com.bangkit.capstone.lukaku.di
 
-import com.bangkit.capstone.lukaku.data.remote.ApiConfig
+import com.bangkit.capstone.lukaku.data.remote.ApiConfig.Companion.getApiService
 import com.bangkit.capstone.lukaku.data.remote.ApiService
 import dagger.Module
 import dagger.Provides
@@ -13,5 +13,5 @@ import javax.inject.Singleton
 class RemoteDataModule {
     @Singleton
     @Provides
-    fun provideApiService(): ApiService = ApiConfig.getApiService()
+    fun provideApiService(): ApiService = getApiService()
 }

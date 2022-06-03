@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.result.ResultFragment">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimaryVariant">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline_begin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.4" />
+
+                <ImageView
+                    android:id="@+id/iv_photo"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:contentDescription="@string/selected_image"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/mainToolbar"
+                    tools:src="@tools:sample/avatars" />
+
+                <View
+                    android:id="@+id/view_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:background="@color/white_smoke_alpha"
+                    android:paddingTop="8dp"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_photo"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tv_date" />
+
+                <TextView
+                    android:id="@+id/tv_type"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:fontFamily="@font/nunito_extrabold"
+                    android:text="@string/type_of_wound"
+                    app:layout_constraintBottom_toBottomOf="@+id/view_background"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline_begin"
+                    app:layout_constraintStart_toStartOf="@+id/view_background" />
+
+                <TextView
+                    android:id="@+id/tv_date_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_extrabold"
+                    android:gravity="end"
+                    android:paddingTop="16dp"
+                    app:layout_constraintBottom_toTopOf="@+id/tv_type"
+                    app:layout_constraintEnd_toEndOf="@+id/tv_type_value"
+                    app:layout_constraintStart_toEndOf="@+id/tv_date"
+                    tools:text="7 Mei 2022 18:30" />
+
+                <TextView
+                    android:id="@+id/tv_date"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_extrabold"
+                    android:paddingTop="16dp"
+                    android:text="@string/date"
+                    app:layout_constraintBottom_toTopOf="@+id/tv_type"
+                    app:layout_constraintEnd_toEndOf="@+id/tv_type"
+                    app:layout_constraintStart_toStartOf="@+id/tv_type" />
+
+                <TextView
+                    android:id="@+id/tv_type_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:fontFamily="@font/nunito_extrabold"
+                    android:gravity="end"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_type"
+                    app:layout_constraintEnd_toEndOf="@+id/view_background"
+                    app:layout_constraintStart_toEndOf="@+id/tv_type"
+                    app:layout_constraintTop_toTopOf="@+id/tv_type"
+                    tools:text="Abrasion" />
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/mainToolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_collapseMode="pin"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/iv_back"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:contentDescription="@string/back"
+                        android:src="@drawable/ic_arrow_back"
+                        app:layout_collapseMode="pin"
+                        app:tint="@color/white_smoke"
+                        tools:ignore="RtlSymmetry"
+                        tools:layout_editor_absoluteX="16dp"
+                        tools:layout_editor_absoluteY="16dp" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tv_detection"
+                        style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/nunito_extrabold"
+                        android:text="@string/detection_result"
+                        android:textColor="@color/white_smoke"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                </androidx.appcompat.widget.Toolbar>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimaryVariant"
+            android:overScrollMode="never"
+            app:tabGravity="fill"
+            app:tabTextColor="?attr/colorPrimary"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

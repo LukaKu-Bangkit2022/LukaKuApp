@@ -24,7 +24,7 @@
                 app:layout_scrollFlags="scroll|enterAlways">
 
                 <ImageView
-                    android:id="@+id/ivBack"
+                    android:id="@+id/iv_back"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"

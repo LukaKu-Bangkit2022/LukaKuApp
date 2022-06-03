@@ -17,7 +17,14 @@
             app:popUpToInclusive="true" />
         <argument
             android:name="image"
-            app:argType="java.io.File" />
+            android:defaultValue="@null"
+            app:argType="java.io.File"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_viewerFragment_to_detectionFragment"
+            app:destination="@id/detectionFragment"
+            app:popUpTo="@id/detectionFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/appSettingsFragment"
@@ -110,7 +117,7 @@
         android:id="@+id/navigation_home"
         android:name="com.bangkit.capstone.lukaku.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_navigation_home_to_articlesFragment"
             app:destination="@id/articlesFragment"
@@ -144,7 +151,7 @@
         android:id="@+id/articlesFragment"
         android:name="com.bangkit.capstone.lukaku.ui.article.ArticlesFragment"
         android:label="fragment_articles"
-        tools:layout="@layout/fragment_articles" >
+        tools:layout="@layout/fragment_articles">
         <action
             android:id="@+id/action_articlesFragment_to_detailArticleFragment"
             app:destination="@id/detailArticleFragment" />
@@ -159,4 +166,56 @@
         android:name="com.bangkit.capstone.lukaku.ui.article.detail.DetailArticleFragment"
         android:label="fragment_detail_article"
         tools:layout="@layout/fragment_detail_article" />
+    <fragment
+        android:id="@+id/resultFragment"
+        android:name="com.bangkit.capstone.lukaku.ui.result.ResultFragment"
+        android:label="fragment_result"
+        tools:layout="@layout/fragment_result">
+        <argument
+            android:name="image"
+            android:defaultValue="@null"
+            app:argType="android.graphics.Bitmap"
+            app:nullable="true" />
+
+        <argument
+            android:name="result_parcelable"
+            android:defaultValue="@null"
+            app:argType="com.bangkit.capstone.lukaku.data.models.DetectionResult"
+            app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/detectionFragment"
+        android:name="com.bangkit.capstone.lukaku.ui.detection.DetectionFragment"
+        android:label="DetectionFragment">
+
+        <argument
+            android:name="image"
+            android:defaultValue="@null"
+            app:argType="android.graphics.Bitmap"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_detectionFragment_to_resultFragment"
+            app:destination="@id/resultFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/navigation_detection"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_detectionFragment_to_navigation_detection"
+            app:destination="@id/navigation_detection"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/navigation_detection"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/drugDetailsFragment"
+        android:name="com.bangkit.capstone.lukaku.ui.drug.DrugDetailsFragment"
+        android:label="fragment_drug_details"
+        tools:layout="@layout/fragment_drug_details">
+        <argument
+            android:name="drug_detail"
+            app:argType="com.bangkit.capstone.lukaku.data.models.MedicineResponseItem" />
+    </fragment>
+    <action
+        android:id="@+id/action_global_drugDetailsFragment"
+        app:destination="@id/drugDetailsFragment" />
 </navigation>

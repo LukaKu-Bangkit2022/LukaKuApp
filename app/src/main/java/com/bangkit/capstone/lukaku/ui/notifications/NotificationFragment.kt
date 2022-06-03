@@ -40,7 +40,7 @@ class NotificationFragment : Fragment() {
         val sectionPagerAdapter = SectionPagerAdapter(requireActivity())
         binding.viewPager.adapter = sectionPagerAdapter
         TabLayoutMediator(binding.tabs, binding.viewPager) { tab, position ->
-            tab.text = resources.getString(TAB_TITLES[position])
+            tab.text = resources.getString(TAB_TITLES_NOTIFICATION[position])
         }.attach()
     }
 
@@ -52,7 +52,7 @@ class NotificationFragment : Fragment() {
 
     companion object {
         @StringRes
-        private val TAB_TITLES = intArrayOf(
+        val TAB_TITLES_NOTIFICATION = intArrayOf(
             R.string.updates,
             R.string.messages
         )

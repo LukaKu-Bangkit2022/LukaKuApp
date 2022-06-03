@@ -2,6 +2,8 @@ package com.bangkit.capstone.lukaku.di
 
 import com.bangkit.capstone.lukaku.data.repository.article.ArticleRepository
 import com.bangkit.capstone.lukaku.data.repository.article.ArticleRepositoryImpl
+import com.bangkit.capstone.lukaku.data.repository.detection.DetectionRepository
+import com.bangkit.capstone.lukaku.data.repository.detection.DetectionRepositoryImpl
 import com.bangkit.capstone.lukaku.data.repository.onboarding.OnboardingRepository
 import com.bangkit.capstone.lukaku.data.repository.onboarding.OnboardingRepositoryImpl
 import com.bangkit.capstone.lukaku.data.repository.settings.SettingsRepository
@@ -22,4 +24,7 @@ abstract class RepositoryModule {
 
     @Binds
     abstract fun bindsArticleRepository(articleRepositoryImpl: ArticleRepositoryImpl): ArticleRepository
+
+    @Binds
+    abstract fun bindsDetectionRepository(detectionRepositoryImpl: DetectionRepositoryImpl): DetectionRepository
 }
