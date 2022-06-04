@@ -53,7 +53,9 @@
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/drawable/ic_skip_arrow.xml" value="0.2075" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/drawable/ic_take_camera.xml" value="0.2075" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/drawable/image_shadow.xml" value="0.194" />
+        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/drawable/layer_indicator_tab_selected.xml" value="0.2075" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/drawable/news_avd_v02.xml" value="0.1845" />
+        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/drawable/selector_indicator_tab.xml" value="0.2075" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout-land/fragment_capture.xml" value="0.22" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout-v23/fragment_capture.xml" value="0.2" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/activity_main.xml" value="0.2" />
@@ -72,7 +74,7 @@
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_notifs.xml" value="0.2" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_onboarding.xml" value="0.2" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_profile.xml" value="0.2" />
-        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_result.xml" value="0.25" />
+        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_result.xml" value="0.22" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_result_detection.xml" value="0.22" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_sign.xml" value="0.2" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_viewer.xml" value="0.25" />

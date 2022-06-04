@@ -87,9 +87,11 @@
     <string name="dialog_process">Are you sure you want to end this process?</string>
     <string name="medicine_label">Recommended drugs found:</string>
     <string name="save">SAVE</string>
+    <string name="save_result">Save Result</string>
     <string name="product">PRODUCT</string>
     <string name="detection_result">Detection Result</string>
     <string name="first_aid_label">How to do first aid:</string>
     <string name="more_action">More Action</string>
     <string name="drug_description">Drug description</string>
+    <string name="feedback">Feedback</string>
 </resources>

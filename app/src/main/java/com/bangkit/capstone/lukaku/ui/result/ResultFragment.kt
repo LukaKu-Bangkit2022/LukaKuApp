@@ -1,24 +1,23 @@
 package com.bangkit.capstone.lukaku.ui.result
 
-import android.graphics.Bitmap
+import android.animation.Animator
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.*
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bangkit.capstone.lukaku.R
 import com.bangkit.capstone.lukaku.adapters.ResultPagerAdapter
 import com.bangkit.capstone.lukaku.data.models.DetectionResult
 import com.bangkit.capstone.lukaku.databinding.FragmentResultBinding
-import com.bangkit.capstone.lukaku.ui.viewer.ViewerFragmentArgs
-import com.bangkit.capstone.lukaku.utils.loadImage
-import com.bangkit.capstone.lukaku.utils.withDateFormat
-import com.bangkit.capstone.lukaku.utils.withFirstUpperCase
+import com.bangkit.capstone.lukaku.utils.*
 import com.google.android.material.tabs.TabLayoutMediator
 import java.io.File
 
-class ResultFragment : Fragment() {
+class ResultFragment : Fragment(), OnClickListener {
 
     private var _binding: FragmentResultBinding? = null
     private val binding get() = _binding!!
@@ -30,7 +29,7 @@ class ResultFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         photo = args.image
-        detectionResult =  args.resultParcelable
+        detectionResult = args.resultParcelable
     }
 
     override fun onCreateView(
@@ -46,7 +45,43 @@ class ResultFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setResult()
         resultPager()
-        backToActivity()
+        onSetListener()
+    }
+
+    private fun onSetListener() {
+        binding.apply {
+            ivBack.setOnClickListener(this@ResultFragment)
+            fab.setOnClickListener(this@ResultFragment)
+            fabSave.setOnClickListener(this@ResultFragment)
+            fabReshoot.setOnClickListener(this@ResultFragment)
+            fabFeedback.setOnClickListener(this@ResultFragment)
+            fabBackground.setOnClickListener(this@ResultFragment)
+        }
+    }
+
+    override fun onClick(view: View?) {
+        when (view?.id) {
+            R.id.ivBack -> requireActivity().onBackPressed()
+            R.id.fab -> onFABVisible()
+            R.id.fab_save -> onSaveResult()
+            R.id.fab_reshoot -> onNavigateReshoot()
+            R.id.fab_feedback -> onShowFeedbackPopup()
+            R.id.fab_background -> closeFABMenu()
+        }
+    }
+
+    private fun onNavigateReshoot() {
+        findNavController().navigate(
+            R.id.action_resultFragment_to_navigation_detection
+        )
+    }
+
+    private fun onShowFeedbackPopup() {
+        context?.toast("Still under development!")
+    }
+
+    private fun onSaveResult() {
+        context?.toast("Still under development!")
     }
 
     private fun setResult() {
@@ -72,9 +107,47 @@ class ResultFragment : Fragment() {
         }
     }
 
-    private fun backToActivity() {
-        binding.ivBack.setOnClickListener {
-            requireActivity().onBackPressed()
+    private fun onFABVisible() {
+        if (GONE == binding.fabBackground.visibility) {
+            showFABMenu()
+        } else closeFABMenu()
+    }
+
+    private fun showFABMenu() {
+        binding.apply {
+            fabLayout1.visibility = VISIBLE
+            fabLayout2.visibility = VISIBLE
+            fabLayout3.visibility = VISIBLE
+            fabBackground.visibility = VISIBLE
+
+            fab.animate().rotationBy(180F)
+            fabLayout1.withAnimationY(-resources.getDimension(R.dimen.fab1))
+            fabLayout2.withAnimationY(-resources.getDimension(R.dimen.fab2))
+            fabLayout3.withAnimationY(-resources.getDimension(R.dimen.fab3))
+        }
+    }
+
+    private fun closeFABMenu() {
+        binding.apply {
+            fabBackground.visibility = GONE
+            fab.animate().rotation(0F)
+            fabLayout1.withAnimationY()
+            fabLayout2.withAnimationY()
+            fabLayout3.withAnimationY()
+            fabLayout3.withAnimationY()
+                .setListener(object : Animator.AnimatorListener {
+                    override fun onAnimationStart(animator: Animator) {}
+                    override fun onAnimationEnd(animator: Animator) {
+                        if (GONE == fabBackground.visibility) {
+                            fabLayout1.visibility = GONE
+                            fabLayout2.visibility = GONE
+                            fabLayout3.visibility = GONE
+                        }
+                    }
+
+                    override fun onAnimationCancel(animator: Animator) {}
+                    override fun onAnimationRepeat(animator: Animator) {}
+                })
         }
     }
 

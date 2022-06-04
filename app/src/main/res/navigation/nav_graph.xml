@@ -182,6 +182,11 @@
             android:defaultValue="@null"
             app:argType="com.bangkit.capstone.lukaku.data.models.DetectionResult"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_resultFragment_to_navigation_detection"
+            app:destination="@id/navigation_detection"
+            app:popUpTo="@id/resultFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/detectionFragment"

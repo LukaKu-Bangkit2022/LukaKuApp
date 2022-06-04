@@ -9,8 +9,10 @@ import android.graphics.Bitmap.CompressFormat
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Environment
+import android.view.ViewPropertyAnimator
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.Toast
 import com.bangkit.capstone.lukaku.R
 import com.bangkit.capstone.lukaku.utils.Constants.ANIMATION_FAST_MILLIS
@@ -20,6 +22,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -131,4 +134,8 @@ fun reduceFileImage(file: File): File {
     bitmap.compress(CompressFormat.JPEG, compressQuality, FileOutputStream(file))
 
     return file
+}
+
+fun LinearLayout.withAnimationY(value:Float = 0f): ViewPropertyAnimator {
+    return animate().translationY(value)
 }
