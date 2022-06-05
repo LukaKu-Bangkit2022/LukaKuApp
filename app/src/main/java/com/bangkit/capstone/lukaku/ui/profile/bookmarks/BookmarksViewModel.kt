@@ -1,4 +1,4 @@
-package com.bangkit.capstone.lukaku.ui.home
+package com.bangkit.capstone.lukaku.ui.profile.bookmarks
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -9,10 +9,10 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(
+class BookmarksViewModel @Inject constructor(
     private val articleRepository: ArticleRepository
 ) : ViewModel() {
-    fun getAllArticle() = articleRepository.getArticle()
+    fun getBookmarkedArticle() = articleRepository.getBookmarkedArticle()
 
     fun saveArticle(articleEntity: ArticleEntity) {
         viewModelScope.launch {

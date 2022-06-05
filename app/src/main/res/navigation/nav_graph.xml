@@ -112,6 +112,10 @@
             app:popExitAnim="@android:anim/fade_out"
             app:popUpTo="@id/nav_graph"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_navigation_profile_to_detailArticleFragment"
+            app:destination="@id/detailArticleFragment"
+            app:popUpTo="@id/navigation_profile" />
     </fragment>
     <fragment
         android:id="@+id/navigation_home"

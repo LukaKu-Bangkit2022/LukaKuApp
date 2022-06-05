@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.StringRes
 import com.bangkit.capstone.lukaku.R
-import com.bangkit.capstone.lukaku.adapters.SectionPagerAdapter
+import com.bangkit.capstone.lukaku.adapters.NotificationPagerAdapter
 import com.bangkit.capstone.lukaku.databinding.FragmentNotificationBinding
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -37,8 +37,8 @@ class NotificationFragment : Fragment() {
     }
 
     private fun sectionPager() {
-        val sectionPagerAdapter = SectionPagerAdapter(requireActivity())
-        binding.viewPager.adapter = sectionPagerAdapter
+        val notificationPagerAdapter = NotificationPagerAdapter(requireActivity())
+        binding.viewPager.adapter = notificationPagerAdapter
         TabLayoutMediator(binding.tabs, binding.viewPager) { tab, position ->
             tab.text = resources.getString(TAB_TITLES_NOTIFICATION[position])
         }.attach()

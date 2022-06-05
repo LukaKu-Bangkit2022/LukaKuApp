@@ -7,7 +7,7 @@ import com.bangkit.capstone.lukaku.ui.notifications.NotificationFragment.Compani
 import com.bangkit.capstone.lukaku.ui.notifications.messages.MessagesFragment
 import com.bangkit.capstone.lukaku.ui.notifications.updates.UpdatesFragment
 
-class SectionPagerAdapter(
+class NotificationPagerAdapter(
     fa: FragmentActivity
 ) : FragmentStateAdapter(fa) {
 

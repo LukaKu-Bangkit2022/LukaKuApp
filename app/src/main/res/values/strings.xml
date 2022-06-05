@@ -98,4 +98,6 @@
     <string name="more_action">More Action</string>
     <string name="drug_description">Drug description</string>
     <string name="feedback">Feedback</string>
+    <string name="bookmarks">Bookmarks</string>
+    <string name="no_bookmarked_article">No bookmarked article.</string>
 </resources>

@@ -11,6 +11,7 @@ import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.bangkit.capstone.lukaku.R
+import com.bangkit.capstone.lukaku.adapters.LocalProfilePagerAdapter
 import com.bangkit.capstone.lukaku.databinding.FragmentProfileBinding
 import com.bangkit.capstone.lukaku.utils.ActivityLifeObserver
 import com.bangkit.capstone.lukaku.utils.loadCircleImage
@@ -19,6 +20,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions.*
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -60,6 +62,7 @@ class ProfileFragment : Fragment() {
         client = GoogleSignIn.getClient(requireActivity(), gso)
 
         setProfile()
+        localProfilePager()
 
         binding.ivSettings.setOnClickListener { showPopup(it) }
     }
@@ -127,5 +130,20 @@ class ProfileFragment : Fragment() {
         client.signOut()
 
         findNavController().navigate(R.id.action_navigation_profile_to_signFragment)
+    }
+
+    private fun localProfilePager() {
+        val localProfilePagerAdapter = LocalProfilePagerAdapter(requireActivity())
+        binding.viewPager.adapter = localProfilePagerAdapter
+        TabLayoutMediator(binding.tabs, binding.viewPager) { tab, position ->
+            tab.text = resources.getString(TAB_TITLES_LOCAL_PROFILE[position])
+        }.attach()
+    }
+
+    companion object {
+        val TAB_TITLES_LOCAL_PROFILE = intArrayOf(
+            R.string.history,
+            R.string.bookmarks
+        )
     }
 }

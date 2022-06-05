@@ -1,5 +1,6 @@
 package com.bangkit.capstone.lukaku.data.local.room
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.bangkit.capstone.lukaku.data.local.entity.ArticleEntity
 import kotlinx.coroutines.flow.Flow
@@ -10,7 +11,7 @@ interface ArticleDao {
     fun getArticle(): Flow<List<ArticleEntity>>
 
     @Query("SELECT * FROM article where bookmarked = 1")
-    fun getBookmarkedArticle(): Flow<List<ArticleEntity>>
+    fun getBookmarkedArticle(): LiveData<List<ArticleEntity>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertArticle(articleEntity: List<ArticleEntity>)

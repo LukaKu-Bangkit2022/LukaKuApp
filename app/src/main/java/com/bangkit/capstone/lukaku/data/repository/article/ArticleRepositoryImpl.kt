@@ -1,8 +1,8 @@
 package com.bangkit.capstone.lukaku.data.repository.article
 
+import androidx.lifecycle.LiveData
 import com.bangkit.capstone.lukaku.data.local.entity.ArticleEntity
 import com.bangkit.capstone.lukaku.data.local.room.ArticleDao
-import com.bangkit.capstone.lukaku.data.models.ArticleResponse
 import com.bangkit.capstone.lukaku.data.remote.ApiService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -10,7 +10,6 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
-
 class ArticleRepositoryImpl @Inject constructor(
     private val apiService: ApiService,
     private val articleDao: ArticleDao
@@ -48,8 +47,9 @@ class ArticleRepositoryImpl @Inject constructor(
         }
     }.flowOn(Dispatchers.IO)
 
-    override fun getBookmarkedArticle(): Flow<List<ArticleEntity>> =
-        articleDao.getBookmarkedArticle()
+    override fun getBookmarkedArticle(): LiveData<List<ArticleEntity>> {
+        return articleDao.getBookmarkedArticle()
+    }
 
     override fun searchArticle(searchQuery: String): Flow<Result<List<ArticleEntity>>> = flow {
         try {
@@ -84,3 +84,4 @@ class ArticleRepositoryImpl @Inject constructor(
         articleDao.updateArticle(articleEntity)
     }
 }
+
