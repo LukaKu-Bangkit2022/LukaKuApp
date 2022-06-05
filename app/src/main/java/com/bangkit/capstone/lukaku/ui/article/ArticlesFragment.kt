@@ -107,13 +107,16 @@ class ArticlesFragment : Fragment() {
     }
 
     private fun getAllArticle() {
+        true.showLoading()
         lifecycleScope.launch {
             viewModel.getAllArticle().collect { result ->
                 result.onSuccess { response ->
                     articleAdapter.differ.submitList(response.toList())
+                    false.showLoading()
                 }
                 result.onFailure {
                     requireActivity().toast(getString(R.string.article_error_message))
+                    false.showLoading()
                 }
             }
         }
@@ -147,5 +150,11 @@ class ArticlesFragment : Fragment() {
             getAllArticle()
             false
         }
+    }
+
+    private fun Boolean.showLoading() = if (this) {
+        binding.progressBar.visibility = VISIBLE
+    } else {
+        binding.progressBar.visibility = INVISIBLE
     }
 }
