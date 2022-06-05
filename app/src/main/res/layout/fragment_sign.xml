@@ -7,14 +7,14 @@
     tools:context=".ui.sign.SignFragment">
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
+        android:id="@+id/guideline_begin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.5" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
+        android:id="@+id/guideline_end"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -34,7 +34,7 @@
         style="@style/LogoMenu"
         android:contentDescription="@string/lets_get_started"
         android:src="@drawable/ic_illustration_sign"
-        app:layout_constraintBottom_toBottomOf="@id/guideline"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_begin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/temp" />

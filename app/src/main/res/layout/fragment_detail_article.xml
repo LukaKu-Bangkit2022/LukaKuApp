@@ -49,6 +49,15 @@
                     android:contentDescription="@string/back"
                     android:src="@drawable/ic_arrow_back_white" />
 
+                <ImageView
+                    android:id="@+id/iv_bookmark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="16dp"
+                    android:contentDescription="@string/save_article"
+                    android:src="@drawable/ic_bookmark" />
+
             </androidx.appcompat.widget.Toolbar>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -60,10 +69,10 @@
                     android:id="@+id/tv_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
                     android:ellipsize="end"
                     android:fontFamily="@font/nunito_extrabold"
                     android:maxLines="2"
-                    android:paddingBottom="4dp"
                     android:textColor="@color/white_smoke"
                     android:textSize="22sp"
                     android:textStyle="bold"
@@ -77,7 +86,7 @@
                     android:id="@+id/tvDate"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
                     android:ellipsize="end"
                     android:fontFamily="@font/lato"
                     android:textColor="@color/white_smoke"
@@ -91,7 +100,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="6dp"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
                     android:ellipsize="end"
                     android:fontFamily="@font/lato"
                     android:textColor="@color/white_smoke"
@@ -109,12 +118,11 @@
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tv_content"
-                    android:layout_width="115dp"
-                    android:layout_height="25dp"
-                    android:background="@drawable/bg_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_category"
                     android:fontFamily="@font/lato"
                     android:gravity="center"
-                    android:padding="4dp"
                     android:textColor="@color/white_smoke"
                     android:textSize="12sp"
                     android:textStyle="bold"

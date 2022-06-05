@@ -4,10 +4,15 @@ import android.Manifest
 import android.app.Application
 import android.content.ContentResolver
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.Bitmap.CompressFormat
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Environment
+import android.view.ViewPropertyAnimator
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.Toast
 import com.bangkit.capstone.lukaku.R
 import com.bangkit.capstone.lukaku.utils.Constants.ANIMATION_FAST_MILLIS
@@ -15,10 +20,9 @@ import com.bangkit.capstone.lukaku.utils.Constants.FILENAME_FORMAT
 import com.bangkit.capstone.lukaku.utils.Constants.PHOTO_EXTENSION
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import java.io.File
-import java.io.FileOutputStream
-import java.io.InputStream
-import java.io.OutputStream
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -57,10 +61,10 @@ fun ImageView.loadCircleImage(imageSource: Uri?) {
         .into(this)
 }
 
-fun <T> ImageView.loadImage(image: T) {
+fun <T> ImageView.loadImage(image: T, corners: Int = 1) {
     Glide.with(this)
         .load(image)
-        .centerCrop()
+        .transform(CenterCrop(), RoundedCorners(corners))
         .placeholder(R.drawable.ic_image_load)
         .error(R.drawable.ic_image_broken)
         .into(this)
@@ -84,6 +88,24 @@ fun uriToFile(uri: Uri, context: Context): File {
     return imageFile
 }
 
+fun bitmapToFile(bitmap: Bitmap, context: Context): File {
+    val imageFile = createTempFile(context)
+
+    var compressQuality = 100
+    var streamLength: Int
+
+    do {
+        val outputStream = ByteArrayOutputStream()
+        bitmap.compress(CompressFormat.JPEG, compressQuality, outputStream)
+        val bmpPicByteArray = outputStream.toByteArray()
+        streamLength = bmpPicByteArray.size
+        compressQuality -= 5
+    } while (streamLength > 1000000)
+
+    bitmap.compress(CompressFormat.JPEG, compressQuality, FileOutputStream(imageFile))
+    return imageFile
+}
+
 fun ImageButton.simulateClick(delay: Long = ANIMATION_FAST_MILLIS) {
     performClick()
     isPressed = true
@@ -92,4 +114,27 @@ fun ImageButton.simulateClick(delay: Long = ANIMATION_FAST_MILLIS) {
         invalidate()
         isPressed = false
     }, delay)
+}
+
+fun reduceFileImage(file: File): File {
+    val bitmap = BitmapFactory.decodeFile(file.path)
+
+    var compressQuality = 100
+    var streamLength: Int
+
+    do {
+        val outputStream = ByteArrayOutputStream()
+        bitmap.compress(CompressFormat.JPEG, compressQuality, outputStream)
+        val bmpPicByteArray = outputStream.toByteArray()
+        streamLength = bmpPicByteArray.size
+        compressQuality -= 5
+    } while (streamLength > 1000000)
+
+    bitmap.compress(CompressFormat.JPEG, compressQuality, FileOutputStream(file))
+
+    return file
+}
+
+fun LinearLayout.withAnimationY(value: Float = 0f): ViewPropertyAnimator {
+    return animate().translationY(value)
 }

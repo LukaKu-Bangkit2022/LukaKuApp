@@ -103,7 +103,7 @@
         android:textColor="@color/white_smoke"
         app:layout_constraintBottom_toTopOf="@+id/ib_take_image"
         app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="@+id/guideline_begin"
         tools:text="Zoom: 1.05x" />
 
     <ImageView
@@ -112,20 +112,20 @@
         android:layout_height="0dp"
         android:contentDescription="@string/point_to_take_image"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_end"
+        app:layout_constraintStart_toStartOf="@+id/guideline_begin"
         app:layout_constraintTop_toTopOf="@+id/view_finder"
         app:srcCompat="@drawable/ic_detector_line" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
+        android:id="@+id/guideline_begin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.1" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
+        android:id="@+id/guideline_end"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"

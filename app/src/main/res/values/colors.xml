@@ -11,6 +11,7 @@
     <color name="black_pearl">#222831</color>
     <color name="black_pearl_transparent">#26222831</color>
     <color name="white_smoke">#EAEAEA</color>
+    <color name="white_smoke_alpha">#80EAEAEA</color>
     <color name="ic_launcher_background">#222831</color>
     <color name="green">#39B54A</color>
     <color name="blue">#00AEEF</color>
@@ -18,4 +19,5 @@
     <color name="nobel">#9A9A9A</color>
     <color name="nobel_transparent">#4D9A9A9A</color>
     <color name="pink">#EC008C</color>
+    <color name="yellow">#FBBA38</color>
 </resources>

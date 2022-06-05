@@ -4,6 +4,8 @@ import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -69,12 +71,11 @@ class HomeFragment : Fragment() {
         initRecyclerView()
         onDetail()
         getAllArticle()
-
     }
 
     override fun onResume() {
         super.onResume()
-        bottomBar.visibility = View.VISIBLE
+        bottomBar.visibility = VISIBLE
     }
 
     override fun onDestroyView() {
@@ -109,13 +110,16 @@ class HomeFragment : Fragment() {
     }
 
     private fun getAllArticle() {
+        true.showLoading()
         lifecycleScope.launch {
             viewModel.getAllArticle().collect { result ->
                 result.onSuccess { response ->
-                    articleAdapter.differ.submitList(response.take(5))
+                    articleAdapter.differ.submitList(response.take(6).toList())
+                    false.showLoading()
                 }
                 result.onFailure {
                     requireActivity().toast(getString(R.string.article_error_message))
+                    false.showLoading()
                 }
             }
         }
@@ -123,7 +127,13 @@ class HomeFragment : Fragment() {
 
     private fun initRecyclerView() {
         binding.rvArticles.apply {
-            articleAdapter = ArticleAdapter()
+            articleAdapter = ArticleAdapter { articleEntity ->
+                if (articleEntity.isBookmarked) {
+                    viewModel.deleteArticle(articleEntity)
+                } else {
+                    viewModel.saveArticle(articleEntity)
+                }
+            }
             adapter = articleAdapter
             layoutManager = LinearLayoutManager(requireActivity())
         }
@@ -153,7 +163,16 @@ class HomeFragment : Fragment() {
                 requireActivity().intent.putExtra(EXTRA_ARTICLE, it)
             }
 
-            findNavController().navigate(R.id.action_navigation_home_to_detailArticleFragment, bundle)
+            findNavController().navigate(
+                R.id.action_navigation_home_to_detailArticleFragment,
+                bundle
+            )
         }
+    }
+
+    private fun Boolean.showLoading() = if (this) {
+        binding.progressBar.visibility = VISIBLE
+    } else {
+        binding.progressBar.visibility = INVISIBLE
     }
 }

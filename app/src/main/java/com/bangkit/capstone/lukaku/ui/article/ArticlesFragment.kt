@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bangkit.capstone.lukaku.R
 import com.bangkit.capstone.lukaku.adapters.ArticleAdapter
 import com.bangkit.capstone.lukaku.databinding.FragmentArticlesBinding
-import com.bangkit.capstone.lukaku.utils.Constants
+import com.bangkit.capstone.lukaku.utils.Constants.EXTRA_ARTICLE
 import com.bangkit.capstone.lukaku.utils.toast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -22,7 +22,7 @@ import kotlinx.coroutines.launch
 class ArticlesFragment : Fragment() {
     private var _binding: FragmentArticlesBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: ArticleViewModel by viewModels()
+    private val viewModel: ArticlesViewModel by viewModels()
     private lateinit var articleAdapter: ArticleAdapter
 
     override fun onCreateView(
@@ -57,7 +57,13 @@ class ArticlesFragment : Fragment() {
 
     private fun initRecyclerView() {
         binding.rvArticles.apply {
-            articleAdapter = ArticleAdapter()
+            articleAdapter = ArticleAdapter { articleEntity ->
+                if (articleEntity.isBookmarked) {
+                    viewModel.deleteArticle(articleEntity)
+                } else {
+                    viewModel.saveArticle(articleEntity)
+                }
+            }
             adapter = articleAdapter
             layoutManager = LinearLayoutManager(requireActivity())
         }
@@ -84,7 +90,7 @@ class ArticlesFragment : Fragment() {
     private fun onDetail() {
         articleAdapter.setOnItemClickListener {
             val bundle = Bundle().apply {
-                requireActivity().intent.putExtra(Constants.EXTRA_ARTICLE, it)
+                requireActivity().intent.putExtra(EXTRA_ARTICLE, it)
             }
 
             findNavController().navigate(

@@ -24,13 +24,13 @@
                 app:layout_scrollFlags="scroll|enterAlways">
 
                 <ImageView
-                    android:id="@+id/ivBack"
+                    android:id="@+id/iv_back"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:contentDescription="@string/back"
-                    android:src="@drawable/ic_arrow_back"
+                    android:src="@drawable/ic_arrow_back_black"
                     tools:ignore="RtlSymmetry" />
 
                 <com.google.android.material.textview.MaterialTextView
@@ -47,13 +47,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
-                    app:queryHint="@string/search_articles"
-                    android:maxWidth="10000dp"
                     android:layout_marginEnd="16dp"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:layoutDirection="rtl"
+                    android:maxWidth="10000dp"
                     android:queryBackground="@android:color/transparent"
-                    app:queryBackground="@android:color/transparent" />
+                    app:queryBackground="@android:color/transparent"
+                    app:queryHint="@string/search_articles" />
 
             </androidx.appcompat.widget.Toolbar>
 
@@ -74,7 +74,6 @@
                 android:id="@+id/rvArticles"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

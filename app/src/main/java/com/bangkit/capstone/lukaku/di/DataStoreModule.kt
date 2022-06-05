@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
-import com.bangkit.capstone.lukaku.data.local.OnboardingDataStore
-import com.bangkit.capstone.lukaku.data.local.SettingsDataStore
+import com.bangkit.capstone.lukaku.data.local.preferences.OnboardingDataStore
+import com.bangkit.capstone.lukaku.data.local.preferences.SettingsDataStore
 import com.bangkit.capstone.lukaku.utils.Constants.DATASTORE_PREF
 import dagger.Module
 import dagger.Provides

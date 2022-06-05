@@ -5,8 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import com.bangkit.capstone.lukaku.R
-import com.bangkit.capstone.lukaku.data.models.ArticleResponseItem
+import com.bangkit.capstone.lukaku.data.local.entity.ArticleEntity
 import com.bangkit.capstone.lukaku.databinding.FragmentDetailArticleBinding
 import com.bangkit.capstone.lukaku.utils.Constants.EXTRA_ARTICLE
 import com.bangkit.capstone.lukaku.utils.loadImage
@@ -27,7 +28,8 @@ class DetailArticleFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val item = requireActivity().intent.getSerializableExtra(EXTRA_ARTICLE) as ArticleResponseItem
+        val item =
+            requireActivity().intent.getParcelableExtra<ArticleEntity>(EXTRA_ARTICLE) as ArticleEntity
 
         catchArticleData(item)
         backToActivity()
@@ -44,10 +46,15 @@ class DetailArticleFragment : Fragment() {
         }
     }
 
-    private fun catchArticleData(item: ArticleResponseItem) {
+    private fun catchArticleData(item: ArticleEntity) {
         binding.apply {
             ivPhoto.loadImage(item.imageUrl)
             tvTitle.text = item.title
+            if (item.category == "Kesehatan" || item.category == "Health") {
+                tvContent.background.setTint(ContextCompat.getColor(requireContext(), R.color.pink))
+            } else {
+                tvContent.background.setTint(ContextCompat.getColor(requireContext(), R.color.yellow))
+            }
             tvContent.text = item.category
             tvDate.text = getString(R.string.line, item.publishedAt)
             tvAuthor.text = item.author

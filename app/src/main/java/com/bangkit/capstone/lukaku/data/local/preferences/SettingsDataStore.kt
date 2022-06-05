@@ -1,4 +1,4 @@
-package com.bangkit.capstone.lukaku.data.local
+package com.bangkit.capstone.lukaku.data.local.preferences
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences

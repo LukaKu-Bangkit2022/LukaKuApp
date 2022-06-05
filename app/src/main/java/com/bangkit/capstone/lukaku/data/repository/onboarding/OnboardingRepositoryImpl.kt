@@ -1,6 +1,6 @@
 package com.bangkit.capstone.lukaku.data.repository.onboarding
 
-import com.bangkit.capstone.lukaku.data.local.OnboardingDataStore
+import com.bangkit.capstone.lukaku.data.local.preferences.OnboardingDataStore
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

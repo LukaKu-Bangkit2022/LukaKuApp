@@ -2,10 +2,11 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
+    id 'com.google.gms.google-services'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
-    id 'com.google.gms.google-services'
     id 'androidx.navigation.safeargs'
+    id 'kotlin-parcelize'
 }
 
 android {
@@ -46,10 +47,11 @@ android {
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.4.1'
-    implementation 'com.google.android.material:material:1.6.0'
+    implementation 'androidx.core:core-ktx:1.8.0'
+    implementation 'androidx.appcompat:appcompat:1.4.2'
+    implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
@@ -59,6 +61,7 @@ dependencies {
 
     // Lifecycle
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.1'
     implementation 'androidx.activity:activity-ktx:1.4.0'
 
     // Navigation Component
@@ -66,10 +69,10 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.4.2'
 
     // CameraX
-    implementation "androidx.camera:camera-core:1.2.0-alpha01"
-    implementation "androidx.camera:camera-camera2:1.2.0-alpha01"
-    implementation "androidx.camera:camera-lifecycle:1.2.0-alpha01"
-    implementation "androidx.camera:camera-view:1.2.0-alpha01"
+    implementation "androidx.camera:camera-core:1.2.0-alpha02"
+    implementation "androidx.camera:camera-camera2:1.2.0-alpha02"
+    implementation "androidx.camera:camera-lifecycle:1.2.0-alpha02"
+    implementation "androidx.camera:camera-view:1.2.0-alpha02"
 
     // DataStore
     implementation 'androidx.datastore:datastore-core:1.0.0'
@@ -112,4 +115,9 @@ dependencies {
     // OkHttp
     implementation 'com.squareup.okhttp3:okhttp-bom:5.0.0-alpha.2'
     implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2'
+
+    // Room
+    implementation 'androidx.room:room-runtime:2.4.2'
+    implementation "androidx.room:room-ktx:2.4.2"
+    kapt 'androidx.room:room-compiler:2.4.2'
 }
