@@ -146,6 +146,7 @@
         <entry key="..\:/Users/chels/Downloads/LukaKuApp/app/src/main/res/drawable-night/ic_skip_arrow.xml" value="0.1" />
         <entry key="..\:/Users/chels/Downloads/LukaKuApp/app/src/main/res/drawable/bg_button.xml" value="0.114" />
         <entry key="..\:/Users/chels/Downloads/LukaKuApp/app/src/main/res/drawable/bg_button_circle.xml" value="0.114" />
+        <entry key="..\:/Users/chels/Downloads/LukaKuApp/app/src/main/res/drawable/bg_category.xml" value="0.1225" />
         <entry key="..\:/Users/chels/Downloads/LukaKuApp/app/src/main/res/drawable/bg_content.xml" value="0.1345" />
         <entry key="..\:/Users/chels/Downloads/LukaKuApp/app/src/main/res/drawable/bg_content_detail.xml" value="0.1345" />
         <entry key="..\:/Users/chels/Downloads/LukaKuApp/app/src/main/res/drawable/bg_health_content.xml" value="0.1" />
@@ -209,7 +210,7 @@
         <entry key="..\:/Users/chels/Downloads/LukaKuApp/app/src/main/res/layout/fragment_capture.xml" value="0.25" />
         <entry key="..\:/Users/chels/Downloads/LukaKuApp/app/src/main/res/layout/fragment_detail_article.xml" value="0.264" />
         <entry key="..\:/Users/chels/Downloads/LukaKuApp/app/src/main/res/layout/fragment_detection.xml" value="0.25" />
-        <entry key="..\:/Users/chels/Downloads/LukaKuApp/app/src/main/res/layout/fragment_drug_details.xml" value="0.264" />
+        <entry key="..\:/Users/chels/Downloads/LukaKuApp/app/src/main/res/layout/fragment_drug_details.xml" value="0.2" />
         <entry key="..\:/Users/chels/Downloads/LukaKuApp/app/src/main/res/layout/fragment_first_aid.xml" value="0.19791666666666666" />
         <entry key="..\:/Users/chels/Downloads/LukaKuApp/app/src/main/res/layout/fragment_home.xml" value="0.264" />
         <entry key="..\:/Users/chels/Downloads/LukaKuApp/app/src/main/res/layout/fragment_hospital.xml" value="0.19791666666666666" />

@@ -77,20 +77,7 @@ class ArticleRepositoryImpl @Inject constructor(
             exception.printStackTrace()
             emit(Result.failure(exception))
         }
-//        articleDao.getArticle().map {
-//            emit(Result.success(it))
-//        }
     }
-
-//    override fun searchArticle(searchQuery: String): Flow<Result<List<ArticleResponse>>> = flow {
-//        try {
-//            val response = apiService.searchArticles(searchQuery)
-//            emit(Result.success(response))
-//        } catch (exception: Exception) {
-//            exception.printStackTrace()
-//            emit(Result.failure(exception))
-//        }
-//    }
 
     override suspend fun setArticleBookmark(articleEntity: ArticleEntity, bookmarkState: Boolean) {
         articleEntity.isBookmarked = bookmarkState
