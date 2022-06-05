@@ -35,21 +35,56 @@
         <entry key="..\:/C22-PS188/app/src/main/res/menu/button_nav_menu.xml" value="0.2" />
         <entry key="..\:/C22-PS188/app/src/main/res/menu/menu.xml" value="0.2" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/drawable-night/bg_button.xml" value="0.2075" />
+        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/drawable-night/ic_arrow_back.xml" value="0.2075" />
+        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/drawable-night/ic_skip_arrow.xml" value="0.2075" />
+        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/drawable-night/news_avd.xml" value="0.1855" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/drawable/bg_button.xml" value="0.2075" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/drawable/bg_button_circle.xml" value="0.2075" />
+        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/drawable/bg_content.xml" value="0.2075" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/drawable/bg_round.xml" value="0.2075" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/drawable/bg_search.xml" value="0.2075" />
+        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/drawable/bg_tes.xml" value="0.2075" />
+        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/drawable/ic_arrow_back.xml" value="0.2075" />
+        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/drawable/ic_arrow_forward.xml" value="0.2075" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/drawable/ic_detection.xml" value="0.2075" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/drawable/ic_detector_line.xml" value="0.2075" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/drawable/ic_outline_detection.xml" value="0.2075" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/drawable/ic_photo_galery.xml" value="0.2075" />
+        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/drawable/ic_skip_arrow.xml" value="0.2075" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/drawable/ic_take_camera.xml" value="0.2075" />
+        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/drawable/image_shadow.xml" value="0.194" />
+        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/drawable/layer_indicator_tab_selected.xml" value="0.2075" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/drawable/news_avd_v02.xml" value="0.1845" />
+        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/drawable/selector_indicator_tab.xml" value="0.2075" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout-land/fragment_capture.xml" value="0.22" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout-v23/fragment_capture.xml" value="0.2" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/dialog_loading.xml" value="0.5" />
+        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/dialog_loading_detection.xml" value="0.22" />
+        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_app_settings.xml" value="0.1" />
+        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_articles.xml" value="0.1" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_capture.xml" value="0.25" />
-        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_viewer.xml" value="0.2" />
+        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_detail_article.xml" value="0.33" />
+        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_detection.xml" value="0.14" />
+        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_drug_details.xml" value="0.33" />
+        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_first_aid.xml" value="0.25" />
+        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_home.xml" value="0.22" />
+        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_medicine.xml" value="0.2" />
+        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_notification.xml" value="0.2" />
+        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_notifs.xml" value="0.2" />
+        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_onboarding.xml" value="0.2" />
+        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_profile.xml" value="0.2" />
+        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_result.xml" value="0.22" />
+        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_result_detection.xml" value="0.22" />
+        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_sign.xml" value="0.2" />
+        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_viewer.xml" value="0.25" />
+        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/item_list_article.xml" value="0.75" />
+        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/item_list_drug.xml" value="0.22" />
+        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/item_list_first_aid.xml" value="0.33" />
+        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/item_list_headline.xml" value="0.22" />
+        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/item_list_history.xml" value="0.33" />
+        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.194" />
+        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.194" />
         <entry key="..\:/Users/chels/Downloads/C22-PS188/app/src/main/res/drawable-night/bg_button.xml" value="0.137" />
         <entry key="..\:/Users/chels/Downloads/C22-PS188/app/src/main/res/drawable-night/ic_app_settings_alt.xml" value="0.137" />
         <entry key="..\:/Users/chels/Downloads/C22-PS188/app/src/main/res/drawable-night/ic_arrow_back.xml" value="0.137" />
