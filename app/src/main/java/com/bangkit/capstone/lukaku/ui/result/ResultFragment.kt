@@ -7,14 +7,25 @@ import android.view.View
 import android.view.View.*
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bangkit.capstone.lukaku.R
 import com.bangkit.capstone.lukaku.adapters.ResultPagerAdapter
+import com.bangkit.capstone.lukaku.data.fectory.DetectionViewModelFactory
+import com.bangkit.capstone.lukaku.data.local.entity.DetectionSaved
 import com.bangkit.capstone.lukaku.data.models.DetectionResult
 import com.bangkit.capstone.lukaku.databinding.FragmentResultBinding
-import com.bangkit.capstone.lukaku.utils.*
+import com.bangkit.capstone.lukaku.helper.withDateFormat
+import com.bangkit.capstone.lukaku.helper.withFirstUpperCase
+import com.bangkit.capstone.lukaku.utils.loadImage
+import com.bangkit.capstone.lukaku.utils.toast
+import com.bangkit.capstone.lukaku.utils.withAnimationY
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.launch
 import java.io.File
 
 class ResultFragment : Fragment(), OnClickListener {
@@ -25,6 +36,13 @@ class ResultFragment : Fragment(), OnClickListener {
     private var photo: File? = null
     private var detectionResult: DetectionResult? = null
     private val args: ResultFragmentArgs by navArgs()
+
+    private var isSave: Boolean = false
+    private var resultId: Long? = null
+
+    private val viewModel: ResultViewModel by viewModels {
+        DetectionViewModelFactory.getInstance(requireContext())
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +64,37 @@ class ResultFragment : Fragment(), OnClickListener {
         setResult()
         resultPager()
         onSetListener()
+        onSubscribe()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        viewModel.apply {
+            mutableIsSave.value = isSave
+            mutableResultId.value = resultId
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        val stageSave = if (isSave || (resultId != null)) {
+            isSave = true
+            getString(R.string.title_delete)
+        } else getString(R.string.title_save)
+
+        binding.tvSave.text = stageSave
+    }
+
+    override fun onClick(view: View?) {
+        when (view?.id) {
+            R.id.ivBack -> requireActivity().onBackPressed()
+            R.id.fab -> onFABVisible()
+            R.id.fab_save -> onSaveResult()
+            R.id.fab_reshoot -> onNavigateReshoot()
+            R.id.fab_feedback -> onShowFeedbackPopup()
+            R.id.fab_background -> closeFABMenu()
+        }
     }
 
     private fun onSetListener() {
@@ -59,14 +108,11 @@ class ResultFragment : Fragment(), OnClickListener {
         }
     }
 
-    override fun onClick(view: View?) {
-        when (view?.id) {
-            R.id.ivBack -> requireActivity().onBackPressed()
-            R.id.fab -> onFABVisible()
-            R.id.fab_save -> onSaveResult()
-            R.id.fab_reshoot -> onNavigateReshoot()
-            R.id.fab_feedback -> onShowFeedbackPopup()
-            R.id.fab_background -> closeFABMenu()
+    private fun onSubscribe() {
+        viewModel.apply {
+            getResultId().observe(viewLifecycleOwner) { resultId = it }
+
+            isSave().observe(viewLifecycleOwner) { isSave = it }
         }
     }
 
@@ -81,7 +127,30 @@ class ResultFragment : Fragment(), OnClickListener {
     }
 
     private fun onSaveResult() {
-        context?.toast("Still under development!")
+        if (isSave) {
+            lifecycleScope.launch {
+                viewModel.deleteDetection(resultId!!)
+                resultId = null
+            }
+
+            isSave = false
+            binding.tvSave.text = getString(R.string.title_save)
+        } else {
+            val auth = Firebase.auth
+            val user = auth.currentUser
+
+            val detectionSaved = DetectionSaved().also {
+                it.uid = user?.uid
+                it.detectionResult = detectionResult
+            }
+
+            lifecycleScope.launch {
+                resultId = viewModel.insertDetection(detectionSaved)
+            }
+
+            isSave = true
+            binding.tvSave.text = getString(R.string.title_delete)
+        }
     }
 
     private fun setResult() {

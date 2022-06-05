@@ -94,4 +94,6 @@
     <string name="more_action">More Action</string>
     <string name="drug_description">Drug description</string>
     <string name="feedback">Feedback</string>
+    <string name="title_save">Stave</string>
+    <string name="title_delete">Delete Saved</string>
 </resources>

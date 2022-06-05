@@ -15,7 +15,7 @@ import com.bangkit.capstone.lukaku.adapters.ArticleAdapter
 import com.bangkit.capstone.lukaku.adapters.HeadlineAdapter
 import com.bangkit.capstone.lukaku.data.resources.HeadlineData
 import com.bangkit.capstone.lukaku.databinding.FragmentHomeBinding
-import com.bangkit.capstone.lukaku.utils.ActivityLifeObserver
+import com.bangkit.capstone.lukaku.helper.ActivityLifeObserver
 import com.bangkit.capstone.lukaku.utils.Constants.EXTRA_ARTICLE
 import com.bangkit.capstone.lukaku.utils.Constants.INTERVAL
 import com.bangkit.capstone.lukaku.utils.ViewPager.autoScroll

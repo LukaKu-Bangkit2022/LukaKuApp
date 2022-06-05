@@ -1,6 +1,6 @@
 package com.bangkit.capstone.lukaku.data.repository.settings
 
-import com.bangkit.capstone.lukaku.data.local.SettingsDataStore
+import com.bangkit.capstone.lukaku.data.local.datastore.SettingsDataStore
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

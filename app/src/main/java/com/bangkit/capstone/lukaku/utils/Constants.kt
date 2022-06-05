@@ -15,4 +15,6 @@ object Constants {
     const val DECIMAL_FORMAT = "#.##"
     const val EXTRA_ARTICLE = "EXTRA_ARTICLE"
     const val ARG_RESULT = "detection_result"
+    const val DB_VERSION = 1
+    const val DB_NAME = "Detection.db"
 }

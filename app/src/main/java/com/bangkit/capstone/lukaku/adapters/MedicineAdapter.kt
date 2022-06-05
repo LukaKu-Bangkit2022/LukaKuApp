@@ -1,6 +1,5 @@
 package com.bangkit.capstone.lukaku.adapters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
@@ -13,8 +12,8 @@ import com.bangkit.capstone.lukaku.data.models.MedicineResponseItem
 import com.bangkit.capstone.lukaku.databinding.ItemListDrugBinding
 import com.bangkit.capstone.lukaku.databinding.ItemListDrugBinding.inflate
 import com.bangkit.capstone.lukaku.utils.loadImage
-import com.bangkit.capstone.lukaku.utils.withCurrencyFormat
-import com.bangkit.capstone.lukaku.utils.withFirstUpperCase
+import com.bangkit.capstone.lukaku.helper.withCurrencyFormat
+import com.bangkit.capstone.lukaku.helper.withFirstUpperCase
 
 class MedicineAdapter : RecyclerView.Adapter<MedicineAdapter.MedicineViewHolder>() {
     private val callback = object : DiffUtil.ItemCallback<MedicineResponseItem>() {
@@ -33,7 +32,7 @@ class MedicineAdapter : RecyclerView.Adapter<MedicineAdapter.MedicineViewHolder>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MedicineViewHolder {
         val binding = inflate(LayoutInflater.from(parent.context), parent, false)
-        return MedicineViewHolder(parent.context, binding)
+        return MedicineViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: MedicineViewHolder, position: Int) {
@@ -43,7 +42,6 @@ class MedicineAdapter : RecyclerView.Adapter<MedicineAdapter.MedicineViewHolder>
     override fun getItemCount(): Int = differ.currentList.size
 
     inner class MedicineViewHolder(
-        private val context: Context,
         private val binding: ItemListDrugBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: MedicineResponseItem) {

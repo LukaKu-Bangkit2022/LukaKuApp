@@ -8,8 +8,8 @@ import androidx.fragment.app.Fragment
 import com.bangkit.capstone.lukaku.data.models.MedicineResponseItem
 import com.bangkit.capstone.lukaku.databinding.FragmentDrugDetailsBinding
 import com.bangkit.capstone.lukaku.utils.loadImage
-import com.bangkit.capstone.lukaku.utils.withCurrencyFormat
-import com.bangkit.capstone.lukaku.utils.withFirstUpperCase
+import com.bangkit.capstone.lukaku.helper.withCurrencyFormat
+import com.bangkit.capstone.lukaku.helper.withFirstUpperCase
 
 class DrugDetailsFragment : Fragment() {
 
