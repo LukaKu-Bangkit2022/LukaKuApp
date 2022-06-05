@@ -135,7 +135,6 @@ fun reduceFileImage(file: File): File {
     return file
 }
 
-
 fun LinearLayout.withAnimationY(value:Float = 0f): ViewPropertyAnimator {
     return animate().translationY(value)
 }
