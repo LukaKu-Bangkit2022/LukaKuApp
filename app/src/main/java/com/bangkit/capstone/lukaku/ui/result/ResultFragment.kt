@@ -127,6 +127,7 @@ class ResultFragment : Fragment(), OnClickListener {
     }
 
     private fun onSaveResult() {
+
         if (isSave) {
             lifecycleScope.launch {
                 viewModel.deleteDetection(resultId!!)
@@ -141,6 +142,7 @@ class ResultFragment : Fragment(), OnClickListener {
 
             val detectionSaved = DetectionSaved().also {
                 it.uid = user?.uid
+                it.photoPath = photo?.path
                 it.detectionResult = detectionResult
             }
 

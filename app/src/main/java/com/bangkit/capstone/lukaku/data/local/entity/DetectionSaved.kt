@@ -17,5 +17,8 @@ data class DetectionSaved(
     @field:ColumnInfo(name = "uid")
     var uid: String? = null,
 
+    @field:ColumnInfo(name = "photo_path")
+    var photoPath: String? = null,
+
     var detectionResult: DetectionResult? = null,
 ) : Parcelable

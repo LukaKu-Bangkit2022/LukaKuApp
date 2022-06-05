@@ -1,14 +1,12 @@
 package com.bangkit.capstone.lukaku.utils
 
 import android.Manifest
-import android.app.Application
 import android.content.ContentResolver
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Bitmap.CompressFormat
 import android.graphics.BitmapFactory
 import android.net.Uri
-import android.os.Environment
 import android.view.ViewPropertyAnimator
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -22,7 +20,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -35,20 +32,8 @@ val timeStamp: String = SimpleDateFormat(
 ).format(System.currentTimeMillis())
 
 fun createTempFile(context: Context): File {
-    val storageDir: File? = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+    val storageDir: File? = context.cacheDir
     return File.createTempFile(timeStamp, PHOTO_EXTENSION, storageDir)
-}
-
-fun createFile(application: Application): File {
-    val mediaDir = application.externalMediaDirs.firstOrNull()?.let {
-        File(it, application.resources.getString(R.string.app_name)).apply { mkdirs() }
-    }
-
-    val outputDirectory = if (
-        mediaDir != null && mediaDir.exists()
-    ) mediaDir else application.filesDir
-
-    return File(outputDirectory, "$timeStamp$PHOTO_EXTENSION")
 }
 
 fun ImageView.loadCircleImage(imageSource: Uri?) {
@@ -136,6 +121,6 @@ fun reduceFileImage(file: File): File {
     return file
 }
 
-fun LinearLayout.withAnimationY(value:Float = 0f): ViewPropertyAnimator {
+fun LinearLayout.withAnimationY(value: Float = 0f): ViewPropertyAnimator {
     return animate().translationY(value)
 }

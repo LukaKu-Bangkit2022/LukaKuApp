@@ -13,7 +13,6 @@ import com.bangkit.capstone.lukaku.R
 import com.bangkit.capstone.lukaku.databinding.FragmentViewerBinding
 import com.bangkit.capstone.lukaku.ui.viewer.ViewerFragmentDirections.actionViewerFragmentToDetectionFragment
 import com.bangkit.capstone.lukaku.utils.bitmapToFile
-import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 
 class ViewerFragment : Fragment(), View.OnClickListener {
