@@ -3,7 +3,9 @@ package com.bangkit.capstone.lukaku.di
 import android.content.Context
 import androidx.room.Room
 import com.bangkit.capstone.lukaku.data.local.room.ArticleDao
-import com.bangkit.capstone.lukaku.data.local.room.ArticleDatabase
+import com.bangkit.capstone.lukaku.data.local.room.DetectionDao
+import com.bangkit.capstone.lukaku.data.local.room.LukakuDatabase
+import com.bangkit.capstone.lukaku.utils.Constants.DB_NAME
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,15 +18,20 @@ import javax.inject.Singleton
 class DatabaseModule {
     @Singleton
     @Provides
-    fun provideArticleDao(articleDatabase: ArticleDatabase): ArticleDao =
-        articleDatabase.articleDao()
+    fun provideArticleDatabase(@ApplicationContext context: Context): LukakuDatabase =
+        Room.databaseBuilder(
+            context.applicationContext,
+            LukakuDatabase::class.java,
+            DB_NAME
+        ).build()
 
     @Singleton
     @Provides
-    fun provideArticleDatabase(@ApplicationContext context: Context): ArticleDatabase =
-        Room.databaseBuilder(
-            context.applicationContext,
-            ArticleDatabase::class.java,
-            "article_database"
-        ).build()
+    fun provideDetectionDao(database: LukakuDatabase): DetectionDao =
+        database.detectionDao()
+
+    @Singleton
+    @Provides
+    fun provideArticleDao(database: LukakuDatabase): ArticleDao =
+        database.articleDao()
 }

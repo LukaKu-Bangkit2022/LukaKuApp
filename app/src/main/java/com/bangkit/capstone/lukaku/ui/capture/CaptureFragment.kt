@@ -364,7 +364,7 @@ class CaptureFragment : Fragment(), View.OnClickListener {
 
     private fun takePhoto() {
         imageCapture?.let {
-            val imageFile = createFile(requireActivity().application)
+            val imageFile = createTempFile(requireContext())
             val metadata = Metadata().apply {
                 isReversedHorizontal = lensFacing == LENS_FACING_FRONT
             }
@@ -382,7 +382,6 @@ class CaptureFragment : Fragment(), View.OnClickListener {
                     override fun onImageSaved(output: OutputFileResults) {
                         onNavigate(imageFile)
                     }
-
                 })
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

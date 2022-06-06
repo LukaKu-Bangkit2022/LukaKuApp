@@ -6,6 +6,8 @@ import com.bangkit.capstone.lukaku.data.repository.detection.DetectionRepository
 import com.bangkit.capstone.lukaku.data.repository.detection.DetectionRepositoryImpl
 import com.bangkit.capstone.lukaku.data.repository.onboarding.OnboardingRepository
 import com.bangkit.capstone.lukaku.data.repository.onboarding.OnboardingRepositoryImpl
+import com.bangkit.capstone.lukaku.data.repository.result.ResultRepository
+import com.bangkit.capstone.lukaku.data.repository.result.ResultRepositoryImpl
 import com.bangkit.capstone.lukaku.data.repository.settings.SettingsRepository
 import com.bangkit.capstone.lukaku.data.repository.settings.SettingsRepositoryImpl
 import dagger.Binds
@@ -27,4 +29,7 @@ abstract class RepositoryModule {
 
     @Binds
     abstract fun bindsDetectionRepository(detectionRepositoryImpl: DetectionRepositoryImpl): DetectionRepository
+
+    @Binds
+    abstract fun bindsResultRepository(resultRepositoryImpl: ResultRepositoryImpl): ResultRepository
 }

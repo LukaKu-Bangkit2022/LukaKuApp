@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.bangkit.capstone.lukaku.R
-import com.bangkit.capstone.lukaku.utils.ActivityLifeObserver
+import com.bangkit.capstone.lukaku.helper.ActivityLifeObserver
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment

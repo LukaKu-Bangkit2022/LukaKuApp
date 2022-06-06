@@ -17,7 +17,7 @@ import com.bangkit.capstone.lukaku.data.models.DetectionResult
 import com.bangkit.capstone.lukaku.databinding.FragmentDetectionBinding
 import com.bangkit.capstone.lukaku.ui.detection.DetectionFragmentDirections.actionDetectionFragmentToResultFragment
 import com.bangkit.capstone.lukaku.utils.loadImage
-import com.bangkit.capstone.lukaku.utils.withFirstUpperCase
+import com.bangkit.capstone.lukaku.helper.withFirstUpperCase
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull

@@ -180,7 +180,6 @@
             android:defaultValue="@null"
             app:argType="java.io.File"
             app:nullable="true" />
-
         <argument
             android:name="result_parcelable"
             android:defaultValue="@null"
@@ -191,6 +190,10 @@
             app:destination="@id/navigation_detection"
             app:popUpTo="@id/resultFragment"
             app:popUpToInclusive="true" />
+        <argument
+            android:name="id"
+            app:argType="string"
+            android:defaultValue=""/>
     </fragment>
     <fragment
         android:id="@+id/detectionFragment"
@@ -228,4 +231,7 @@
     <action
         android:id="@+id/action_global_drugDetailsFragment"
         app:destination="@id/drugDetailsFragment" />
+    <action
+        android:id="@+id/action_global_resultFragment"
+        app:destination="@id/resultFragment" />
 </navigation>

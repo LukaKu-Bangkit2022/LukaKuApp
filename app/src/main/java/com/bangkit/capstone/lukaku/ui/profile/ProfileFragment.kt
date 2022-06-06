@@ -13,7 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.bangkit.capstone.lukaku.R
 import com.bangkit.capstone.lukaku.adapters.LocalProfilePagerAdapter
 import com.bangkit.capstone.lukaku.databinding.FragmentProfileBinding
-import com.bangkit.capstone.lukaku.utils.ActivityLifeObserver
+import com.bangkit.capstone.lukaku.helper.ActivityLifeObserver
 import com.bangkit.capstone.lukaku.utils.loadCircleImage
 import com.bangkit.capstone.lukaku.utils.toast
 import com.google.android.gms.auth.api.signin.GoogleSignIn

@@ -1,4 +1,4 @@
-package com.bangkit.capstone.lukaku.utils
+package com.bangkit.capstone.lukaku.helper
 
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner

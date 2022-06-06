@@ -21,7 +21,7 @@
     <string name="history">History</string>
     <string name="date">Date</string>
     <string name="wound_type">Wound Type</string>
-    <string name="wound_status">Wound Status</string>
+    <string name="medicine_size">Medicine</string>
     <string name="detection_result_photo">Photo Detection Results</string>
     <string name="error_camera_start">Failed to bring up the camera.</string>
     <string name="error_camera_permission">Not getting permissions.</string>
@@ -100,4 +100,8 @@
     <string name="feedback">Feedback</string>
     <string name="bookmarks">Bookmarks</string>
     <string name="no_bookmarked_article">No bookmarked article.</string>
+    <string name="title_save">Stave</string>
+    <string name="title_delete">Delete Saved</string>
+    <string name="aid_available">First Aids %s.</string>
+    <string name="drag_size">%s Recommended Drugs.</string>
 </resources>
