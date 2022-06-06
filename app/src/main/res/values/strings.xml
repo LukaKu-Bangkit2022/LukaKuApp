@@ -109,4 +109,7 @@
     <string name="available">Available</string>
     <string name="no_available">Not Available</string>
     <string name="drag_size">%s Recommended Drugs.</string>
+    <string name="failed_status">Whoops!</string>
+    <string name="failed_message">There is something problem with your network or the server is currently down, please try it again later.</string>
+    <string name="retry">Retry</string>
 </resources>

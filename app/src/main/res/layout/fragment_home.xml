@@ -148,7 +148,24 @@
                 app:layout_constraintBottom_toBottomOf="@+id/tv_articles"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/tv_articles"
-                tools:ignore="SmallSp" />
+                tools:ignore="SmallSp,TouchTargetSizeCheck" />
+
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_articles"
+                app:shimmer_duration="1000">
+
+                <include
+                    android:id="@+id/lyt_shimmer_default"
+                    layout="@layout/include_shimmer_article" />
+
+            </com.facebook.shimmer.ShimmerFrameLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvArticles"
@@ -161,17 +178,20 @@
                 app:layout_constraintTop_toBottomOf="@+id/tv_articles"
                 tools:listitem="@layout/item_list_article" />
 
+            <include
+                android:id="@+id/in_network"
+                layout="@layout/include_failed"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_articles" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?attr/progressBarStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_marginBottom="180dp"
-        android:visibility="invisible" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

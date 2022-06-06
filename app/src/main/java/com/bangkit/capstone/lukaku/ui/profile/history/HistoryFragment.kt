@@ -16,9 +16,11 @@ import com.bangkit.capstone.lukaku.R
 import com.bangkit.capstone.lukaku.adapters.DetectionAdapter
 import com.bangkit.capstone.lukaku.data.local.entity.DetectionEntity
 import com.bangkit.capstone.lukaku.databinding.FragmentHistoryBinding
+import com.bangkit.capstone.lukaku.utils.onShimmer
 import com.bangkit.capstone.lukaku.utils.toast
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class HistoryFragment : Fragment() {
@@ -52,10 +54,14 @@ class HistoryFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
-        binding.rvHistory.apply {
-            detectionAdapter = DetectionAdapter(this@HistoryFragment::showPopup)
-            adapter = detectionAdapter
-            layoutManager = LinearLayoutManager(requireActivity())
+        binding.apply {
+            shimmer.onShimmer()
+
+            rvHistory.apply {
+                detectionAdapter = DetectionAdapter(this@HistoryFragment::showPopup)
+                adapter = detectionAdapter
+                layoutManager = LinearLayoutManager(requireActivity())
+            }
         }
     }
 
@@ -64,12 +70,14 @@ class HistoryFragment : Fragment() {
             getDetectionSaved(auth.currentUser!!.uid).observe(viewLifecycleOwner) {
                 if (it.isEmpty()) {
                     binding.apply {
+                        shimmer.onShimmer(true)
                         emptyMessage.visibility = VISIBLE
                         rvHistory.visibility = GONE
                     }
                 } else {
                     detectionAdapter.submitList(it)
                     binding.apply {
+                        shimmer.onShimmer(true)
                         rvHistory.visibility = VISIBLE
                         emptyMessage.visibility = GONE
                     }
@@ -93,7 +101,7 @@ class HistoryFragment : Fragment() {
                     viewModel.deleteDetection(detectionEntity.id.toLong())
                 }
                 R.id.item_feedback -> {
-                    requireActivity().toast(getString(R.string.still_under_development))
+                    context?.toast(getString(R.string.still_under_development))
                 }
             }
             true

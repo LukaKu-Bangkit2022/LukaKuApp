@@ -1,0 +1,565 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:cardCornerRadius="8dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <View
+                android:id="@+id/iv_photo"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:background="@color/colorShimmer"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/iv_more"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/bg_shimmer"
+                android:src="@drawable/ic_more"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/tv_date"
+                android:layout_width="0dp"
+                android:layout_height="16dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/bg_shimmer"
+                app:layout_constraintEnd_toStartOf="@id/iv_more"
+                app:layout_constraintStart_toEndOf="@+id/iv_photo"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/tv_type"
+                android:layout_width="0dp"
+                android:layout_height="18dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="50dp"
+                android:background="@drawable/bg_shimmer"
+                app:layout_constraintEnd_toEndOf="@+id/tv_date"
+                app:layout_constraintStart_toStartOf="@+id/tv_date"
+                app:layout_constraintTop_toBottomOf="@+id/tv_date" />
+
+            <View
+                android:id="@+id/tv_first_aids"
+                android:layout_width="0dp"
+                android:layout_height="16dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_shimmer"
+                app:layout_constraintEnd_toStartOf="@+id/iv_more"
+                app:layout_constraintStart_toStartOf="@+id/tv_type"
+                app:layout_constraintTop_toBottomOf="@+id/tv_type" />
+
+            <View
+                android:id="@+id/tv_medicine"
+                android:layout_width="0dp"
+                android:layout_height="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="80dp"
+                android:background="@drawable/bg_shimmer"
+                app:layout_constraintEnd_toEndOf="@+id/tv_first_aids"
+                app:layout_constraintStart_toStartOf="@+id/tv_type"
+                app:layout_constraintTop_toBottomOf="@+id/tv_first_aids" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:cardCornerRadius="8dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <View
+                android:id="@+id/iv_photo1"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:background="@color/colorShimmer"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/iv_more1"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/bg_shimmer"
+                android:src="@drawable/ic_more"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/tv_date1"
+                android:layout_width="0dp"
+                android:layout_height="16dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/bg_shimmer"
+                app:layout_constraintEnd_toStartOf="@id/iv_more1"
+                app:layout_constraintStart_toEndOf="@+id/iv_photo1"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/tv_type1"
+                android:layout_width="0dp"
+                android:layout_height="18dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="50dp"
+                android:background="@drawable/bg_shimmer"
+                app:layout_constraintEnd_toEndOf="@+id/tv_date1"
+                app:layout_constraintStart_toStartOf="@+id/tv_date1"
+                app:layout_constraintTop_toBottomOf="@+id/tv_date1" />
+
+            <View
+                android:id="@+id/tv_first_aids1"
+                android:layout_width="0dp"
+                android:layout_height="16dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_shimmer"
+                app:layout_constraintEnd_toStartOf="@+id/iv_more1"
+                app:layout_constraintStart_toStartOf="@+id/tv_type1"
+                app:layout_constraintTop_toBottomOf="@+id/tv_type1" />
+
+            <View
+                android:id="@+id/tv_medicine1"
+                android:layout_width="0dp"
+                android:layout_height="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="80dp"
+                android:background="@drawable/bg_shimmer"
+                app:layout_constraintEnd_toEndOf="@+id/tv_first_aids1"
+                app:layout_constraintStart_toStartOf="@+id/tv_type1"
+                app:layout_constraintTop_toBottomOf="@+id/tv_first_aids1" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:cardCornerRadius="8dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <View
+                android:id="@+id/iv_photo2"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:background="@color/colorShimmer"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/iv_more2"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/bg_shimmer"
+                android:src="@drawable/ic_more"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/tv_date2"
+                android:layout_width="0dp"
+                android:layout_height="16dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/bg_shimmer"
+                app:layout_constraintEnd_toStartOf="@id/iv_more2"
+                app:layout_constraintStart_toEndOf="@+id/iv_photo2"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/tv_type2"
+                android:layout_width="0dp"
+                android:layout_height="18dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="50dp"
+                android:background="@drawable/bg_shimmer"
+                app:layout_constraintEnd_toEndOf="@+id/tv_date2"
+                app:layout_constraintStart_toStartOf="@+id/tv_date2"
+                app:layout_constraintTop_toBottomOf="@+id/tv_date2" />
+
+            <View
+                android:id="@+id/tv_first_aids2"
+                android:layout_width="0dp"
+                android:layout_height="16dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_shimmer"
+                app:layout_constraintEnd_toStartOf="@+id/iv_more2"
+                app:layout_constraintStart_toStartOf="@+id/tv_type2"
+                app:layout_constraintTop_toBottomOf="@+id/tv_type2" />
+
+            <View
+                android:id="@+id/tv_medicine2"
+                android:layout_width="0dp"
+                android:layout_height="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="80dp"
+                android:background="@drawable/bg_shimmer"
+                app:layout_constraintEnd_toEndOf="@+id/tv_first_aids2"
+                app:layout_constraintStart_toStartOf="@+id/tv_type2"
+                app:layout_constraintTop_toBottomOf="@+id/tv_first_aids2" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:cardCornerRadius="8dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <View
+                android:id="@+id/iv_photo3"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:background="@color/colorShimmer"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/iv_more3"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/bg_shimmer"
+                android:src="@drawable/ic_more"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/tv_date3"
+                android:layout_width="0dp"
+                android:layout_height="16dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/bg_shimmer"
+                app:layout_constraintEnd_toStartOf="@id/iv_more3"
+                app:layout_constraintStart_toEndOf="@+id/iv_photo3"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/tv_type3"
+                android:layout_width="0dp"
+                android:layout_height="18dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="50dp"
+                android:background="@drawable/bg_shimmer"
+                app:layout_constraintEnd_toEndOf="@+id/tv_date3"
+                app:layout_constraintStart_toStartOf="@+id/tv_date3"
+                app:layout_constraintTop_toBottomOf="@+id/tv_date3" />
+
+            <View
+                android:id="@+id/tv_first_aids3"
+                android:layout_width="0dp"
+                android:layout_height="16dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_shimmer"
+                app:layout_constraintEnd_toStartOf="@+id/iv_more3"
+                app:layout_constraintStart_toStartOf="@+id/tv_type3"
+                app:layout_constraintTop_toBottomOf="@+id/tv_type3" />
+
+            <View
+                android:id="@+id/tv_medicine3"
+                android:layout_width="0dp"
+                android:layout_height="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="80dp"
+                android:background="@drawable/bg_shimmer"
+                app:layout_constraintEnd_toEndOf="@+id/tv_first_aids3"
+                app:layout_constraintStart_toStartOf="@+id/tv_type3"
+                app:layout_constraintTop_toBottomOf="@+id/tv_first_aids3" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:cardCornerRadius="8dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <View
+                android:id="@+id/iv_photo4"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:background="@color/colorShimmer"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/iv_more4"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/bg_shimmer"
+                android:src="@drawable/ic_more"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/tv_date4"
+                android:layout_width="0dp"
+                android:layout_height="16dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/bg_shimmer"
+                app:layout_constraintEnd_toStartOf="@id/iv_more4"
+                app:layout_constraintStart_toEndOf="@+id/iv_photo4"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/tv_type4"
+                android:layout_width="0dp"
+                android:layout_height="18dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="50dp"
+                android:background="@drawable/bg_shimmer"
+                app:layout_constraintEnd_toEndOf="@+id/tv_date4"
+                app:layout_constraintStart_toStartOf="@+id/tv_date4"
+                app:layout_constraintTop_toBottomOf="@+id/tv_date4" />
+
+            <View
+                android:id="@+id/tv_first_aids4"
+                android:layout_width="0dp"
+                android:layout_height="16dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_shimmer"
+                app:layout_constraintEnd_toStartOf="@+id/iv_more4"
+                app:layout_constraintStart_toStartOf="@+id/tv_type4"
+                app:layout_constraintTop_toBottomOf="@+id/tv_type4" />
+
+            <View
+                android:id="@+id/tv_medicine4"
+                android:layout_width="0dp"
+                android:layout_height="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="80dp"
+                android:background="@drawable/bg_shimmer"
+                app:layout_constraintEnd_toEndOf="@+id/tv_first_aids4"
+                app:layout_constraintStart_toStartOf="@+id/tv_type4"
+                app:layout_constraintTop_toBottomOf="@+id/tv_first_aids4" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:cardCornerRadius="8dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <View
+                android:id="@+id/iv_photo6"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:background="@color/colorShimmer"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/iv_more6"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/bg_shimmer"
+                android:src="@drawable/ic_more"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/tv_date6"
+                android:layout_width="0dp"
+                android:layout_height="16dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/bg_shimmer"
+                app:layout_constraintEnd_toStartOf="@id/iv_more6"
+                app:layout_constraintStart_toEndOf="@+id/iv_photo6"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/tv_type6"
+                android:layout_width="0dp"
+                android:layout_height="18dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="50dp"
+                android:background="@drawable/bg_shimmer"
+                app:layout_constraintEnd_toEndOf="@+id/tv_date6"
+                app:layout_constraintStart_toStartOf="@+id/tv_date6"
+                app:layout_constraintTop_toBottomOf="@+id/tv_date6" />
+
+            <View
+                android:id="@+id/tv_first_aids6"
+                android:layout_width="0dp"
+                android:layout_height="16dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_shimmer"
+                app:layout_constraintEnd_toStartOf="@+id/iv_more6"
+                app:layout_constraintStart_toStartOf="@+id/tv_type6"
+                app:layout_constraintTop_toBottomOf="@+id/tv_type6" />
+
+            <View
+                android:id="@+id/tv_medicine6"
+                android:layout_width="0dp"
+                android:layout_height="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="80dp"
+                android:background="@drawable/bg_shimmer"
+                app:layout_constraintEnd_toEndOf="@+id/tv_first_aids6"
+                app:layout_constraintStart_toStartOf="@+id/tv_type6"
+                app:layout_constraintTop_toBottomOf="@+id/tv_first_aids6" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:cardCornerRadius="8dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <View
+                android:id="@+id/iv_photo8"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:background="@color/colorShimmer"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/iv_more8"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/bg_shimmer"
+                android:src="@drawable/ic_more"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/tv_date8"
+                android:layout_width="0dp"
+                android:layout_height="16dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/bg_shimmer"
+                app:layout_constraintEnd_toStartOf="@id/iv_more8"
+                app:layout_constraintStart_toEndOf="@+id/iv_photo8"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/tv_type8"
+                android:layout_width="0dp"
+                android:layout_height="18dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="50dp"
+                android:background="@drawable/bg_shimmer"
+                app:layout_constraintEnd_toEndOf="@+id/tv_date8"
+                app:layout_constraintStart_toStartOf="@+id/tv_date8"
+                app:layout_constraintTop_toBottomOf="@+id/tv_date8" />
+
+            <View
+                android:id="@+id/tv_first_aids8"
+                android:layout_width="0dp"
+                android:layout_height="16dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_shimmer"
+                app:layout_constraintEnd_toStartOf="@+id/iv_more8"
+                app:layout_constraintStart_toStartOf="@+id/tv_type8"
+                app:layout_constraintTop_toBottomOf="@+id/tv_type8" />
+
+            <View
+                android:id="@+id/tv_medicine8"
+                android:layout_width="0dp"
+                android:layout_height="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="80dp"
+                android:background="@drawable/bg_shimmer"
+                app:layout_constraintEnd_toEndOf="@+id/tv_first_aids8"
+                app:layout_constraintStart_toStartOf="@+id/tv_type8"
+                app:layout_constraintTop_toBottomOf="@+id/tv_first_aids8" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+
+</LinearLayout>

@@ -7,6 +7,7 @@ import android.graphics.Bitmap
 import android.graphics.Bitmap.CompressFormat
 import android.graphics.BitmapFactory
 import android.net.Uri
+import android.view.View
 import android.view.ViewPropertyAnimator
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -20,6 +21,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.facebook.shimmer.ShimmerFrameLayout
 import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -123,4 +125,16 @@ fun reduceFileImage(file: File): File {
 
 fun LinearLayout.withAnimationY(value: Float = 0f): ViewPropertyAnimator {
     return animate().translationY(value)
+}
+
+fun ShimmerFrameLayout.onShimmer(isStop: Boolean = false) {
+    this.apply {
+        if (isStop) {
+            visibility = View.GONE
+            stopShimmer()
+        } else {
+            visibility = View.VISIBLE
+            startShimmer()
+        }
+    }
 }

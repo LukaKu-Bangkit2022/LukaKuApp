@@ -3,7 +3,8 @@ package com.bangkit.capstone.lukaku.ui.profile.bookmarks
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.*
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -15,6 +16,7 @@ import com.bangkit.capstone.lukaku.R
 import com.bangkit.capstone.lukaku.adapters.ArticleAdapter
 import com.bangkit.capstone.lukaku.databinding.FragmentBookmarksBinding
 import com.bangkit.capstone.lukaku.utils.Constants
+import com.bangkit.capstone.lukaku.utils.onShimmer
 import com.bangkit.capstone.lukaku.utils.toast
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -50,30 +52,36 @@ class BookmarksFragment : Fragment() {
 
     private fun getBookmarkedArticle() {
         viewModel.getBookmarkedArticle().observe(viewLifecycleOwner) { bookmarkedArticle ->
-            if (bookmarkedArticle.isEmpty()) {
-                binding.apply {
+            binding.apply {
+                if (bookmarkedArticle.isEmpty()) {
                     emptyMessage.text = getString(R.string.no_bookmarked_article)
                     emptyMessage.visibility = VISIBLE
                     rvArticles.visibility = GONE
+                } else {
+                    articleAdapter.differ.submitList(bookmarkedArticle)
+                    emptyMessage.visibility = GONE
                 }
-            } else {
-                articleAdapter.differ.submitList(bookmarkedArticle)
-                binding.emptyMessage.visibility = GONE
+                shimmer.onShimmer(true)
             }
         }
     }
 
     private fun initRecyclerView() {
-        binding.rvArticles.apply {
-            articleAdapter = ArticleAdapter { articleEntity ->
-                if (articleEntity.isBookmarked) {
-                    viewModel.deleteArticle(articleEntity)
-                } else {
-                    viewModel.saveArticle(articleEntity)
+        binding.apply {
+            shimmer.onShimmer()
+
+            rvArticles.apply {
+                articleAdapter = ArticleAdapter { articleEntity ->
+                    if (articleEntity.isBookmarked) {
+                        viewModel.deleteArticle(articleEntity)
+                    } else {
+                        viewModel.saveArticle(articleEntity)
+                    }
                 }
+
+                adapter = articleAdapter
+                layoutManager = LinearLayoutManager(requireActivity())
             }
-            adapter = articleAdapter
-            layoutManager = LinearLayoutManager(requireActivity())
         }
     }
 

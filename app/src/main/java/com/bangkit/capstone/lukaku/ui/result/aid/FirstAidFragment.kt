@@ -15,6 +15,7 @@ import com.bangkit.capstone.lukaku.data.models.FirstAidResponse
 import com.bangkit.capstone.lukaku.data.models.FirstAidResponseItem
 import com.bangkit.capstone.lukaku.databinding.FragmentFirstAidBinding
 import com.bangkit.capstone.lukaku.utils.Constants.ARG_RESULT
+import com.bangkit.capstone.lukaku.utils.onShimmer
 import com.bangkit.capstone.lukaku.utils.toast
 
 class FirstAidFragment : Fragment() {
@@ -52,6 +53,8 @@ class FirstAidFragment : Fragment() {
     }
 
     private fun getFirstAids() {
+        binding.shimmer.onShimmer()
+
         if (firstAidResponse?.size != 0) {
             firstAidResponseItem = firstAidResponse!![0]
 
@@ -64,6 +67,7 @@ class FirstAidFragment : Fragment() {
             val firstAidContent = firstAidResponseItem.firstaid
             val firstAidList = firstAidContent?.split("*")?.toList()
 
+
             if (!firstAidList.isNullOrEmpty()) {
                 binding.rvFirstAids.apply {
                     firstAidsAdapter = FirstAidsAdapter(firstAidList)
@@ -71,8 +75,12 @@ class FirstAidFragment : Fragment() {
                     layoutManager = LinearLayoutManager(requireActivity())
                 }
             } else context?.toast(getString(R.string.first_aids_error_message))
+
+            binding.shimmer.onShimmer(true)
+
         } else {
             binding.apply {
+                shimmer.onShimmer(true)
                 tvLabelList.visibility = GONE
                 rvFirstAids.visibility = GONE
                 emptyMessage.visibility = VISIBLE
