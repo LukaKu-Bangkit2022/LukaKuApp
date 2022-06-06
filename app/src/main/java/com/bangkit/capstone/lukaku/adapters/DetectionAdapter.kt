@@ -41,7 +41,7 @@ class DetectionAdapter :
             val firstAids = saved.detectionResult?.firstAidResponse
             val medicine = saved.detectionResult?.medicineResponse
             val imageFile = File(saved.photoPath!!)
-            val isAvailable = if (firstAids != null) "Available" else "Not Available"
+            val isAvailable = if (firstAids?.size != 0) "Available" else "Not Available"
 
             binding.apply {
                 tvDate.text = detectionInfo?.date?.withDateFormat()
