@@ -70,7 +70,7 @@ class HomeFragment : Fragment() {
         goToProfile()
         initRecyclerView()
         onDetail()
-//        getAllArticle()
+        getAllArticle()
     }
 
     override fun onResume() {

@@ -27,7 +27,7 @@
             tools:srcCompat="@tools:sample/avatars" />
 
         <ImageView
-            android:id="@+id/iv_save"
+            android:id="@+id/iv_more"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -51,7 +51,7 @@
             android:maxLines="2"
             android:textColor="?attr/colorPrimary"
             android:textSize="12sp"
-            app:layout_constraintEnd_toStartOf="@id/iv_save"
+            app:layout_constraintEnd_toStartOf="@id/iv_more"
             app:layout_constraintStart_toEndOf="@+id/iv_photo"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="30 April 2022" />
@@ -66,7 +66,7 @@
             android:maxLines="4"
             android:textColor="?attr/colorPrimary"
             android:textSize="18sp"
-            app:layout_constraintEnd_toStartOf="@+id/iv_save"
+            app:layout_constraintEnd_toStartOf="@+id/iv_more"
             app:layout_constraintStart_toStartOf="@+id/tv_date"
             app:layout_constraintTop_toBottomOf="@+id/tv_date"
             tools:text="Abrasion" />
