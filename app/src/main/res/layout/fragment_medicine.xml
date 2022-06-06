@@ -47,4 +47,19 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_label_list"
         tools:listitem="@layout/item_list_drug" />
 
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/emptyMessage"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fontFamily="@font/lato"
+        android:gravity="center"
+        android:paddingBottom="350dp"
+        android:text="@string/no_medicine"
+        android:textColor="?attr/colorPrimary"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

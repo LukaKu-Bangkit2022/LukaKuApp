@@ -22,8 +22,8 @@
         android:fontFamily="@font/lato"
         android:gravity="center"
         android:paddingBottom="275dp"
+        android:text="@string/no_saved_result"
         android:textColor="?attr/colorPrimary"
-        android:visibility="gone"
-        tools:text="No wound history." />
+        android:visibility="gone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

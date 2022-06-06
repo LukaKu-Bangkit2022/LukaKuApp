@@ -6,13 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bangkit.capstone.lukaku.R
 import com.bangkit.capstone.lukaku.adapters.MedicineAdapter
 import com.bangkit.capstone.lukaku.data.models.DetectionResult
 import com.bangkit.capstone.lukaku.data.models.MedicineResponse
 import com.bangkit.capstone.lukaku.databinding.FragmentMedicineBinding
 import com.bangkit.capstone.lukaku.utils.Constants.ARG_RESULT
-import com.bangkit.capstone.lukaku.utils.toast
 
 class MedicineFragment : Fragment() {
 
@@ -56,10 +54,19 @@ class MedicineFragment : Fragment() {
     }
 
     private fun getMedicine() {
-        if (medicineResponse?.size != null) {
+        if (medicineResponse?.size != 0) {
             medicineAdapter.differ.submitList(medicineResponse?.toList())
+            binding.apply {
+                tvLabelList.visibility = View.VISIBLE
+                rvDrugs.visibility = View.VISIBLE
+                emptyMessage.visibility = View.GONE
+            }
         } else {
-            requireActivity().toast(getString(R.string.medicine_error_message))
+            binding.apply {
+                tvLabelList.visibility = View.GONE
+                rvDrugs.visibility = View.GONE
+                emptyMessage.visibility = View.VISIBLE
+            }
         }
     }
 }
