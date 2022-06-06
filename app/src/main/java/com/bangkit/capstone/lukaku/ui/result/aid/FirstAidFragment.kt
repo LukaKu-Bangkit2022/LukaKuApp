@@ -3,6 +3,8 @@ package com.bangkit.capstone.lukaku.ui.result.aid
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -53,6 +55,12 @@ class FirstAidFragment : Fragment() {
         if (firstAidResponse?.size != 0) {
             firstAidResponseItem = firstAidResponse!![0]
 
+            binding.apply {
+                tvLabelList.visibility = VISIBLE
+                rvFirstAids.visibility = VISIBLE
+                emptyMessage.visibility = GONE
+            }
+
             val firstAidContent = firstAidResponseItem.firstaid
             val firstAidList = firstAidContent?.split("*")?.toList()
 
@@ -63,6 +71,12 @@ class FirstAidFragment : Fragment() {
                     layoutManager = LinearLayoutManager(requireActivity())
                 }
             } else context?.toast(getString(R.string.first_aids_error_message))
-        } else context?.toast(getString(R.string.first_aids_error_message))
+        } else {
+            binding.apply {
+                tvLabelList.visibility = GONE
+                rvFirstAids.visibility = GONE
+                emptyMessage.visibility = VISIBLE
+            }
+        }
     }
 }

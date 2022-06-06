@@ -100,8 +100,13 @@
     <string name="feedback">Feedback</string>
     <string name="bookmarks">Bookmarks</string>
     <string name="no_bookmarked_article">No bookmarked article.</string>
+    <string name="no_saved_result">No saved detection result.</string>
+    <string name="no_first_aid">No first aid result.</string>
+    <string name="no_medicine">No drug result.</string>
     <string name="title_save">Stave</string>
     <string name="title_delete">Delete Saved</string>
     <string name="aid_available">First Aids %s.</string>
+    <string name="available">Available</string>
+    <string name="no_available">Not Available</string>
     <string name="drag_size">%s Recommended Drugs.</string>
 </resources>

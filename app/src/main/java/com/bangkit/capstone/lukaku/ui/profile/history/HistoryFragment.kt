@@ -64,7 +64,6 @@ class HistoryFragment : Fragment() {
             getDetectionSaved(auth.currentUser!!.uid).observe(viewLifecycleOwner) {
                 if (it.isEmpty()) {
                     binding.apply {
-                        emptyMessage.text = getString(R.string.no_bookmarked_article)
                         emptyMessage.visibility = VISIBLE
                         rvHistory.visibility = GONE
                     }
