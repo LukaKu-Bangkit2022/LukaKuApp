@@ -17,4 +17,5 @@ object Constants {
     const val ARG_RESULT = "detection_result"
     const val DB_VERSION = 1
     const val DB_NAME = "Lukaku_database"
+    const val LOCATION_PREF = "LOCATION_PREF"
 }

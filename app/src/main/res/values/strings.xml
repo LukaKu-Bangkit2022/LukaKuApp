@@ -104,4 +104,7 @@
     <string name="title_delete">Delete Saved</string>
     <string name="aid_available">First Aids %s.</string>
     <string name="drag_size">%s Recommended Drugs.</string>
+    <string name="realtime_location">Realtime Location</string>
+    <string name="location_error_message">Please turn on location</string>
+    <string name="settings">Settings</string>
 </resources>

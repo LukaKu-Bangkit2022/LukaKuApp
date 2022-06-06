@@ -1,11 +1,8 @@
 package com.bangkit.capstone.lukaku.data.remote
 
-import com.bangkit.capstone.lukaku.data.models.ArticleResponse
+import com.bangkit.capstone.lukaku.data.models.*
 import retrofit2.http.GET
 import retrofit2.http.Query
-import com.bangkit.capstone.lukaku.data.models.DetectionResponse
-import com.bangkit.capstone.lukaku.data.models.FirstAidResponse
-import com.bangkit.capstone.lukaku.data.models.MedicineResponse
 import okhttp3.MultipartBody
 import retrofit2.http.*
 

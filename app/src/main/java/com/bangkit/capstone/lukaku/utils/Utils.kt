@@ -7,11 +7,13 @@ import android.graphics.Bitmap
 import android.graphics.Bitmap.CompressFormat
 import android.graphics.BitmapFactory
 import android.net.Uri
+import android.view.View
 import android.view.ViewPropertyAnimator
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import com.bangkit.capstone.lukaku.R
 import com.bangkit.capstone.lukaku.utils.Constants.ANIMATION_FAST_MILLIS
 import com.bangkit.capstone.lukaku.utils.Constants.FILENAME_FORMAT
@@ -20,6 +22,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.google.android.material.snackbar.Snackbar
 import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -57,6 +60,21 @@ fun <T> ImageView.loadImage(image: T, corners: Int = 1) {
 }
 
 fun Context.toast(message: CharSequence) = Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+
+fun Snackbar.action(action: String, color: Int? = null, listener: (View) -> Unit) {
+    setAction(action, listener)
+    color?.let { setActionTextColor(ContextCompat.getColor(context, color)) }
+}
+
+inline fun View.snack(
+    message: String,
+    length: Int = Snackbar.LENGTH_SHORT,
+    f: Snackbar.() -> Unit
+) {
+    val snack = Snackbar.make(this, message, length)
+    snack.f()
+    snack.show()
+}
 
 fun uriToFile(uri: Uri, context: Context): File {
     val contentResolver: ContentResolver = context.contentResolver

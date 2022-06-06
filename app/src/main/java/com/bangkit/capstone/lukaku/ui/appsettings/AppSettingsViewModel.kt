@@ -19,4 +19,12 @@ class AppSettingsViewModel @Inject constructor(
     }
 
     fun getThemeSetting(): Flow<Boolean?> = settingsRepository.getThemeSetting()
+
+    fun saveRealtimeLocation(isLocationActive: Boolean) {
+        viewModelScope.launch {
+            settingsRepository.saveRealtimeLocation(isLocationActive)
+        }
+    }
+
+    fun getRealtimeLocation(): Flow<Boolean?> = settingsRepository.getRealtimeLocation()
 }

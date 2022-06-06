@@ -4,6 +4,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
+import com.bangkit.capstone.lukaku.utils.Constants.LOCATION_PREF
 import com.bangkit.capstone.lukaku.utils.Constants.THEME_PREF
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -18,5 +19,15 @@ class SettingsDataStore @Inject constructor(private val dataStore: DataStore<Pre
 
     fun getThemeSetting(): Flow<Boolean?> = dataStore.data.map {
         it[booleanPreferencesKey(THEME_PREF)]
+    }
+
+    suspend fun saveRealtimeLocation(isLocationActive: Boolean) {
+        dataStore.edit {
+            it[booleanPreferencesKey(LOCATION_PREF)] = isLocationActive
+        }
+    }
+
+    fun getRealtimeLocation(): Flow<Boolean?> = dataStore.data.map {
+        it[booleanPreferencesKey(LOCATION_PREF)]
     }
 }

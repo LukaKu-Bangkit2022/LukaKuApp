@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.bangkit.capstone.lukaku.R
+import com.bangkit.capstone.lukaku.databinding.FragmentHospitalBinding
 import com.bangkit.capstone.lukaku.helper.ActivityLifeObserver
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -17,6 +18,8 @@ import me.ibrahimsn.lib.SmoothBottomBar
 
 class HospitalFragment : Fragment() {
 
+    private var _binding: FragmentHospitalBinding? = null
+    private val binding get() = _binding!!
     private lateinit var bottomBar: SmoothBottomBar
 
     private val callback = OnMapReadyCallback { googleMap ->
@@ -36,8 +39,9 @@ class HospitalFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_hospital, container, false)
+    ): View {
+        _binding = FragmentHospitalBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -54,6 +58,7 @@ class HospitalFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        _binding = null
         bottomBar.visibility = View.GONE
     }
 }
