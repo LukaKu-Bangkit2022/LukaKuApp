@@ -2,7 +2,6 @@ package com.bangkit.capstone.lukaku.di
 
 import android.content.Context
 import com.bangkit.capstone.lukaku.data.local.room.DetectionDatabase
-import com.bangkit.capstone.lukaku.data.remote.ApiConfig
 import com.bangkit.capstone.lukaku.data.repository.result.ResultRepository
 
 object Injection {

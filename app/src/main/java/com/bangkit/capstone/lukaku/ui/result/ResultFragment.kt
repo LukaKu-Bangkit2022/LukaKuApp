@@ -48,6 +48,7 @@ class ResultFragment : Fragment(), OnClickListener {
         super.onCreate(savedInstanceState)
         photo = args.image
         detectionResult = args.resultParcelable
+        resultId = if (args.id.isNotEmpty()) args.id.toLong() else null
     }
 
     override fun onCreateView(
@@ -88,7 +89,7 @@ class ResultFragment : Fragment(), OnClickListener {
 
     override fun onClick(view: View?) {
         when (view?.id) {
-            R.id.ivBack -> requireActivity().onBackPressed()
+            R.id.iv_back -> requireActivity().onBackPressed()
             R.id.fab -> onFABVisible()
             R.id.fab_save -> onSaveResult()
             R.id.fab_reshoot -> onNavigateReshoot()
@@ -127,7 +128,6 @@ class ResultFragment : Fragment(), OnClickListener {
     }
 
     private fun onSaveResult() {
-
         if (isSave) {
             lifecycleScope.launch {
                 viewModel.deleteDetection(resultId!!)

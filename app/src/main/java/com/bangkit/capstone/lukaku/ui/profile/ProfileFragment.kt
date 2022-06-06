@@ -9,8 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bangkit.capstone.lukaku.R
+import com.bangkit.capstone.lukaku.adapters.DetectionAdapter
+import com.bangkit.capstone.lukaku.data.fectory.DetectionViewModelFactory
 import com.bangkit.capstone.lukaku.databinding.FragmentProfileBinding
 import com.bangkit.capstone.lukaku.helper.ActivityLifeObserver
 import com.bangkit.capstone.lukaku.utils.loadCircleImage
@@ -31,6 +35,11 @@ class ProfileFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
     private lateinit var client: GoogleSignInClient
     private lateinit var bottomBar: SmoothBottomBar
+    private lateinit var detectionAdapter: DetectionAdapter
+
+    private val viewModel: ProfileViewModel by viewModels {
+        DetectionViewModelFactory.getInstance(requireContext())
+    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -60,8 +69,26 @@ class ProfileFragment : Fragment() {
         client = GoogleSignIn.getClient(requireActivity(), gso)
 
         setProfile()
+        initRecyclerView()
+        onSubscribe()
 
         binding.ivSettings.setOnClickListener { showPopup(it) }
+    }
+
+    private fun initRecyclerView() {
+        binding.rvHistory.apply {
+            detectionAdapter = DetectionAdapter()
+            adapter = detectionAdapter
+            layoutManager = LinearLayoutManager(requireActivity())
+        }
+    }
+
+    private fun onSubscribe() {
+        viewModel.apply {
+            getDetectionSaved(auth.currentUser!!.uid).observe(viewLifecycleOwner) {
+                detectionAdapter.submitList(it)
+            }
+        }
     }
 
     override fun onResume() {

@@ -10,8 +10,6 @@ class ResultViewModel(
     private val resultRepository: ResultRepository
 ) : ViewModel() {
 
-    fun getDetectionSaved() = resultRepository.getDetectionSaved()
-
     suspend fun insertDetection(result: DetectionSaved): Long {
         return resultRepository.insertDetection(result)
     }

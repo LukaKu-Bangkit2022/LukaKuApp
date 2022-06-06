@@ -9,8 +9,8 @@ import com.bangkit.capstone.lukaku.data.local.entity.DetectionSaved
 
 @Dao
 interface DetectionDao {
-    @Query("SELECT * FROM detection ORDER BY id")
-    fun getDetectionSaved(): LiveData<List<DetectionSaved>>
+    @Query("SELECT * FROM detection WHERE uid = :uid ORDER BY id")
+    fun getDetectionSaved(uid: String): LiveData<List<DetectionSaved>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveDetection(result: DetectionSaved): Long

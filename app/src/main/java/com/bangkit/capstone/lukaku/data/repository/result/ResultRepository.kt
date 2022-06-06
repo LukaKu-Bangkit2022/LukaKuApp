@@ -10,7 +10,9 @@ class ResultRepository private constructor(
     private val detectionDao: DetectionDao
 ) {
 
-    fun getDetectionSaved(): LiveData<List<DetectionSaved>> = detectionDao.getDetectionSaved()
+    fun getDetectionSaved(uid: String): LiveData<List<DetectionSaved>> {
+        return detectionDao.getDetectionSaved(uid)
+    }
 
     suspend fun insertDetection(result: DetectionSaved): Long {
         return withContext(Dispatchers.IO) {
