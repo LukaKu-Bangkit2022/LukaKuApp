@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:background="@color/white_smoke"
+    android:background="?attr/colorPrimaryVariant"
     android:orientation="vertical"
     android:padding="16dp">
 
@@ -14,7 +14,7 @@
         android:layout_height="100dp"
         android:contentDescription="@string/app_name"
         android:scaleType="centerCrop"
-        android:src="@drawable/ic_bookmark"
+        android:src="@drawable/ic_outline_save"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -32,13 +32,13 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <TextView
-        android:id="@+id/failed_message"
+        android:id="@+id/tv_message"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="24dp"
         android:fontFamily="@font/lato"
         android:gravity="center"
-        android:text="@string/bookmark_message"
+        android:text="@string/history_message"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />

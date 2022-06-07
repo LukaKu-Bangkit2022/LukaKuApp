@@ -29,7 +29,6 @@ class FirstAidFragment : Fragment() {
     private lateinit var firstAidsAdapter: FirstAidsAdapter
     private lateinit var firstAidResponseItem: FirstAidResponseItem
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         detectionResult = arguments?.getParcelable(ARG_RESULT)
@@ -52,6 +51,11 @@ class FirstAidFragment : Fragment() {
         getFirstAids()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     private fun getFirstAids() {
         binding.shimmer.onShimmer()
 
@@ -61,7 +65,7 @@ class FirstAidFragment : Fragment() {
             binding.apply {
                 tvLabelList.visibility = VISIBLE
                 rvFirstAids.visibility = VISIBLE
-                emptyMessage.visibility = GONE
+                inNoContent.root.visibility = GONE
             }
 
             val firstAidContent = firstAidResponseItem.firstaid
@@ -83,7 +87,7 @@ class FirstAidFragment : Fragment() {
                 shimmer.onShimmer(true)
                 tvLabelList.visibility = GONE
                 rvFirstAids.visibility = GONE
-                emptyMessage.visibility = VISIBLE
+                inNoContent.root.visibility = VISIBLE
             }
         }
     }

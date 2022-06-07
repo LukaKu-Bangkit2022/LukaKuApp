@@ -2,4 +2,5 @@
     <dimen name="fab1">55dp</dimen>
     <dimen name="fab2">105dp</dimen>
     <dimen name="fab3">155dp</dimen>
+    <dimen name="fab4">205dp</dimen>
 </resources>

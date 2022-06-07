@@ -1,16 +1,20 @@
 package com.bangkit.capstone.lukaku.ui.result
 
 import android.animation.Animator
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.*
+import android.view.View.OnClickListener
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.viewpager2.widget.ViewPager2.*
 import com.bangkit.capstone.lukaku.R
 import com.bangkit.capstone.lukaku.adapters.ResultPagerAdapter
 import com.bangkit.capstone.lukaku.data.local.entity.DetectionEntity
@@ -18,6 +22,7 @@ import com.bangkit.capstone.lukaku.data.models.DetectionResult
 import com.bangkit.capstone.lukaku.databinding.FragmentResultBinding
 import com.bangkit.capstone.lukaku.helper.withDateFormat
 import com.bangkit.capstone.lukaku.helper.withFirstUpperCase
+import com.bangkit.capstone.lukaku.utils.Constants.COPY
 import com.bangkit.capstone.lukaku.utils.loadImage
 import com.bangkit.capstone.lukaku.utils.toast
 import com.bangkit.capstone.lukaku.utils.withAnimationY
@@ -31,7 +36,7 @@ import java.io.File
 class ResultFragment : Fragment(), OnClickListener {
 
     private var _binding: FragmentResultBinding? = null
-    private val binding get() = _binding!!
+    val binding get() = _binding!!
 
     private var photo: File? = null
     private var detectionResult: DetectionResult? = null
@@ -40,6 +45,7 @@ class ResultFragment : Fragment(), OnClickListener {
 
     private var isSave: Boolean = false
     private var resultId: Long? = null
+    private var index: Int = 0
 
     private lateinit var auth: FirebaseAuth
 
@@ -72,6 +78,8 @@ class ResultFragment : Fragment(), OnClickListener {
 
     override fun onStop() {
         super.onStop()
+
+        closeFABMenu()
         viewModel.apply {
             mutableIsSave.value = isSave
             mutableResultId.value = resultId
@@ -89,6 +97,11 @@ class ResultFragment : Fragment(), OnClickListener {
         binding.tvSave.text = stageSave
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     override fun onClick(view: View?) {
         when (view?.id) {
             R.id.iv_back -> requireActivity().onBackPressed()
@@ -96,7 +109,32 @@ class ResultFragment : Fragment(), OnClickListener {
             R.id.fab_save -> onSaveResult()
             R.id.fab_reshoot -> onNavigateReshoot()
             R.id.fab_feedback -> onShowFeedbackPopup()
+            R.id.fab_copy_all -> copyAllFirstAids()
             R.id.fab_background -> closeFABMenu()
+        }
+    }
+
+    private fun isHaveContent(): Boolean {
+        return detectionResult?.firstAidResponse?.size != 0 && index == 0
+    }
+
+    private fun copyAllFirstAids() {
+        if (isHaveContent()) {
+            val firstAidResponseItem = detectionResult?.firstAidResponse!![0]
+            val firstAidContent = firstAidResponseItem.firstaid
+
+            val firstAidList = firstAidContent?.split("*")?.toList()?.joinToString(
+                prefix = getString(R.string.prefix_first),
+                separator = getString(R.string.separator_next),
+                postfix = getString(R.string.postfix_by),
+            )
+
+            val clipboard =
+                context?.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            val clip = ClipData.newPlainText(COPY, firstAidList)
+            clipboard.setPrimaryClip(clip)
+
+            context?.toast(getString(R.string.clipboard_all))
         }
     }
 
@@ -107,7 +145,19 @@ class ResultFragment : Fragment(), OnClickListener {
             fabSave.setOnClickListener(this@ResultFragment)
             fabReshoot.setOnClickListener(this@ResultFragment)
             fabFeedback.setOnClickListener(this@ResultFragment)
+            fabCopyAll.setOnClickListener(this@ResultFragment)
             fabBackground.setOnClickListener(this@ResultFragment)
+
+            viewPager.registerOnPageChangeCallback(object : OnPageChangeCallback() {
+                override fun onPageScrolled(
+                    position: Int,
+                    positionOffset: Float,
+                    positionOffsetPixels: Int
+                ) {
+                    super.onPageScrolled(position, positionOffset, positionOffsetPixels)
+                    index = position
+                }
+            })
         }
     }
 
@@ -126,7 +176,7 @@ class ResultFragment : Fragment(), OnClickListener {
     }
 
     private fun onShowFeedbackPopup() {
-        context?.toast("Still under development!")
+        context?.toast(getString(R.string.still_under_development))
     }
 
     private fun onSaveResult() {
@@ -140,7 +190,6 @@ class ResultFragment : Fragment(), OnClickListener {
             binding.tvSave.text = getString(R.string.title_save)
         } else {
             val user = auth.currentUser
-
             val detectionSaved = DetectionEntity().also {
                 it.uid = user?.uid
                 it.photoPath = photo?.path
@@ -196,6 +245,12 @@ class ResultFragment : Fragment(), OnClickListener {
             fabLayout1.withAnimationY(-resources.getDimension(R.dimen.fab1))
             fabLayout2.withAnimationY(-resources.getDimension(R.dimen.fab2))
             fabLayout3.withAnimationY(-resources.getDimension(R.dimen.fab3))
+            if (isHaveContent()) {
+                fabLayout4.apply {
+                    visibility = VISIBLE
+                    withAnimationY(-resources.getDimension(R.dimen.fab4))
+                }
+            }
         }
     }
 
@@ -205,21 +260,22 @@ class ResultFragment : Fragment(), OnClickListener {
             fab.animate().rotation(0F)
             fabLayout1.withAnimationY()
             fabLayout2.withAnimationY()
-            fabLayout3.withAnimationY()
-            fabLayout3.withAnimationY()
-                .setListener(object : Animator.AnimatorListener {
-                    override fun onAnimationStart(animator: Animator) {}
-                    override fun onAnimationEnd(animator: Animator) {
-                        if (GONE == fabBackground.visibility) {
-                            fabLayout1.visibility = GONE
-                            fabLayout2.visibility = GONE
-                            fabLayout3.visibility = GONE
-                        }
+            if (isHaveContent()) fabLayout4.apply { withAnimationY() }
+            fabLayout3.withAnimationY().setListener(object : Animator.AnimatorListener {
+                override fun onAnimationStart(animator: Animator) {}
+                override fun onAnimationEnd(animator: Animator) {
+                    if (GONE == fabBackground.visibility) {
+                        fabLayout1.visibility = GONE
+                        fabLayout2.visibility = GONE
+                        fabLayout3.visibility = GONE
+                        fabLayout4.visibility = GONE
+                        if (isHaveContent()) fabLayout4.apply { visibility = GONE }
                     }
+                }
 
-                    override fun onAnimationCancel(animator: Animator) {}
-                    override fun onAnimationRepeat(animator: Animator) {}
-                })
+                override fun onAnimationCancel(animator: Animator) {}
+                override fun onAnimationRepeat(animator: Animator) {}
+            })
         }
     }
 

@@ -71,7 +71,7 @@ class HistoryFragment : Fragment() {
                 if (it.isEmpty()) {
                     binding.apply {
                         shimmer.onShimmer(true)
-                        emptyMessage.visibility = VISIBLE
+                        inHistory.root.visibility = VISIBLE
                         rvHistory.visibility = GONE
                     }
                 } else {
@@ -79,7 +79,7 @@ class HistoryFragment : Fragment() {
                     binding.apply {
                         shimmer.onShimmer(true)
                         rvHistory.visibility = VISIBLE
-                        emptyMessage.visibility = GONE
+                        inHistory.root.visibility = GONE
                     }
                 }
             }

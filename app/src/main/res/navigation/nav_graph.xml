@@ -234,4 +234,9 @@
     <action
         android:id="@+id/action_global_resultFragment"
         app:destination="@id/resultFragment" />
+    <fragment
+        android:id="@+id/navigation_drugstore"
+        android:name="com.bangkit.capstone.lukaku.ui.drugstore.DrugstoreFragment"
+        android:label="fragment_drugstore"
+        tools:layout="@layout/fragment_drugstore" />
 </navigation>

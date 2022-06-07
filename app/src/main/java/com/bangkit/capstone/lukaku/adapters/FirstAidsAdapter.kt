@@ -3,11 +3,13 @@ package com.bangkit.capstone.lukaku.adapters
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.content.Context.CLIPBOARD_SERVICE
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bangkit.capstone.lukaku.R
 import com.bangkit.capstone.lukaku.databinding.ItemListFirstAidBinding
+import com.bangkit.capstone.lukaku.utils.Constants.COPY
 import com.bangkit.capstone.lukaku.utils.toast
 
 class FirstAidsAdapter(
@@ -37,10 +39,9 @@ class FirstAidsAdapter(
                 tvNumber.text = number
                 tvDescription.text = item
 
-                tvDescription.setOnClickListener {
-                    val clipboard =
-                        context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-                    val clip = ClipData.newPlainText("Copied", item)
+                ivCopy.setOnClickListener {
+                    val clipboard = context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+                    val clip = ClipData.newPlainText(COPY, item)
                     clipboard.setPrimaryClip(clip)
 
                     context.toast(context.getString(R.string.clipboard, number))

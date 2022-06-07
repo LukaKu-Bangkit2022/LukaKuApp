@@ -14,6 +14,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_home">Home</string>
     <string name="title_detection">Detection</string>
+    <string name="title_drugstore">Drugstore</string>
     <string name="title_profile">Profile</string>
     <string name="title_hospital">Hospital</string>
     <string name="settings_menu">Settings</string>
@@ -78,6 +79,7 @@
     <string name="save_bookmark">Save Bookmark?</string>
     <string name="piece">Rp %s</string>
     <string name="clipboard">Copied Number %s to clipboard</string>
+    <string name="clipboard_all">Copied All to clipboard</string>
     <string name="medicine_error_message">No label result.</string>
     <string name="first_aids_error_message">No label result.</string>
     <string name="tab_first_aid">First Aids</string>
@@ -109,7 +111,18 @@
     <string name="available">Available</string>
     <string name="no_available">Not Available</string>
     <string name="drag_size">%s Recommended Drugs.</string>
+    <string name="maintenance_status">Sorry!</string>
+    <string name="maintenance_message">The %s is currently still under development, you can contribute by providing Feedback.</string>
     <string name="failed_status">Whoops!</string>
     <string name="failed_message">There is something problem with your network or the server is currently down, please try it again later.</string>
+    <string name="bookmark_message">Your bookmark list is empty because you don\'t add any article in the bookmark menu.</string>
+    <string name="history_message">Your history list is empty because you don\'t save any detection results in the action menu.</string>
+    <string name="no_content_message">It looks like there are no content available at this time.</string>
+    <string name="no_result_message">It looks like there are no results available at this time, please try again.</string>
     <string name="retry">Retry</string>
+    <string name="copy_item">Copy</string>
+    <string name="copy_all">Copy All First Aids</string>
+    <string name="prefix_first">First: </string>
+    <string name="separator_next"> Next: </string>
+    <string name="postfix_by"> by LukaKu</string>
 </resources>

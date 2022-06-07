@@ -1,6 +1,7 @@
 package com.bangkit.capstone.lukaku.ui.onboarding
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,11 +39,6 @@ class OnboardingFragment : Fragment() {
         auth = Firebase.auth
         checkUser()
         startAction()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        viewModel.saveOnboarding(true)
     }
 
     override fun onDestroyView() {

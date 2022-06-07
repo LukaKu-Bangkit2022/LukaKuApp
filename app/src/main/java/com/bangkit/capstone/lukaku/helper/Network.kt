@@ -17,7 +17,6 @@ object Network {
                 capabilities.hasTransport(TRANSPORT_WIFI) -> true
                 capabilities.hasTransport(TRANSPORT_CELLULAR) -> true
                 capabilities.hasTransport(TRANSPORT_ETHERNET) -> true
-                capabilities.hasTransport(TRANSPORT_BLUETOOTH) -> true
                 else -> false
             }
         } else {

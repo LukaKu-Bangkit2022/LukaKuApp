@@ -20,7 +20,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="?attr/colorPrimary"
+                android:background="?attr/colorPrimaryVariant"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
                 android:paddingBottom="25dp">
@@ -45,7 +45,7 @@
                             android:fontFamily="@font/nunito_extrabold"
                             android:gravity="center"
                             android:text="@string/title_profile"
-                            android:textColor="?attr/colorPrimaryVariant"
+                            android:textColor="?attr/colorSecondary"
                             android:textSize="16sp" />
 
                         <ImageView
@@ -79,7 +79,7 @@
                     android:fontFamily="@font/nunito_extrabold"
                     android:gravity="center"
                     android:maxLines="2"
-                    android:textColor="?attr/colorPrimaryVariant"
+                    android:textColor="?attr/colorSecondary"
                     android:textSize="20sp"
                     app:layout_constraintEnd_toEndOf="@+id/iv_profile"
                     app:layout_constraintStart_toStartOf="@+id/iv_profile"
@@ -92,7 +92,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/lato"
-                    android:textColor="?attr/colorPrimaryVariant"
+                    android:textColor="?attr/colorSecondary"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/tv_name"
                     app:layout_constraintStart_toStartOf="@+id/tv_name"

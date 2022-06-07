@@ -40,6 +40,7 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private val viewModel: HomeViewModel by viewModels()
+
     private lateinit var bottomBar: SmoothBottomBar
     private lateinit var auth: FirebaseAuth
     private lateinit var articleAdapter: ArticleAdapter
@@ -68,7 +69,7 @@ class HomeFragment : Fragment() {
         onStartHeadline()
         goToViewMore()
         goToNotifications()
-        goToProfile()
+//        goToProfile()
         initRecyclerView()
         onDetail()
         getAllArticle()

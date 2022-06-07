@@ -162,7 +162,7 @@
                 app:shimmer_duration="1000">
 
                 <include
-                    android:id="@+id/lyt_shimmer_default"
+                    android:id="@+id/in_shimmer"
                     layout="@layout/include_shimmer_article" />
 
             </com.facebook.shimmer.ShimmerFrameLayout>

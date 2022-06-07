@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:background="@color/white_smoke"
+    android:background="?attr/colorPrimaryVariant"
     android:orientation="vertical"
     android:padding="16dp">
 
@@ -25,14 +25,15 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/retry"
-        android:textColor="?attr/colorOnSecondary"
+        android:textAllCaps="false"
+        android:textColor="?attr/colorPrimaryVariant"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/failed_message"
-        app:layout_constraintTop_toBottomOf="@+id/failed_message" />
+        app:layout_constraintEnd_toEndOf="@+id/tv_message"
+        app:layout_constraintStart_toStartOf="@+id/tv_message"
+        app:layout_constraintTop_toBottomOf="@+id/tv_message" />
 
     <TextView
-        android:id="@+id/failed_message"
+        android:id="@+id/tv_message"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="24dp"

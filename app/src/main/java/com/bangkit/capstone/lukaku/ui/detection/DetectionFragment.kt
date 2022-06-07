@@ -15,9 +15,10 @@ import androidx.navigation.fragment.navArgs
 import com.bangkit.capstone.lukaku.R
 import com.bangkit.capstone.lukaku.data.models.DetectionResult
 import com.bangkit.capstone.lukaku.databinding.FragmentDetectionBinding
+import com.bangkit.capstone.lukaku.helper.Network
+import com.bangkit.capstone.lukaku.helper.withFirstUpperCase
 import com.bangkit.capstone.lukaku.ui.detection.DetectionFragmentDirections.actionDetectionFragmentToResultFragment
 import com.bangkit.capstone.lukaku.utils.loadImage
-import com.bangkit.capstone.lukaku.helper.withFirstUpperCase
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -126,7 +127,7 @@ class DetectionFragment : Fragment(), View.OnClickListener {
                         val resultInfo = result.getOrNull()?.detectionResponse
                         if (resultInfo != null) {
                             onNavigateResult(result.getOrNull())
-                        } else message = "No label result"
+                        } else message = getString(R.string.no_result_message)
                     }
 
                     result.onFailure {
@@ -141,14 +142,14 @@ class DetectionFragment : Fragment(), View.OnClickListener {
                                 frame = 0
                             }
                         }
-                        message = it.message.toString()
+
+                        message = if (Network.isConnect(requireContext())) {
+                            getString(R.string.failed_message)
+                        } else getString(R.string.failed_message)
                     }
 
                     if (message.isNotEmpty()) {
-                        binding.tvStatus.text = getString(
-                            R.string.status_detection_error,
-                            message.withFirstUpperCase()
-                        )
+                        binding.tvStatus.text = message.withFirstUpperCase()
                     }
                 }
             }

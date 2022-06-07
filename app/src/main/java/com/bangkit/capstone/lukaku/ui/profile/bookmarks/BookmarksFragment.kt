@@ -54,12 +54,11 @@ class BookmarksFragment : Fragment() {
         viewModel.getBookmarkedArticle().observe(viewLifecycleOwner) { bookmarkedArticle ->
             binding.apply {
                 if (bookmarkedArticle.isEmpty()) {
-                    emptyMessage.text = getString(R.string.no_bookmarked_article)
-                    emptyMessage.visibility = VISIBLE
+                    inBookmark.root.visibility = VISIBLE
                     rvArticles.visibility = GONE
                 } else {
                     articleAdapter.differ.submitList(bookmarkedArticle)
-                    emptyMessage.visibility = GONE
+                    inBookmark.root.visibility = GONE
                 }
                 shimmer.onShimmer(true)
             }
