@@ -1,11 +1,13 @@
 package com.bangkit.capstone.lukaku.utils
 
 import android.Manifest
+import android.app.Activity
 import android.content.ContentResolver
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Bitmap.CompressFormat
 import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.net.Uri
 import android.view.View
 import android.view.ViewPropertyAnimator
@@ -14,6 +16,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.view.WindowCompat
 import com.bangkit.capstone.lukaku.R
 import com.bangkit.capstone.lukaku.utils.Constants.ANIMATION_FAST_MILLIS
 import com.bangkit.capstone.lukaku.utils.Constants.FILENAME_FORMAT
@@ -60,21 +63,6 @@ fun <T> ImageView.loadImage(image: T, corners: Int = 1) {
 }
 
 fun Context.toast(message: CharSequence) = Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-
-fun Snackbar.action(action: String, color: Int? = null, listener: (View) -> Unit) {
-    setAction(action, listener)
-    color?.let { setActionTextColor(ContextCompat.getColor(context, color)) }
-}
-
-inline fun View.snack(
-    message: String,
-    length: Int = Snackbar.LENGTH_SHORT,
-    f: Snackbar.() -> Unit
-) {
-    val snack = Snackbar.make(this, message, length)
-    snack.f()
-    snack.show()
-}
 
 fun uriToFile(uri: Uri, context: Context): File {
     val contentResolver: ContentResolver = context.contentResolver

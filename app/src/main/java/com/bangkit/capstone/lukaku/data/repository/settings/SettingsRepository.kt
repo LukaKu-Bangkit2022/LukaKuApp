@@ -5,6 +5,4 @@ import kotlinx.coroutines.flow.Flow
 interface SettingsRepository {
     suspend fun saveThemeSetting(isDarkModeActive: Boolean)
     fun getThemeSetting(): Flow<Boolean?>
-    suspend fun saveRealtimeLocation(isLocationActive: Boolean)
-    fun getRealtimeLocation(): Flow<Boolean?>
 }

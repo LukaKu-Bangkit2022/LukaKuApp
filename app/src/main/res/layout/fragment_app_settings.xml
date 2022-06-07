@@ -76,26 +76,17 @@
         app:layout_constraintStart_toStartOf="@id/div1"
         app:layout_constraintTop_toBottomOf="@id/div1" />
 
-    <com.google.android.material.switchmaterial.SwitchMaterial
-        android:id="@+id/swLocation"
-        style="@style/TextDescSettings"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/realtime_location"
-        app:layout_constraintEnd_toEndOf="@id/tvCommon"
-        app:layout_constraintStart_toStartOf="@id/tvCommon"
-        app:layout_constraintTop_toBottomOf="@id/tvCommon" />
-
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvChangeLanguage"
         style="@style/TextDescSettings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="@string/change_language"
         app:drawableRightCompat="@drawable/ic_double_arrow_right"
-        app:layout_constraintEnd_toEndOf="@id/swLocation"
-        app:layout_constraintStart_toStartOf="@id/swLocation"
-        app:layout_constraintTop_toBottomOf="@id/swLocation" />
+        app:layout_constraintEnd_toEndOf="@id/tvCommon"
+        app:layout_constraintStart_toStartOf="@id/tvCommon"
+        app:layout_constraintTop_toBottomOf="@id/tvCommon" />
 
     <com.google.android.material.divider.MaterialDivider
         android:id="@+id/div2"

@@ -20,14 +20,4 @@ class SettingsDataStore @Inject constructor(private val dataStore: DataStore<Pre
     fun getThemeSetting(): Flow<Boolean?> = dataStore.data.map {
         it[booleanPreferencesKey(THEME_PREF)]
     }
-
-    suspend fun saveRealtimeLocation(isLocationActive: Boolean) {
-        dataStore.edit {
-            it[booleanPreferencesKey(LOCATION_PREF)] = isLocationActive
-        }
-    }
-
-    fun getRealtimeLocation(): Flow<Boolean?> = dataStore.data.map {
-        it[booleanPreferencesKey(LOCATION_PREF)]
-    }
 }

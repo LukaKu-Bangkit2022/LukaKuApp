@@ -11,9 +11,4 @@ class SettingsRepositoryImpl @Inject constructor(
         settingsDataStore.saveThemeSetting(isDarkModeActive)
 
     override fun getThemeSetting(): Flow<Boolean?> = settingsDataStore.getThemeSetting()
-
-    override suspend fun saveRealtimeLocation(isLocationActive: Boolean) =
-        settingsDataStore.saveRealtimeLocation(isLocationActive)
-
-    override fun getRealtimeLocation(): Flow<Boolean?> = settingsDataStore.getRealtimeLocation()
 }

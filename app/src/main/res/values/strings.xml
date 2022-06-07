@@ -6,7 +6,7 @@
     <string name="desc_menu_1">Take a snapshot or photo with the camera,\nor upload an image from your phone gallery.</string>
     <string name="desc_menu_2">Access information quickly for first aid methods\nthat you can do in everyday life.</string>
     <string name="desc_menu_3">Get access to healing with ready-to-order drug recommendations.</string>
-    <string name="desc_sign">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</string>
+    <string name="desc_sign">Let\'s start with a quick product tour and we will\nhave you up and running in no time!</string>
     <string name="join_now">Join Now</string>
     <string name="skip">SKIP</string>
     <string name="next">NEXT</string>
@@ -112,4 +112,5 @@
     <string name="realtime_location">Realtime Location</string>
     <string name="location_error_message">Please turn on location</string>
     <string name="settings">Settings</string>
+    <string name="your_location">Your Location</string>
 </resources>
