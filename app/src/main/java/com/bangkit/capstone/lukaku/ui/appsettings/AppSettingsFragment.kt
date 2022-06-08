@@ -51,6 +51,9 @@ class AppSettingsFragment : Fragment(), View.OnClickListener {
             R.id.tv_feedback -> {
                 findNavController().navigate(R.id.action_global_feedbackFragment)
             }
+            R.id.tv_about -> {
+                findNavController().navigate(R.id.action_appSettingsFragment_to_aboutFragment)
+            }
         }
     }
 
@@ -58,6 +61,7 @@ class AppSettingsFragment : Fragment(), View.OnClickListener {
         binding.apply {
             ivBack.setOnClickListener(this@AppSettingsFragment)
             tvFeedback.setOnClickListener(this@AppSettingsFragment)
+            tvAbout.setOnClickListener(this@AppSettingsFragment)
         }
     }
 

@@ -30,7 +30,13 @@
         android:id="@+id/appSettingsFragment"
         android:name="com.bangkit.capstone.lukaku.ui.appsettings.AppSettingsFragment"
         android:label="fragment_app_settings"
-        tools:layout="@layout/fragment_app_settings" />
+        tools:layout="@layout/fragment_app_settings" >
+        <action
+            android:id="@+id/action_appSettingsFragment_to_aboutFragment"
+            app:destination="@id/aboutFragment"
+            app:popUpTo="@id/aboutFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/onboardingFragment"
         android:name="com.bangkit.capstone.lukaku.ui.onboarding.OnboardingFragment"
@@ -247,4 +253,9 @@
     <action
         android:id="@+id/action_global_feedbackFragment"
         app:destination="@id/feedbackFragment" />
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.bangkit.capstone.lukaku.ui.about.AboutFragment"
+        android:label="fragment_about"
+        tools:layout="@layout/fragment_about" />
 </navigation>

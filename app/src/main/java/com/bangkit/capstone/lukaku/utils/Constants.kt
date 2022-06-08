@@ -19,4 +19,8 @@ object Constants {
     const val DB_NAME = "Lukaku_database"
     const val COPY = "Copied"
     const val RESPOND_OK = "OK"
+    const val MAIL_ADDRESS = "lukaku.det@gmail.com"
+    const val MAIL_SUBJECT = "Ask Lukaku"
+    const val GITHUB = "https://github.com/LukaKu-Bangkit2022"
+    const val LINKEDIN = "https://www.linkedin.com/company/lukaku/"
 }

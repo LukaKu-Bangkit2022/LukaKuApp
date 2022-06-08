@@ -109,6 +109,26 @@
         app:layout_constraintTop_toTopOf="@+id/div2" />
 
     <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/div3"
+        style="@style/DivStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_about" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_about"
+        style="@style/TextDescSettings"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:text="@string/about"
+        app:drawableRightCompat="@drawable/ic_double_arrow_right"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_feedback" />
+
+    <com.google.android.material.divider.MaterialDivider
         android:id="@+id/div"
         style="@style/DivStyle"
         android:layout_width="match_parent"

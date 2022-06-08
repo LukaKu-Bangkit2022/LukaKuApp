@@ -141,4 +141,11 @@
     <string name="counter">%s/500</string>
     <string name="deleted">"Deleted successfully."</string>
     <string name="saved">"Saved successfully."</string>
+    <string name="about">About</string>
+    <string name="about_info">The Lukaku application is a service that is engaged in the health sector that involves artificial intelligence technology to detect wounds and provide advice on actions in the form of first aids methods and drug recommendations.</string>
+    <string name="email_us">email us</string>
+    <string name="github_us">github us</string>
+    <string name="linkedin_us">linkedin us</string>
+    <string name="title_email">Send email</string>
+    <string name="title_open">Open media</string>
 </resources>
