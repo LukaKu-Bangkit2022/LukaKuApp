@@ -239,4 +239,12 @@
         android:name="com.bangkit.capstone.lukaku.ui.drugstore.DrugstoreFragment"
         android:label="fragment_drugstore"
         tools:layout="@layout/fragment_drugstore" />
+    <fragment
+        android:id="@+id/feedbackFragment"
+        android:name="com.bangkit.capstone.lukaku.ui.feedback.FeedbackFragment"
+        android:label="fragment_feedback"
+        tools:layout="@layout/fragment_feedback" />
+    <action
+        android:id="@+id/action_global_feedbackFragment"
+        app:destination="@id/feedbackFragment" />
 </navigation>

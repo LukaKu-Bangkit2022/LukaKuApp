@@ -6,10 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.bangkit.capstone.lukaku.R
 import com.bangkit.capstone.lukaku.databinding.FragmentDrugstoreBinding
 import com.bangkit.capstone.lukaku.helper.ActivityLifeObserver
-import com.bangkit.capstone.lukaku.utils.toast
 import me.ibrahimsn.lib.SmoothBottomBar
 
 class DrugstoreFragment : Fragment() {
@@ -44,7 +44,7 @@ class DrugstoreFragment : Fragment() {
         binding.inMaintenance.apply {
             tvMessage.text = message
             btnFeedback.setOnClickListener {
-                onShowFeedback()
+                findNavController().navigate(R.id.action_global_feedbackFragment)
             }
         }
     }
@@ -58,9 +58,5 @@ class DrugstoreFragment : Fragment() {
         super.onDestroyView()
         bottomBar.visibility = View.GONE
         _binding = null
-    }
-
-    private fun onShowFeedback() {
-        context?.toast(getString(R.string.still_under_development))
     }
 }

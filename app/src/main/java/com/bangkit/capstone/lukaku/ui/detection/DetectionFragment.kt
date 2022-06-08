@@ -87,10 +87,10 @@ class DetectionFragment : Fragment(), View.OnClickListener {
         Builder(requireContext()).apply {
             setMessage(requireActivity().getString(R.string.dialog_process))
             setCancelable(false)
-            setPositiveButton("Yes") { _, _ ->
+            setPositiveButton(getString(R.string.positive_btn_detection)) { _, _ ->
                 findNavController().navigate(R.id.action_detectionFragment_to_navigation_detection)
             }
-            setNegativeButton("No") { dialog, _ ->
+            setNegativeButton(getString(R.string.negative_btn_detection)) { dialog, _ ->
                 dialog.dismiss()
             }
             create()

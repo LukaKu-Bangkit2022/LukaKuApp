@@ -108,7 +108,7 @@ class ResultFragment : Fragment(), OnClickListener {
             R.id.fab -> onFABVisible()
             R.id.fab_save -> onSaveResult()
             R.id.fab_reshoot -> onNavigateReshoot()
-            R.id.fab_feedback -> onShowFeedbackPopup()
+            R.id.fab_feedback -> onNavigateFeedback()
             R.id.fab_copy_all -> copyAllFirstAids()
             R.id.fab_background -> closeFABMenu()
         }
@@ -175,8 +175,8 @@ class ResultFragment : Fragment(), OnClickListener {
         )
     }
 
-    private fun onShowFeedbackPopup() {
-        context?.toast(getString(R.string.still_under_development))
+    private fun onNavigateFeedback() {
+        findNavController().navigate(R.id.action_global_feedbackFragment)
     }
 
     private fun onSaveResult() {

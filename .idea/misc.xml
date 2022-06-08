@@ -49,7 +49,9 @@
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/drawable-night/news_avd.xml" value="0.1855" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/drawable/bg_button.xml" value="0.2075" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/drawable/bg_button_circle.xml" value="0.2075" />
+        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/drawable/bg_category.xml" value="0.2075" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/drawable/bg_content.xml" value="0.2075" />
+        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/drawable/bg_input.xml" value="0.2075" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/drawable/bg_round.xml" value="0.2075" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/drawable/bg_search.xml" value="0.2075" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/drawable/bg_shimmer.xml" value="0.2075" />
@@ -94,14 +96,16 @@
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/dialog_loading.xml" value="0.5" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/dialog_loading_detection.xml" value="0.22" />
-        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_app_settings.xml" value="0.1" />
+        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/feedback_popup.xml" value="0.25" />
+        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_app_settings.xml" value="0.33" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_articles.xml" value="0.15" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_bookmarks.xml" value="0.12" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_capture.xml" value="0.25" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_detail_article.xml" value="0.33" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_detection.xml" value="0.14" />
-        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_drug_details.xml" value="0.33" />
+        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_drug_details.xml" value="0.22" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_drugstore.xml" value="0.22" />
+        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_feedback.xml" value="0.33" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_first_aid.xml" value="0.33" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_history.xml" value="0.17777777777777778" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_home.xml" value="0.18" />

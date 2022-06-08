@@ -1,13 +1,12 @@
 package com.bangkit.capstone.lukaku.data.remote
 
-import com.bangkit.capstone.lukaku.data.models.ArticleResponse
-import retrofit2.http.GET
-import retrofit2.http.Query
-import com.bangkit.capstone.lukaku.data.models.DetectionResponse
-import com.bangkit.capstone.lukaku.data.models.FirstAidResponse
-import com.bangkit.capstone.lukaku.data.models.MedicineResponse
+import com.bangkit.capstone.lukaku.data.models.*
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.ResponseBody
+import retrofit2.Call
 import retrofit2.http.*
+
 
 interface ApiService {
     @GET("getarticle")
@@ -34,4 +33,9 @@ interface ApiService {
     suspend fun detection(
         @Part file: MultipartBody.Part
     ): DetectionResponse
+
+    @POST("insertfeedback")
+    suspend fun inertFeedback(
+        @Body feedback: Feedback
+    ): FeedbackResponse
 }

@@ -18,4 +18,5 @@ object Constants {
     const val DB_VERSION = 1
     const val DB_NAME = "Lukaku_database"
     const val COPY = "Copied"
+    const val RESPOND_OK = "OK"
 }

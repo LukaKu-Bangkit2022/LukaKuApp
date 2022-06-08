@@ -72,6 +72,8 @@
     <string name="line">%s \t|</string>
     <string name="article_error_message">Something is wrong.</string>
     <string name="detail_photo_article">Detail Photo Article</string>
+    <string name="feedback_success">Your Feedback was sent successfully.</string>
+    <string name="feedback_error">Something is wrong, please try again.</string>
     <string name="search_articles">Search articles…</string>
     <string name="save_article">Save Article</string>
     <string name="article_bookmarked">Article successfully bookmarked</string>
@@ -91,6 +93,11 @@
     <string name="status_detection_complete">Detection in progress…</string>
     <string name="status_detection_error">%s, please try again!</string>
     <string name="dialog_process">Are you sure you want to end this process?</string>
+    <string name="dialog_feedback">Discard draft?</string>
+    <string name="positive_btn_detection">Yes</string>
+    <string name="positive_btn_feedback">Discard</string>
+    <string name="negative_btn_detection">No</string>
+    <string name="negative_btn_feedback">Keep</string>
     <string name="medicine_label">Recommended drugs found:</string>
     <string name="save">SAVE</string>
     <string name="save_result">Save Result</string>
@@ -125,4 +132,7 @@
     <string name="prefix_first">First: </string>
     <string name="separator_next"> Next: </string>
     <string name="postfix_by"> by LukaKu</string>
+    <string name="feedback_hint">Please let us know, how can we improve ourselves?</string>
+    <string name="send">Send</string>
+    <string name="counter">%s/500</string>
 </resources>

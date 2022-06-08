@@ -8,13 +8,15 @@ import androidx.appcompat.app.AppCompatDelegate.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import com.bangkit.capstone.lukaku.R
 import com.bangkit.capstone.lukaku.databinding.FragmentAppSettingsBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class AppSettingsFragment : Fragment() {
+class AppSettingsFragment : Fragment(), View.OnClickListener {
 
     private var _binding: FragmentAppSettingsBinding? = null
     private val binding get() = _binding!!
@@ -33,12 +35,30 @@ class AppSettingsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setTheme()
-        backToActivity()
+        onSetListener()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onClick(view: View?) {
+        when (view?.id) {
+            R.id.iv_back -> {
+                requireActivity().onBackPressed()
+            }
+            R.id.tv_feedback -> {
+                findNavController().navigate(R.id.action_global_feedbackFragment)
+            }
+        }
+    }
+
+    private fun onSetListener() {
+        binding.apply {
+            ivBack.setOnClickListener(this@AppSettingsFragment)
+            tvFeedback.setOnClickListener(this@AppSettingsFragment)
+        }
     }
 
     private fun setTheme() {
@@ -59,12 +79,6 @@ class AppSettingsFragment : Fragment() {
                 setDefaultNightMode(theme)
                 binding.swTheme.isChecked = isThemeChecked
             }
-        }
-    }
-
-    private fun backToActivity() {
-        binding.ivBack.setOnClickListener {
-            requireActivity().onBackPressed()
         }
     }
 }
