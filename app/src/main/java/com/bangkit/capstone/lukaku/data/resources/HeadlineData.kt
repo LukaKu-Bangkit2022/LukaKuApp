@@ -8,16 +8,16 @@ object HeadlineData {
     fun getHeadlines(): List<Headline> = HEADLINE
 
     private val HEADLINE_1: Headline =
-        Headline(R.drawable.ic_detection, "Start detection", "for all wounds.")
+        Headline(R.drawable.headline1, "Mendaki Gunung", "Siapkan perobatan ini sebelum mendaki gunung.")
 
     private val HEADLINE_2: Headline =
-        Headline(R.drawable.ic_health, "Latest Technology", "fast and accurate information.")
+        Headline(R.drawable.headline2, "Mengganti Perban", "Langkah yang tepat saat mengganti perban.")
 
     private val HEADLINE_3: Headline =
         Headline(
-            R.drawable.ic_drug,
-            "Drug recommendations",
-            "according to the results of wound detection."
+            R.drawable.headline3,
+            "Menyembuhkan Luka",
+            "Obat semprot serba guna untuk luka ringan."
         )
 
     private val HEADLINE: ArrayList<Headline> = arrayListOf(HEADLINE_1, HEADLINE_2, HEADLINE_3)
