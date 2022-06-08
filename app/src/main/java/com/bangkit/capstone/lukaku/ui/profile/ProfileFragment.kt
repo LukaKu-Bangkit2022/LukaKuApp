@@ -75,7 +75,7 @@ class ProfileFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         bottomBar.visibility = View.GONE
-//        _binding = null
+        _binding = null
     }
 
     private fun setProfile() {

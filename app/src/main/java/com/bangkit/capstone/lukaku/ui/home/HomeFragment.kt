@@ -38,7 +38,7 @@ import me.ibrahimsn.lib.SmoothBottomBar
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
-    private val binding get() = _binding!!
+    private val binding get() = _binding
     private val viewModel: HomeViewModel by viewModels()
 
     private lateinit var bottomBar: SmoothBottomBar
@@ -55,10 +55,10 @@ class HomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        return binding.root
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -83,12 +83,12 @@ class HomeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         bottomBar.visibility = GONE
-//        _binding = null
+        _binding = null
     }
 
     private fun setProfile() {
         val user = auth.currentUser
-        binding.apply {
+        binding?.apply {
             ivProfile.loadCircleImage(user?.photoUrl)
             tvName.text = getString(R.string.name_display, user?.displayName)
         }
@@ -103,16 +103,16 @@ class HomeFragment : Fragment() {
             title.add(titleItem.title.toString())
         }
 
-        binding.vpHeadline.apply {
+        binding?.vpHeadline?.apply {
             adapter = headlineAdapter
             transformer()
             autoScroll(viewLifecycleOwner.lifecycleScope, INTERVAL)
-            mediator(binding.tabLayout, title)
+            binding?.tabLayout?.let { mediator(it, title) }
         }
     }
 
     private fun initRecyclerView() {
-        binding.apply {
+        binding?.apply {
             shimmer.onShimmer()
 
             rvArticles.apply {
@@ -134,7 +134,7 @@ class HomeFragment : Fragment() {
             viewModel.getAllArticle().collect { result ->
                 result.onSuccess { response ->
                     articleAdapter.differ.submitList(response.take(5).toList())
-                    binding.shimmer.onShimmer(true)
+                    binding?.shimmer?.onShimmer(true)
                 }
                 result.onFailure {
                     onFailRequest()
@@ -144,7 +144,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun onFailRequest() {
-        binding.apply {
+        binding?.apply {
             shimmer.onShimmer(true)
             if (Network.isConnect(requireContext())) {
                 inNetwork.root.visibility = VISIBLE
@@ -160,19 +160,19 @@ class HomeFragment : Fragment() {
     }
 
     private fun goToViewMore() {
-        binding.btnViewMore.setOnClickListener {
+        binding?.btnViewMore?.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_home_to_articlesFragment)
         }
     }
 
     private fun goToNotifications() {
-        binding.ivNotifications.setOnClickListener {
+        binding?.ivNotifications?.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_home_to_notificationFragment)
         }
     }
 
     private fun goToProfile() {
-        binding.ivProfile.setOnClickListener {
+        binding?.ivProfile?.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_home_to_navigation_profile)
         }
     }

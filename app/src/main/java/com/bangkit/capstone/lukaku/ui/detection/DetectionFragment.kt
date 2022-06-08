@@ -26,7 +26,6 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 
-
 @AndroidEntryPoint
 class DetectionFragment : Fragment(), View.OnClickListener {
 
