@@ -1,6 +1,7 @@
 package com.bangkit.capstone.lukaku.ui.feedback
 
 import android.app.AlertDialog
+import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.text.Editable
@@ -29,14 +30,19 @@ class FeedbackFragment : Fragment(), View.OnClickListener {
     private val binding get() = _binding!!
     private val viewModel: FeedbackViewModel by viewModels()
     private var isDraft: Boolean = false
+    private var isSend: Boolean = false
 
     private lateinit var auth: FirebaseAuth
     private lateinit var name: String
     private lateinit var email: String
+    private lateinit var dialog: Dialog
 
     private val callback = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
-            if (isDraft) {
+            if (isSend) {
+                isEnabled = false
+                requireActivity().onBackPressed()
+            } else if (isDraft) {
                 AlertDialog.Builder(requireContext()).apply {
                     setMessage(requireActivity().getString(R.string.dialog_feedback))
                     setCancelable(false)
@@ -56,6 +62,7 @@ class FeedbackFragment : Fragment(), View.OnClickListener {
             }
         }
     }
+
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -86,6 +93,7 @@ class FeedbackFragment : Fragment(), View.OnClickListener {
             tvEmail.text = email
         }
 
+        initProgressDialog()
         onSetListener()
     }
 
@@ -132,6 +140,8 @@ class FeedbackFragment : Fragment(), View.OnClickListener {
     }
 
     private fun onSendFeedback() {
+        dialog.show()
+
         val text = binding.tvFeedback.text.toString()
         val feedback = Feedback(name, email, text)
 
@@ -139,15 +149,25 @@ class FeedbackFragment : Fragment(), View.OnClickListener {
             viewModel.insertFeedback(feedback).observe(viewLifecycleOwner) { result ->
                 result.onSuccess {
                     if (it.result.equals(RESPOND_OK)) {
+                        dialog.dismiss()
+                        isSend = true
                         requireActivity().onBackPressed()
                         context?.toast(getString(R.string.feedback_success))
                     }
                 }
 
                 result.onFailure {
+                    dialog.dismiss()
                     context?.toast(getString(R.string.feedback_error))
                 }
             }
+        }
+    }
+
+    private fun initProgressDialog() {
+        dialog = Dialog(requireActivity()).apply {
+            setContentView(R.layout.dialog_loading)
+            setCancelable(false)
         }
     }
 }
