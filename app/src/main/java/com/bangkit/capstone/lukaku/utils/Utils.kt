@@ -5,8 +5,8 @@ import android.content.ContentResolver
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Bitmap.CompressFormat
-import android.graphics.BitmapFactory
 import android.net.Uri
+import android.os.Environment
 import android.view.View
 import android.view.ViewPropertyAnimator
 import android.widget.ImageButton
@@ -34,7 +34,7 @@ val timeStamp: String = SimpleDateFormat(
 ).format(System.currentTimeMillis())
 
 fun createTempFile(context: Context): File {
-    val storageDir: File? = context.cacheDir
+    val storageDir: File? = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
     return File.createTempFile(timeStamp, PHOTO_EXTENSION, storageDir)
 }
 
@@ -102,25 +102,6 @@ fun ImageButton.simulateClick(delay: Long = ANIMATION_FAST_MILLIS) {
         invalidate()
         isPressed = false
     }, delay)
-}
-
-fun reduceFileImage(file: File): File {
-    val bitmap = BitmapFactory.decodeFile(file.path)
-
-    var compressQuality = 100
-    var streamLength: Int
-
-    do {
-        val outputStream = ByteArrayOutputStream()
-        bitmap.compress(CompressFormat.JPEG, compressQuality, outputStream)
-        val bmpPicByteArray = outputStream.toByteArray()
-        streamLength = bmpPicByteArray.size
-        compressQuality -= 5
-    } while (streamLength > 1000000)
-
-    bitmap.compress(CompressFormat.JPEG, compressQuality, FileOutputStream(file))
-
-    return file
 }
 
 fun LinearLayout.withAnimationY(value: Float = 0f): ViewPropertyAnimator {

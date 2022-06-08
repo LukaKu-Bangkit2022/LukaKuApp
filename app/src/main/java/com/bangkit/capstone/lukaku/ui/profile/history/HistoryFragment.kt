@@ -19,8 +19,10 @@ import com.bangkit.capstone.lukaku.data.local.entity.DetectionEntity
 import com.bangkit.capstone.lukaku.databinding.FragmentHistoryBinding
 import com.bangkit.capstone.lukaku.utils.onShimmer
 import com.bangkit.capstone.lukaku.utils.toast
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
+import java.io.File
 
 
 @AndroidEntryPoint
@@ -99,7 +101,7 @@ class HistoryFragment : Fragment() {
         popup.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.item_delete_saved -> {
-                    viewModel.deleteDetection(detectionEntity.id.toLong())
+                    onShowDialog(detectionEntity)
                 }
                 R.id.item_feedback -> {
                     findNavController().navigate(R.id.action_global_feedbackFragment)
@@ -108,5 +110,20 @@ class HistoryFragment : Fragment() {
             true
         }
         popup.show()
+    }
+
+    private fun onShowDialog(id: DetectionEntity) {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(getString(R.string.dialog_title_deleted))
+            .setMessage(getString(R.string.dialog_message_deleted))
+            .setPositiveButton(getString(R.string.positive_btn_deleted)) { _, _ ->
+                viewModel.deleteDetection(id.id.toLong())
+                val isDelete = id.photoPath?.let { File(it).delete() }
+                if (isDelete == true) context?.toast(getString(R.string.deleted))
+            }
+            .setNegativeButton(getString(R.string.negative_btn_deleted)) { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
     }
 }

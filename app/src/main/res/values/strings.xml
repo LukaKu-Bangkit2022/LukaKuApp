@@ -45,6 +45,8 @@
     <string name="dark_mode">Dark Mode</string>
     <string name="theme">THEME</string>
     <string name="cancel">Cancel</string>
+    <string name="dialog_title_deleted">Are you sure?</string>
+    <string name="dialog_message_deleted">You cannot restore an item once it has been deleted.</string>
     <string name="dialog_title_sign_out">Are you sure?</string>
     <string name="dialog_message_sign_out">You need to sign in again after sign out.</string>
     <string name="sign_in_failed_message">Please check your internet network</string>
@@ -94,9 +96,11 @@
     <string name="status_detection_error">%s, please try again!</string>
     <string name="dialog_process">Are you sure you want to end this process?</string>
     <string name="dialog_feedback">Discard draft?</string>
+    <string name="positive_btn_deleted">Discard</string>
+    <string name="negative_btn_deleted">Keep</string>
     <string name="positive_btn_detection">Yes</string>
-    <string name="positive_btn_feedback">Discard</string>
     <string name="negative_btn_detection">No</string>
+    <string name="positive_btn_feedback">Discard</string>
     <string name="negative_btn_feedback">Keep</string>
     <string name="medicine_label">Recommended drugs found:</string>
     <string name="save">SAVE</string>
@@ -135,4 +139,6 @@
     <string name="feedback_hint">Please let us know, how can we improve ourselves?</string>
     <string name="send">Send</string>
     <string name="counter">%s/500</string>
+    <string name="deleted">"Deleted successfully."</string>
+    <string name="saved">"Saved successfully."</string>
 </resources>

@@ -11,6 +11,7 @@ import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.view.KeyEvent.KEYCODE_UNKNOWN
 import android.view.KeyEvent.KEYCODE_VOLUME_DOWN

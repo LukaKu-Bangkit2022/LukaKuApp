@@ -53,6 +53,7 @@ class ViewerFragment : Fragment(), View.OnClickListener {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        imageFile?.delete()
         _binding = null
     }
 

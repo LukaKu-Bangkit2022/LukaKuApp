@@ -38,7 +38,7 @@ class ResultFragment : Fragment(), OnClickListener {
     private var _binding: FragmentResultBinding? = null
     val binding get() = _binding!!
 
-    private var photo: File? = null
+    private var imageFile: File? = null
     private var detectionResult: DetectionResult? = null
     private val args: ResultFragmentArgs by navArgs()
     private val viewModel: ResultViewModel by viewModels()
@@ -51,7 +51,7 @@ class ResultFragment : Fragment(), OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        photo = args.image
+        imageFile = args.image
         detectionResult = args.resultParcelable
         resultId = if (args.id.isNotEmpty()) args.id.toLong() else null
     }
@@ -99,6 +99,7 @@ class ResultFragment : Fragment(), OnClickListener {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        if (!isSave) imageFile?.delete()
         _binding = null
     }
 
@@ -180,6 +181,7 @@ class ResultFragment : Fragment(), OnClickListener {
     }
 
     private fun onSaveResult() {
+        val message: String
         if (isSave) {
             lifecycleScope.launch {
                 viewModel.deleteDetection(resultId!!)
@@ -188,11 +190,12 @@ class ResultFragment : Fragment(), OnClickListener {
 
             isSave = false
             binding.tvSave.text = getString(R.string.title_save)
+            message = getString(R.string.deleted)
         } else {
             val user = auth.currentUser
             val detectionSaved = DetectionEntity().also {
                 it.uid = user?.uid
-                it.photoPath = photo?.path
+                it.photoPath = this.imageFile?.path
                 it.detectionResult = detectionResult
             }
 
@@ -202,12 +205,15 @@ class ResultFragment : Fragment(), OnClickListener {
 
             isSave = true
             binding.tvSave.text = getString(R.string.title_delete)
+            message = getString(R.string.saved)
         }
+
+        context?.toast(message)
     }
 
     private fun setResult() {
         binding.apply {
-            ivPhoto.loadImage(photo)
+            ivPhoto.loadImage(imageFile)
 
             detectionResult?.apply {
                 tvDateValue.text = detectionResponse?.date?.withDateFormat()
