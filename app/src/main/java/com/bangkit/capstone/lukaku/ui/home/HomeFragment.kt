@@ -69,7 +69,7 @@ class HomeFragment : Fragment() {
         onStartHeadline()
         goToViewMore()
         goToNotifications()
-//        goToProfile()
+        goToProfile()
         initRecyclerView()
         onDetail()
         getAllArticle()
