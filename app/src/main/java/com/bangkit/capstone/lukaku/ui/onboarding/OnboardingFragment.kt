@@ -40,11 +40,6 @@ class OnboardingFragment : Fragment() {
         startAction()
     }
 
-    override fun onStop() {
-        super.onStop()
-        viewModel.saveOnboarding(true)
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

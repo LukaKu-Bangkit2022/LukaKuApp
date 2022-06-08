@@ -13,6 +13,10 @@
         android:icon="@drawable/ic_outline_detection"
         android:title="@string/title_detection" />
     <item
+        android:id="@+id/navigation_drugstore"
+        android:icon="@drawable/ic_drugstore"
+        android:title="@string/title_drugstore" />
+    <item
         android:id="@+id/navigation_profile"
         android:icon="@drawable/ic_outline_profile"
         android:title="@string/title_profile" />

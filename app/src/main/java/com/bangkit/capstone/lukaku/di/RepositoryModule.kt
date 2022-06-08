@@ -4,6 +4,8 @@ import com.bangkit.capstone.lukaku.data.repository.article.ArticleRepository
 import com.bangkit.capstone.lukaku.data.repository.article.ArticleRepositoryImpl
 import com.bangkit.capstone.lukaku.data.repository.detection.DetectionRepository
 import com.bangkit.capstone.lukaku.data.repository.detection.DetectionRepositoryImpl
+import com.bangkit.capstone.lukaku.data.repository.drugstore.FeedbackRepository
+import com.bangkit.capstone.lukaku.data.repository.drugstore.FeedbackRepositoryImpl
 import com.bangkit.capstone.lukaku.data.repository.hospital.HospitalRepository
 import com.bangkit.capstone.lukaku.data.repository.hospital.HospitalRepositoryImpl
 import com.bangkit.capstone.lukaku.data.repository.onboarding.OnboardingRepository
@@ -37,4 +39,7 @@ abstract class RepositoryModule {
 
     @Binds
     abstract fun bindsHospitalRepository(hospitalRepositoryImpl: HospitalRepositoryImpl): HospitalRepository
+
+    @Binds
+    abstract fun bindsDrugstoreRepository(feedbackRepositoryImpl: FeedbackRepositoryImpl): FeedbackRepository
 }

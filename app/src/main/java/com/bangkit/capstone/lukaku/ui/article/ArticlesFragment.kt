@@ -1,8 +1,10 @@
 package com.bangkit.capstone.lukaku.ui.article
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
 import android.view.View.*
+import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -12,8 +14,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bangkit.capstone.lukaku.R
 import com.bangkit.capstone.lukaku.adapters.ArticleAdapter
 import com.bangkit.capstone.lukaku.databinding.FragmentArticlesBinding
+import com.bangkit.capstone.lukaku.helper.Network
 import com.bangkit.capstone.lukaku.utils.Constants.EXTRA_ARTICLE
-import com.bangkit.capstone.lukaku.utils.toast
+import com.bangkit.capstone.lukaku.utils.onShimmer
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -34,11 +37,6 @@ class ArticlesFragment : Fragment() {
         return binding.root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -49,6 +47,11 @@ class ArticlesFragment : Fragment() {
         backToActivity()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     private fun backToActivity() {
         binding.ivBack.setOnClickListener {
             requireActivity().onBackPressed()
@@ -56,16 +59,38 @@ class ArticlesFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
-        binding.rvArticles.apply {
-            articleAdapter = ArticleAdapter { articleEntity ->
-                if (articleEntity.isBookmarked) {
-                    viewModel.deleteArticle(articleEntity)
-                } else {
-                    viewModel.saveArticle(articleEntity)
+        binding.apply {
+            shimmer.onShimmer()
+
+            rvArticles.apply {
+                articleAdapter = ArticleAdapter { articleEntity ->
+                    if (articleEntity.isBookmarked) {
+                        viewModel.deleteArticle(articleEntity)
+                    } else {
+                        viewModel.saveArticle(articleEntity)
+                    }
+                }
+
+                adapter = articleAdapter
+                layoutManager = LinearLayoutManager(requireActivity())
+            }
+        }
+    }
+
+    private fun getAllArticle() {
+        lifecycleScope.launch {
+            viewModel.getAllArticle().collect { result ->
+                result.onSuccess { response ->
+                    articleAdapter.differ.submitList(response.toList())
+                    binding.apply {
+                        shimmer.onShimmer(true)
+                        rvArticles.visibility = VISIBLE
+                    }
+                }
+                result.onFailure {
+                    onFailRequest()
                 }
             }
-            adapter = articleAdapter
-            layoutManager = LinearLayoutManager(requireActivity())
         }
     }
 
@@ -73,16 +98,39 @@ class ArticlesFragment : Fragment() {
         lifecycleScope.launch {
             viewModel.searchArticle(query).collect { result ->
                 result.onSuccess { response ->
+                    binding.apply {
+                        shimmer.onShimmer(true)
+                        rvArticles.visibility = VISIBLE
+                    }
                     if (response.isEmpty()) {
                         true.isArticleFound()
-                    } else {
-                        false.isArticleFound()
-                    }
+                    } else false.isArticleFound()
+
                     articleAdapter.differ.submitList(response.toList())
                 }
                 result.onFailure {
-                    requireActivity().toast(getString(R.string.article_error_message))
+                    onFailRequest()
                 }
+            }
+        }
+    }
+
+    private fun onFailRequest() {
+        binding.apply {
+            shimmer.onShimmer(true)
+            false.isArticleFound()
+
+            if (Network.isConnect(requireContext())) {
+                inNetwork.root.visibility = VISIBLE
+            } else inNetwork.root.visibility = VISIBLE
+
+            inNetwork.btnRetry.setOnClickListener {
+                shimmer.onShimmer()
+                inNetwork.root.visibility = GONE
+
+                if (searchView.query.isNotEmpty()) {
+                    getSearchArticle(searchView.query.toString())
+                } else getAllArticle()
             }
         }
     }
@@ -106,22 +154,6 @@ class ArticlesFragment : Fragment() {
         binding.lottie.visibility = INVISIBLE
     }
 
-    private fun getAllArticle() {
-        true.showLoading()
-        lifecycleScope.launch {
-            viewModel.getAllArticle().collect { result ->
-                result.onSuccess { response ->
-                    articleAdapter.differ.submitList(response.toList())
-                    false.showLoading()
-                }
-                result.onFailure {
-                    requireActivity().toast(getString(R.string.article_error_message))
-                    false.showLoading()
-                }
-            }
-        }
-    }
-
     private fun setSearchView() {
         binding.searchView.setOnSearchClickListener {
             binding.apply {
@@ -132,12 +164,12 @@ class ArticlesFragment : Fragment() {
 
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                getSearchArticle(query.toString())
+                onStartQuery(query.toString())
                 return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                getSearchArticle(newText.toString())
+                onStartQuery(newText.toString())
                 return true
             }
         })
@@ -152,9 +184,12 @@ class ArticlesFragment : Fragment() {
         }
     }
 
-    private fun Boolean.showLoading() = if (this) {
-        binding.progressBar.visibility = VISIBLE
-    } else {
-        binding.progressBar.visibility = INVISIBLE
+    fun onStartQuery(query: String) {
+        binding.apply {
+            shimmer.onShimmer()
+            inNetwork.root.visibility = GONE
+            rvArticles.visibility = GONE
+        }
+        getSearchArticle(query)
     }
 }

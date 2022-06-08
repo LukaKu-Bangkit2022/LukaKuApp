@@ -126,7 +126,12 @@ class HospitalFragment : Fragment() {
                     val latLng = LatLng(location.latitude, location.longitude)
                     mMap.addMarker(
                         MarkerOptions().position(latLng).title(getString(R.string.your_location))
-                            .icon(vectorToBitmap(R.drawable.ic_emoji_emotions, Color.parseColor("#FBBA38")))
+                            .icon(
+                                vectorToBitmap(
+                                    R.drawable.ic_emoji_emotions,
+                                    Color.parseColor("#FBBA38")
+                                )
+                            )
                     )
 
                     val jsonObject = JSONObject()
@@ -145,7 +150,6 @@ class HospitalFragment : Fragment() {
             requestPermissionLauncher.launch(Manifest.permission.ACCESS_COARSE_LOCATION)
         }
     }
-
 
     @SuppressLint("MissingPermission")
     private fun markLocation(requestBody: RequestBody) {

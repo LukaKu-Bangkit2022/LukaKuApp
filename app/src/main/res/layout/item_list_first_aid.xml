@@ -27,7 +27,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_number"
-            tools:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book." />
+            tools:text="Lorem Ipsum is simply dummy text4 444 of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book." />
 
         <TextView
             android:id="@+id/tv_number"
@@ -44,6 +44,17 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="SmallSp"
             tools:text="1" />
+
+        <ImageView
+            android:id="@+id/iv_copy"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:padding="4dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            app:srcCompat="@drawable/ic_copy"
+            android:contentDescription="@string/copy_item" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

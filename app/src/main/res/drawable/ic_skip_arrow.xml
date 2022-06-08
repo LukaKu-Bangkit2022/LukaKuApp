@@ -3,6 +3,7 @@
     android:height="24dp"
     android:autoMirrored="true"
     android:viewportWidth="24"
+    android:tint="?attr/colorSecondary"
     android:viewportHeight="24">
     <path
         android:fillColor="@color/black_pearl"

@@ -3,6 +3,7 @@
     android:height="12dp"
     android:viewportWidth="24"
     android:viewportHeight="12">
+
     <path
         android:fillColor="?attr/colorPrimaryVariant"
         android:pathData="M0,0h24v12h-24z" />

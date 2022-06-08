@@ -15,16 +15,16 @@ import androidx.navigation.fragment.navArgs
 import com.bangkit.capstone.lukaku.R
 import com.bangkit.capstone.lukaku.data.models.DetectionResult
 import com.bangkit.capstone.lukaku.databinding.FragmentDetectionBinding
+import com.bangkit.capstone.lukaku.helper.Network
+import com.bangkit.capstone.lukaku.helper.withFirstUpperCase
 import com.bangkit.capstone.lukaku.ui.detection.DetectionFragmentDirections.actionDetectionFragmentToResultFragment
 import com.bangkit.capstone.lukaku.utils.loadImage
-import com.bangkit.capstone.lukaku.helper.withFirstUpperCase
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
-
 
 @AndroidEntryPoint
 class DetectionFragment : Fragment(), View.OnClickListener {
@@ -86,10 +86,10 @@ class DetectionFragment : Fragment(), View.OnClickListener {
         Builder(requireContext()).apply {
             setMessage(requireActivity().getString(R.string.dialog_process))
             setCancelable(false)
-            setPositiveButton("Yes") { _, _ ->
+            setPositiveButton(getString(R.string.positive_btn_detection)) { _, _ ->
                 findNavController().navigate(R.id.action_detectionFragment_to_navigation_detection)
             }
-            setNegativeButton("No") { dialog, _ ->
+            setNegativeButton(getString(R.string.negative_btn_detection)) { dialog, _ ->
                 dialog.dismiss()
             }
             create()
@@ -126,7 +126,7 @@ class DetectionFragment : Fragment(), View.OnClickListener {
                         val resultInfo = result.getOrNull()?.detectionResponse
                         if (resultInfo != null) {
                             onNavigateResult(result.getOrNull())
-                        } else message = "No label result"
+                        } else message = getString(R.string.no_result_message)
                     }
 
                     result.onFailure {
@@ -141,14 +141,14 @@ class DetectionFragment : Fragment(), View.OnClickListener {
                                 frame = 0
                             }
                         }
-                        message = it.message.toString()
+
+                        message = if (Network.isConnect(requireContext())) {
+                            getString(R.string.failed_message)
+                        } else getString(R.string.failed_message)
                     }
 
                     if (message.isNotEmpty()) {
-                        binding.tvStatus.text = getString(
-                            R.string.status_detection_error,
-                            message.withFirstUpperCase()
-                        )
+                        binding.tvStatus.text = message.withFirstUpperCase()
                     }
                 }
             }

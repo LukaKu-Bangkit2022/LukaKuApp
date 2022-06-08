@@ -1,6 +1,10 @@
 package com.bangkit.capstone.lukaku.data.models
 
-class FirstAidResponse : ArrayList<FirstAidResponseItem>()
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
+class FirstAidResponse : ArrayList<FirstAidResponseItem>(), Parcelable
 
 data class FirstAidResponseItem(
     val firstaid: String? = null,

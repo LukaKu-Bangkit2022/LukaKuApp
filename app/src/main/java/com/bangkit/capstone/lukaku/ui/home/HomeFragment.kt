@@ -4,7 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.INVISIBLE
+import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
@@ -18,13 +18,14 @@ import com.bangkit.capstone.lukaku.adapters.HeadlineAdapter
 import com.bangkit.capstone.lukaku.data.resources.HeadlineData
 import com.bangkit.capstone.lukaku.databinding.FragmentHomeBinding
 import com.bangkit.capstone.lukaku.helper.ActivityLifeObserver
+import com.bangkit.capstone.lukaku.helper.Network
 import com.bangkit.capstone.lukaku.utils.Constants.EXTRA_ARTICLE
 import com.bangkit.capstone.lukaku.utils.Constants.INTERVAL
 import com.bangkit.capstone.lukaku.utils.ViewPager.autoScroll
 import com.bangkit.capstone.lukaku.utils.ViewPager.mediator
 import com.bangkit.capstone.lukaku.utils.ViewPager.transformer
 import com.bangkit.capstone.lukaku.utils.loadCircleImage
-import com.bangkit.capstone.lukaku.utils.toast
+import com.bangkit.capstone.lukaku.utils.onShimmer
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -37,8 +38,9 @@ import me.ibrahimsn.lib.SmoothBottomBar
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
-    private val binding get() = _binding!!
+    private val binding get() = _binding
     private val viewModel: HomeViewModel by viewModels()
+
     private lateinit var bottomBar: SmoothBottomBar
     private lateinit var auth: FirebaseAuth
     private lateinit var articleAdapter: ArticleAdapter
@@ -53,10 +55,10 @@ class HomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        return binding.root
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -70,7 +72,7 @@ class HomeFragment : Fragment() {
         goToProfile()
         initRecyclerView()
         onDetail()
-//        getAllArticle()
+        getAllArticle()
     }
 
     override fun onResume() {
@@ -80,13 +82,13 @@ class HomeFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        bottomBar.visibility = GONE
         _binding = null
-        bottomBar.visibility = View.GONE
     }
 
     private fun setProfile() {
         val user = auth.currentUser
-        binding.apply {
+        binding?.apply {
             ivProfile.loadCircleImage(user?.photoUrl)
             tvName.text = getString(R.string.name_display, user?.displayName)
         }
@@ -101,58 +103,76 @@ class HomeFragment : Fragment() {
             title.add(titleItem.title.toString())
         }
 
-        binding.vpHeadline.apply {
+        binding?.vpHeadline?.apply {
             adapter = headlineAdapter
             transformer()
             autoScroll(viewLifecycleOwner.lifecycleScope, INTERVAL)
-            mediator(binding.tabLayout, title)
-        }
-    }
-
-    private fun getAllArticle() {
-        true.showLoading()
-        lifecycleScope.launch {
-            viewModel.getAllArticle().collect { result ->
-                result.onSuccess { response ->
-                    articleAdapter.differ.submitList(response.take(6).toList())
-                    false.showLoading()
-                }
-                result.onFailure {
-                    requireActivity().toast(getString(R.string.article_error_message))
-                    false.showLoading()
-                }
-            }
+            binding?.tabLayout?.let { mediator(it, title) }
         }
     }
 
     private fun initRecyclerView() {
-        binding.rvArticles.apply {
-            articleAdapter = ArticleAdapter { articleEntity ->
-                if (articleEntity.isBookmarked) {
-                    viewModel.deleteArticle(articleEntity)
-                } else {
-                    viewModel.saveArticle(articleEntity)
+        binding?.apply {
+            shimmer.onShimmer()
+
+            rvArticles.apply {
+                articleAdapter = ArticleAdapter { articleEntity ->
+                    if (articleEntity.isBookmarked) {
+                        viewModel.deleteArticle(articleEntity)
+                    } else {
+                        viewModel.saveArticle(articleEntity)
+                    }
+                }
+                adapter = articleAdapter
+                layoutManager = LinearLayoutManager(requireActivity())
+            }
+        }
+    }
+
+    private fun getAllArticle() {
+        lifecycleScope.launch {
+            viewModel.getAllArticle().collect { result ->
+                result.onSuccess { response ->
+                    articleAdapter.differ.submitList(response.take(5).toList())
+                    binding?.shimmer?.onShimmer(true)
+                }
+                result.onFailure {
+                    onFailRequest()
                 }
             }
-            adapter = articleAdapter
-            layoutManager = LinearLayoutManager(requireActivity())
+        }
+    }
+
+    private fun onFailRequest() {
+        binding?.apply {
+            shimmer.onShimmer(true)
+            if (Network.isConnect(requireContext())) {
+                inNetwork.root.visibility = VISIBLE
+            } else inNetwork.root.visibility = VISIBLE
+
+            inNetwork.btnRetry.setOnClickListener {
+                shimmer.onShimmer()
+                inNetwork.root.visibility = GONE
+
+                getAllArticle()
+            }
         }
     }
 
     private fun goToViewMore() {
-        binding.btnViewMore.setOnClickListener {
+        binding?.btnViewMore?.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_home_to_articlesFragment)
         }
     }
 
     private fun goToNotifications() {
-        binding.ivNotifications.setOnClickListener {
+        binding?.ivNotifications?.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_home_to_notificationFragment)
         }
     }
 
     private fun goToProfile() {
-        binding.ivProfile.setOnClickListener {
+        binding?.ivProfile?.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_home_to_navigation_profile)
         }
     }
@@ -168,11 +188,5 @@ class HomeFragment : Fragment() {
                 bundle
             )
         }
-    }
-
-    private fun Boolean.showLoading() = if (this) {
-        binding.progressBar.visibility = VISIBLE
-    } else {
-        binding.progressBar.visibility = INVISIBLE
     }
 }

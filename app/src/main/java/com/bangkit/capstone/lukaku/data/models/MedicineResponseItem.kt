@@ -3,7 +3,8 @@ package com.bangkit.capstone.lukaku.data.models
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
-class MedicineResponse : ArrayList<MedicineResponseItem>()
+@Parcelize
+class MedicineResponse : ArrayList<MedicineResponseItem>(), Parcelable
 
 @Parcelize
 data class MedicineResponseItem(

@@ -191,7 +191,8 @@
             android:layout_marginEnd="16dp"
             android:contentDescription="@string/save_result"
             app:fabSize="mini"
-            app:srcCompat="@drawable/ic_outline_save" />
+            app:srcCompat="@drawable/ic_outline_save"
+            app:tint="?attr/colorPrimaryVariant" />
     </LinearLayout>
 
     <LinearLayout
@@ -220,7 +221,8 @@
             android:layout_marginEnd="16dp"
             android:contentDescription="@string/reshoot"
             app:fabSize="mini"
-            app:srcCompat="@drawable/ic_outline_detection" />
+            app:srcCompat="@drawable/ic_outline_detection"
+            app:tint="?attr/colorPrimaryVariant" />
     </LinearLayout>
 
     <LinearLayout
@@ -250,7 +252,38 @@
             android:contentDescription="@string/feedback"
             android:tint="@android:color/white"
             app:fabSize="mini"
-            app:srcCompat="@drawable/ic_outline_feedback" />
+            app:srcCompat="@drawable/ic_outline_feedback"
+            app:tint="?attr/colorPrimaryVariant" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/fab_layout4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="16dp"
+        android:clipToPadding="false"
+        android:gravity="center_vertical"
+        android:padding="6dp"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lato_bold"
+            android:text="@string/copy_all"
+            android:textColor="@color/black_pearl" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_copy_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:contentDescription="@string/copy_all"
+            app:fabSize="mini"
+            app:srcCompat="@drawable/ic_copy_all"
+            app:tint="?attr/colorPrimaryVariant" />
     </LinearLayout>
 
     <LinearLayout
@@ -270,7 +303,8 @@
             android:contentDescription="@string/more_action"
             android:focusable="true"
             android:gravity="center_vertical"
-            app:srcCompat="@drawable/ic_expand_more" />
+            app:srcCompat="@drawable/ic_expand_more"
+            app:tint="?attr/colorPrimaryVariant" />
     </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

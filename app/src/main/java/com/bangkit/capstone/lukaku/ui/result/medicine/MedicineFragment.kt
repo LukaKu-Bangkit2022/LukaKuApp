@@ -11,6 +11,7 @@ import com.bangkit.capstone.lukaku.data.models.DetectionResult
 import com.bangkit.capstone.lukaku.data.models.MedicineResponse
 import com.bangkit.capstone.lukaku.databinding.FragmentMedicineBinding
 import com.bangkit.capstone.lukaku.utils.Constants.ARG_RESULT
+import com.bangkit.capstone.lukaku.utils.onShimmer
 
 class MedicineFragment : Fragment() {
 
@@ -45,8 +46,14 @@ class MedicineFragment : Fragment() {
         getMedicine()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     private fun initRecyclerView() {
         binding.rvDrugs.apply {
+            binding.shimmer.onShimmer()
             medicineAdapter = MedicineAdapter()
             adapter = medicineAdapter
             layoutManager = LinearLayoutManager(requireActivity())
@@ -57,15 +64,17 @@ class MedicineFragment : Fragment() {
         if (medicineResponse?.size != 0) {
             medicineAdapter.differ.submitList(medicineResponse?.toList())
             binding.apply {
+                shimmer.onShimmer(true)
                 tvLabelList.visibility = View.VISIBLE
                 rvDrugs.visibility = View.VISIBLE
-                emptyMessage.visibility = View.GONE
+                inNoContent.root.visibility = View.GONE
             }
         } else {
             binding.apply {
+                shimmer.onShimmer(true)
                 tvLabelList.visibility = View.GONE
                 rvDrugs.visibility = View.GONE
-                emptyMessage.visibility = View.VISIBLE
+                inNoContent.root.visibility = View.VISIBLE
             }
         }
     }

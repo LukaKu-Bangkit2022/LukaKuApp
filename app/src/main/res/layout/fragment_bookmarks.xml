@@ -3,7 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context="ui.profile.bookmarks.BookmarksFragment">
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shimmer_duration="1000">
+
+        <include
+            android:id="@+id/in_shimmer"
+            layout="@layout/include_shimmer_article" />
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvArticles"
@@ -15,15 +32,13 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/item_list_article" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/emptyMessage"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fontFamily="@font/lato"
-        android:gravity="center"
-        android:paddingBottom="275dp"
-        android:textColor="?attr/colorPrimary"
+    <include
+        android:id="@+id/in_bookmark"
         android:visibility="gone"
-        tools:text="No bookmarked article." />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        layout="@layout/include_bookmark" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

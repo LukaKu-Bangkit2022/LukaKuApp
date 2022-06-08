@@ -12,5 +12,6 @@ import javax.inject.Inject
 class HospitalViewModel @Inject constructor(
     private val hospitalRepository: HospitalRepository
 ) : ViewModel() {
-    fun getAllNearestHospital(requestBody: RequestBody): Flow<Result<HospitalResponse>> = hospitalRepository.getAllNearestHospital(requestBody)
+    fun getAllNearestHospital(requestBody: RequestBody): Flow<Result<HospitalResponse>> =
+        hospitalRepository.getAllNearestHospital(requestBody)
 }

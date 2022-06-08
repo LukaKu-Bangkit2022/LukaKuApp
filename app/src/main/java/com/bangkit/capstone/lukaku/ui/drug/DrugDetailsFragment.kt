@@ -37,6 +37,11 @@ class DrugDetailsFragment : Fragment() {
         onSetItems()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     private fun onSetItems() {
         binding.apply {
             ivImage.loadImage(drugItem.imageUrl, 8)

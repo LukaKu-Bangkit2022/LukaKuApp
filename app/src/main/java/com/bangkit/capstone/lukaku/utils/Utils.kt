@@ -1,22 +1,18 @@
 package com.bangkit.capstone.lukaku.utils
 
 import android.Manifest
-import android.app.Activity
 import android.content.ContentResolver
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Bitmap.CompressFormat
-import android.graphics.BitmapFactory
-import android.graphics.Color
 import android.net.Uri
+import android.os.Environment
 import android.view.View
 import android.view.ViewPropertyAnimator
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Toast
-import androidx.core.content.ContextCompat
-import androidx.core.view.WindowCompat
 import com.bangkit.capstone.lukaku.R
 import com.bangkit.capstone.lukaku.utils.Constants.ANIMATION_FAST_MILLIS
 import com.bangkit.capstone.lukaku.utils.Constants.FILENAME_FORMAT
@@ -25,7 +21,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.google.android.material.snackbar.Snackbar
+import com.facebook.shimmer.ShimmerFrameLayout
 import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -38,7 +34,7 @@ val timeStamp: String = SimpleDateFormat(
 ).format(System.currentTimeMillis())
 
 fun createTempFile(context: Context): File {
-    val storageDir: File? = context.cacheDir
+    val storageDir: File? = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
     return File.createTempFile(timeStamp, PHOTO_EXTENSION, storageDir)
 }
 
@@ -108,25 +104,18 @@ fun ImageButton.simulateClick(delay: Long = ANIMATION_FAST_MILLIS) {
     }, delay)
 }
 
-fun reduceFileImage(file: File): File {
-    val bitmap = BitmapFactory.decodeFile(file.path)
-
-    var compressQuality = 100
-    var streamLength: Int
-
-    do {
-        val outputStream = ByteArrayOutputStream()
-        bitmap.compress(CompressFormat.JPEG, compressQuality, outputStream)
-        val bmpPicByteArray = outputStream.toByteArray()
-        streamLength = bmpPicByteArray.size
-        compressQuality -= 5
-    } while (streamLength > 1000000)
-
-    bitmap.compress(CompressFormat.JPEG, compressQuality, FileOutputStream(file))
-
-    return file
-}
-
 fun LinearLayout.withAnimationY(value: Float = 0f): ViewPropertyAnimator {
     return animate().translationY(value)
+}
+
+fun ShimmerFrameLayout.onShimmer(isStop: Boolean = false) {
+    this.apply {
+        if (isStop) {
+            visibility = View.GONE
+            stopShimmer()
+        } else {
+            visibility = View.VISIBLE
+            startShimmer()
+        }
+    }
 }
