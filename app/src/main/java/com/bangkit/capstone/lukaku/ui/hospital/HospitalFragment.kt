@@ -2,13 +2,11 @@ package com.bangkit.capstone.lukaku.ui.hospital
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.app.Dialog
 import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
-import android.location.Geocoder
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -24,6 +22,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.bangkit.capstone.lukaku.R
+import com.bangkit.capstone.lukaku.data.models.HospitalBody
 import com.bangkit.capstone.lukaku.databinding.FragmentHospitalBinding
 import com.bangkit.capstone.lukaku.helper.ActivityLifeObserver
 import com.bangkit.capstone.lukaku.utils.toast
@@ -41,11 +40,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import me.ibrahimsn.lib.SmoothBottomBar
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.RequestBody
-import okhttp3.RequestBody.Companion.toRequestBody
-import org.json.JSONObject
-import java.util.*
 
 @AndroidEntryPoint
 class HospitalFragment : Fragment() {
@@ -55,7 +49,6 @@ class HospitalFragment : Fragment() {
     private val viewModel: HospitalViewModel by viewModels()
     private lateinit var mMap: GoogleMap
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
-    private lateinit var dialog: Dialog
 
     private val callback = OnMapReadyCallback { googleMap ->
         mMap = googleMap
@@ -97,8 +90,6 @@ class HospitalFragment : Fragment() {
         fusedLocationProviderClient =
             LocationServices.getFusedLocationProviderClient(requireContext())
 
-        initProgressDialog()
-
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
     }
@@ -133,15 +124,8 @@ class HospitalFragment : Fragment() {
                                 )
                             )
                     )
-
-                    val jsonObject = JSONObject()
-                    jsonObject.put("latitude", location.latitude.toString())
-                    jsonObject.put("longitude", location.longitude.toString())
-                    val requestBody =
-                        jsonObject.toString().toRequestBody("application/json".toMediaTypeOrNull())
-
-                    markLocation(requestBody)
-                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12f))
+                    markLocation(HospitalBody(location.latitude.toString(), location.longitude.toString()))
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 14f))
                 } else {
                     requireActivity().toast(getString(R.string.location_error_message))
                 }
@@ -152,36 +136,17 @@ class HospitalFragment : Fragment() {
     }
 
     @SuppressLint("MissingPermission")
-    private fun markLocation(requestBody: RequestBody) {
-        dialog.show()
+    private fun markLocation(hospitalBody: HospitalBody) {
         lifecycleScope.launch {
-            viewModel.getAllNearestHospital(requestBody).collect { result ->
+            viewModel.getAllNearestHospital(hospitalBody).collect { result ->
                 result.onSuccess { response ->
                     response.forEach { responseItem ->
-                        val latLng =
-                            LatLng(
-                                responseItem.latitude.toDouble(),
-                                responseItem.longitude.toDouble()
-                            )
-                        mMap.addMarker(
-                            MarkerOptions().position(latLng)
-                                .title(responseItem.nama)
-                                .snippet(
-                                    getCityName(
-                                        responseItem.latitude.toDouble(),
-                                        responseItem.longitude.toDouble()
-                                    ) + " " + getCountryName(
-                                        responseItem.latitude.toDouble(),
-                                        responseItem.longitude.toDouble()
-                                    )
-                                )
-                        )
+                        val latLng = LatLng(responseItem.latitude?.toDouble() ?: 0.0, responseItem.longitude?.toDouble() ?: 0.0)
+                        mMap.addMarker(MarkerOptions().position(latLng).title(responseItem.nama).snippet(responseItem.place))
                     }
-                    dialog.dismiss()
                 }
                 result.onFailure {
                     requireActivity().toast(getString(R.string.article_error_message))
-                    dialog.dismiss()
                 }
             }
         }
@@ -203,29 +168,5 @@ class HospitalFragment : Fragment() {
         DrawableCompat.setTint(vectorDrawable, color)
         vectorDrawable.draw(canvas)
         return BitmapDescriptorFactory.fromBitmap(bitmap)
-    }
-
-    private fun initProgressDialog() {
-        dialog = Dialog(requireActivity()).apply {
-            setContentView(R.layout.dialog_loading)
-            setCancelable(false)
-        }
-    }
-
-    private fun getCityName(lat: Double, lon: Double): String {
-        val cityName: String
-        val geoCoder = Geocoder(requireActivity(), Locale.getDefault())
-        val address = geoCoder.getFromLocation(lat, lon, 1)
-        cityName = address[0]?.subAdminArea ?: ""
-
-        return cityName
-    }
-
-    private fun getCountryName(lat: Double, lon: Double): String {
-        val countryName: String
-        val geoCoder = Geocoder(requireActivity(), Locale.getDefault())
-        val address = geoCoder.getFromLocation(lat, lon, 1)
-        countryName = address[0]?.countryName ?: ""
-        return countryName
     }
 }

@@ -2,7 +2,6 @@ package com.bangkit.capstone.lukaku.data.remote
 
 import com.bangkit.capstone.lukaku.data.models.*
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import retrofit2.http.*
 
 interface ApiService {
@@ -32,7 +31,7 @@ interface ApiService {
     ): DetectionResponse
 
     @POST("getnearesthospital")
-    suspend fun getNearestHospital(@Body requestBody: RequestBody): HospitalResponse
+    suspend fun getNearestHospital(@Body hospitalBody: HospitalBody): HospitalResponse
 
     @POST("insertfeedback")
     suspend fun inertFeedback(

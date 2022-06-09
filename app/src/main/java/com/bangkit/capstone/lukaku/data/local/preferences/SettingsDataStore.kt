@@ -4,7 +4,6 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
-import com.bangkit.capstone.lukaku.utils.Constants.LOCATION_PREF
 import com.bangkit.capstone.lukaku.utils.Constants.THEME_PREF
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
