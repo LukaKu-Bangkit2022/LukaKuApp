@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
+import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
@@ -32,10 +33,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.BitmapDescriptor
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -44,7 +42,7 @@ import me.ibrahimsn.lib.SmoothBottomBar
 @AndroidEntryPoint
 class HospitalFragment : Fragment() {
     private var _binding: FragmentHospitalBinding? = null
-    private val binding get() = _binding!!
+    private val binding get() = _binding
     private lateinit var bottomBar: SmoothBottomBar
     private val viewModel: HospitalViewModel by viewModels()
     private lateinit var mMap: GoogleMap
@@ -57,6 +55,8 @@ class HospitalFragment : Fragment() {
             isCompassEnabled = true
             isMapToolbarEnabled = true
         }
+
+        onSetMapTheme()
         getLastLocation()
     }
 
@@ -79,9 +79,9 @@ class HospitalFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         _binding = FragmentHospitalBinding.inflate(inflater, container, false)
-        return binding.root
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -124,7 +124,12 @@ class HospitalFragment : Fragment() {
                                 )
                             )
                     )
-                    markLocation(HospitalBody(location.latitude.toString(), location.longitude.toString()))
+                    markLocation(
+                        HospitalBody(
+                            location.latitude.toString(),
+                            location.longitude.toString()
+                        )
+                    )
                     mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 14f))
                 } else {
                     requireActivity().toast(getString(R.string.location_error_message))
@@ -141,8 +146,14 @@ class HospitalFragment : Fragment() {
             viewModel.getAllNearestHospital(hospitalBody).collect { result ->
                 result.onSuccess { response ->
                     response.forEach { responseItem ->
-                        val latLng = LatLng(responseItem.latitude?.toDouble() ?: 0.0, responseItem.longitude?.toDouble() ?: 0.0)
-                        mMap.addMarker(MarkerOptions().position(latLng).title(responseItem.nama).snippet(responseItem.place))
+                        val latLng = LatLng(
+                            responseItem.latitude?.toDouble() ?: 0.0,
+                            responseItem.longitude?.toDouble() ?: 0.0
+                        )
+                        mMap.addMarker(
+                            MarkerOptions().position(latLng).title(responseItem.nama)
+                                .snippet(responseItem.place)
+                        )
                     }
                 }
                 result.onFailure {
@@ -168,5 +179,42 @@ class HospitalFragment : Fragment() {
         DrawableCompat.setTint(vectorDrawable, color)
         vectorDrawable.draw(canvas)
         return BitmapDescriptorFactory.fromBitmap(bitmap)
+    }
+
+    private fun onSetMapTheme() {
+        lifecycleScope.launch {
+            viewModel.getThemeSetting().collect {
+                setMapStyle(false, (it == true))
+            }
+        }
+
+        binding?.tglStyle?.setOnCheckedChangeListener { _, isChecked ->
+            setMapStyle(isChecked, false)
+        }
+    }
+
+    private fun setMapStyle(isChecked: Boolean, isTheme: Boolean) {
+        try {
+            val success = if (isChecked || isTheme) {
+                binding?.tglStyle?.isChecked = true
+                mMap.setMapStyle(
+                    MapStyleOptions.loadRawResourceStyle(
+                        requireContext(),
+                        R.raw.night_map_style
+                    )
+                )
+            } else {
+                mMap.setMapStyle(
+                    MapStyleOptions.loadRawResourceStyle(
+                        requireContext(),
+                        R.raw.light_map_style
+                    )
+                )
+            }
+
+            if (!success) context?.toast(getString(R.string.error_style_parsing))
+        } catch (exception: Resources.NotFoundException) {
+            context?.toast(getString(R.string.error_style_find, exception.message))
+        }
     }
 }

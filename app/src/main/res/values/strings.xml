@@ -152,4 +152,6 @@
     <string name="linkedin_us">linkedin us</string>
     <string name="title_email">Send email</string>
     <string name="title_open">Open media</string>
+    <string name="error_style_find">Can\'t find style. Error: %s</string>
+    <string name="error_style_parsing">Style parsing failed.</string>
 </resources>

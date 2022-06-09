@@ -41,6 +41,7 @@
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/drawable-night/news_avd.xml" value="0.1855" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/drawable/bg_button.xml" value="0.2075" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/drawable/bg_button_circle.xml" value="0.2075" />
+        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/drawable/bg_category.xml" value="0.2075" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/drawable/bg_content.xml" value="0.2075" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/drawable/bg_input.xml" value="0.2075" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/drawable/bg_round.xml" value="0.2075" />
@@ -60,10 +61,13 @@
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/drawable/ic_settings.xml" value="0.2075" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/drawable/ic_skip_arrow.xml" value="0.2075" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/drawable/ic_take_camera.xml" value="0.2075" />
+        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/drawable/ic_theme_light.xml" value="0.2065" />
+        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/drawable/ic_theme_night.xml" value="0.2075" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/drawable/image_shadow.xml" value="0.194" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/drawable/layer_indicator_tab_selected.xml" value="0.2075" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/drawable/news_avd_v02.xml" value="0.1845" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/drawable/selector_indicator_tab.xml" value="0.2075" />
+        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/drawable/toggle_selector.xml" value="0.2075" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout-land/fragment_capture.xml" value="0.22" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout-v23/fragment_capture.xml" value="0.2" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/activity_main.xml" value="0.2" />
@@ -81,6 +85,7 @@
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_first_aid.xml" value="0.14" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_history.xml" value="0.2" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_home.xml" value="0.22" />
+        <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_hospital.xml" value="0.2" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_medicine.xml" value="0.2" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_notification.xml" value="0.2" />
         <entry key="..\:/LUKAKU/LukaKuApp/app/src/main/res/layout/fragment_notifs.xml" value="0.2" />
