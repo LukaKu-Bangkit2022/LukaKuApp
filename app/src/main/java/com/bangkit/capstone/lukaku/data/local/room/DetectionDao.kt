@@ -17,7 +17,4 @@ interface DetectionDao {
 
     @Query("DELETE FROM detection WHERE id = :id")
     suspend fun deleteDetection(id: Long)
-
-    @Query("DELETE FROM detection")
-    suspend fun deleteDetection()
 }

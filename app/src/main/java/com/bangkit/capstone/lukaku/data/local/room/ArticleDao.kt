@@ -10,8 +10,8 @@ interface ArticleDao {
     @Query("SELECT * FROM article ORDER BY id ASC")
     fun getArticle(): Flow<List<ArticleEntity>>
 
-    @Query("SELECT * FROM article where bookmarked = 1")
-    fun getBookmarkedArticle(): LiveData<List<ArticleEntity>>
+    @Query("SELECT * FROM article WHERE uid =:uid AND bookmarked = 1")
+    fun getBookmarkedArticle(uid: String): LiveData<List<ArticleEntity>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertArticle(articleEntity: List<ArticleEntity>)
@@ -22,6 +22,6 @@ interface ArticleDao {
     @Query("DELETE FROM article WHERE bookmarked = 0")
     suspend fun deleteAll()
 
-    @Query("SELECT EXISTS(SELECT * FROM article WHERE id = :id AND bookmarked = 1)")
-    suspend fun isArticleBookmarked(id: Int): Boolean
+    @Query("SELECT EXISTS(SELECT * FROM article WHERE uid = :uid AND id = :id AND bookmarked = 1)")
+    suspend fun isArticleBookmarked(id: Int, uid: String): Boolean
 }

@@ -36,7 +36,7 @@ class ArticleAdapter(private val onBookmarkClick: (ArticleEntity) -> Unit) :
 
         ivBookmark.setOnClickListener {
             onBookmarkClick(article)
-            if (article.isBookmarked) {
+            if (article.isBookmarked == true) {
                 ivBookmark.setImageDrawable(
                     ContextCompat.getDrawable(
                         ivBookmark.context,
@@ -109,7 +109,7 @@ class ArticleAdapter(private val onBookmarkClick: (ArticleEntity) -> Unit) :
     }
 
     private fun isBookmarked(article: ArticleEntity, ivBookmark: ImageView) {
-        if (article.isBookmarked) {
+        if (article.isBookmarked == true) {
             ivBookmark.setImageDrawable(
                 ContextCompat.getDrawable(
                     ivBookmark.context,

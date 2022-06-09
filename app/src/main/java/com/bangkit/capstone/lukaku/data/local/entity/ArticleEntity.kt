@@ -46,5 +46,8 @@ data class ArticleEntity(
     val treatment_title: String,
 
     @field:ColumnInfo(name = "bookmarked")
-    var isBookmarked: Boolean
+    var isBookmarked: Boolean,
+
+    @field:ColumnInfo(name = "uid")
+    var uid: String? = "",
 ) : Parcelable
