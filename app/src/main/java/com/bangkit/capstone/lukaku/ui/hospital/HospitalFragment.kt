@@ -13,6 +13,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
@@ -21,6 +22,7 @@ import androidx.core.graphics.drawable.DrawableCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.bangkit.capstone.lukaku.R
 import com.bangkit.capstone.lukaku.data.models.HospitalBody
 import com.bangkit.capstone.lukaku.databinding.FragmentHospitalBinding
@@ -91,6 +93,8 @@ class HospitalFragment : Fragment() {
 
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
+
+        handleOnBackPressed()
     }
 
     override fun onResume() {
@@ -102,6 +106,16 @@ class HospitalFragment : Fragment() {
         super.onDestroyView()
         _binding = null
         bottomBar.visibility = View.GONE
+    }
+
+    private fun handleOnBackPressed() {
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                findNavController().navigate(R.id.action_navigation_hospital_to_navigation_home)
+            }
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
     }
 
     @SuppressLint("MissingPermission")

@@ -17,6 +17,7 @@ import android.view.KeyEvent.KEYCODE_VOLUME_DOWN
 import android.view.ScaleGestureDetector.SimpleOnScaleGestureListener
 import android.view.WindowManager.LayoutParams.ROTATION_ANIMATION_CROSSFADE
 import android.widget.SeekBar
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts.RequestMultiplePermissions
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.appcompat.app.AppCompatActivity.RESULT_OK
@@ -130,6 +131,7 @@ class CaptureFragment : Fragment(), View.OnClickListener {
 
         onSubscribe()
         startListener()
+        handleOnBackPressed()
     }
 
     override fun onResume() {
@@ -161,10 +163,20 @@ class CaptureFragment : Fragment(), View.OnClickListener {
         when (view.id) {
             R.id.ib_take_image -> takePhoto()
             R.id.ib_switch_camera -> swichCamera()
-            R.id.ib_close -> requireActivity().onBackPressed()
+            R.id.ib_close -> findNavController().navigate(R.id.action_navigation_detection_to_navigation_home)
             R.id.ib_flash -> swichFlash()
             R.id.ib_open_gallery -> startGallery()
         }
+    }
+
+    private fun handleOnBackPressed() {
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                findNavController().navigate(R.id.action_navigation_detection_to_navigation_home)
+            }
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
     }
 
     private fun onSubscribe() {
