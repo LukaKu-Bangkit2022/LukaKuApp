@@ -18,7 +18,9 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.bangkit.capstone.lukaku.R
+import com.bangkit.capstone.lukaku.data.local.preferences.LanguagePreference
 import com.bangkit.capstone.lukaku.databinding.ActivityMainBinding
+import com.bangkit.capstone.lukaku.helper.Language.onSetLanguage
 import com.bangkit.capstone.lukaku.utils.Constants.KEY_EVENT_ACTION
 import com.bangkit.capstone.lukaku.utils.Constants.KEY_EVENT_EXTRA
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,6 +38,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         installSplashScreenWithAnim(savedInstanceState)
         supportActionBar?.hide()
+
+        val preference = LanguagePreference(this@MainActivity)
+        val languageId = preference.getLanguage()
+        onSetLanguage(this@MainActivity, languageId.toString())
 
         lifecycleScope.launch {
             viewModel.getThemeSetting().collect { isDarkModeActive ->

@@ -2,9 +2,11 @@ package com.bangkit.capstone.lukaku.di
 
 import android.content.Context
 import androidx.room.Room
+import com.bangkit.capstone.lukaku.App
 import com.bangkit.capstone.lukaku.data.local.room.ArticleDao
 import com.bangkit.capstone.lukaku.data.local.room.DetectionDao
 import com.bangkit.capstone.lukaku.data.local.room.LukakuDatabase
+import com.bangkit.capstone.lukaku.ui.main.MainActivity
 import com.bangkit.capstone.lukaku.utils.Constants.DB_NAME
 import dagger.Module
 import dagger.Provides

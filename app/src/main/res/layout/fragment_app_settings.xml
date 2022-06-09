@@ -65,8 +65,40 @@
         app:layout_constraintStart_toStartOf="@id/swTheme"
         app:layout_constraintTop_toBottomOf="@+id/swTheme" />
 
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/div4"
+        style="@style/DivStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/swTheme"
+        app:layout_constraintStart_toStartOf="@id/swTheme"
+        app:layout_constraintTop_toBottomOf="@+id/swTheme" />
+
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvCommon"
+        style="@style/TextSubSettings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/common"
+        app:layout_constraintEnd_toEndOf="@id/div1"
+        app:layout_constraintStart_toStartOf="@id/div1"
+        app:layout_constraintTop_toBottomOf="@id/div1" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvCommon3"
+        style="@style/TextSubSettings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/application"
+        app:layout_constraintEnd_toEndOf="@+id/div2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/div2"
+        app:layout_constraintTop_toBottomOf="@+id/tvChangeLanguage" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvCommon2"
         style="@style/TextSubSettings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -80,20 +112,20 @@
         android:id="@+id/tvChangeLanguage"
         style="@style/TextDescSettings"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_height="50dp"
+        android:background="?attr/selectableItemBackground"
         android:text="@string/change_language"
         app:drawableRightCompat="@drawable/ic_double_arrow_right"
-        app:layout_constraintEnd_toEndOf="@id/tvCommon"
-        app:layout_constraintStart_toStartOf="@id/tvCommon"
-        app:layout_constraintTop_toBottomOf="@id/tvCommon" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvCommon" />
 
     <com.google.android.material.divider.MaterialDivider
         android:id="@+id/div2"
         style="@style/DivStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvChangeLanguage" />
@@ -106,8 +138,9 @@
         android:text="@string/feedback"
         app:drawableRightCompat="@drawable/ic_double_arrow_right"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/div2" />
+        app:layout_constraintTop_toBottomOf="@+id/tvCommon3" />
 
     <com.google.android.material.divider.MaterialDivider
         android:id="@+id/div3"
