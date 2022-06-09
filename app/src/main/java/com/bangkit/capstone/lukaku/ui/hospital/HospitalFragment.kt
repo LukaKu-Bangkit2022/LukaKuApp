@@ -14,7 +14,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
@@ -115,21 +114,8 @@ class HospitalFragment : Fragment() {
             fusedLocationProviderClient.lastLocation.addOnSuccessListener { location ->
                 if (location != null) {
                     val latLng = LatLng(location.latitude, location.longitude)
-                    mMap.addMarker(
-                        MarkerOptions().position(latLng).title(getString(R.string.your_location))
-                            .icon(
-                                vectorToBitmap(
-                                    R.drawable.ic_emoji_emotions,
-                                    Color.parseColor("#FBBA38")
-                                )
-                            )
-                    )
-                    markLocation(
-                        HospitalBody(
-                            location.latitude.toString(),
-                            location.longitude.toString()
-                        )
-                    )
+                    mMap.addMarker(MarkerOptions().position(latLng).title(getString(R.string.your_location)).icon(vectorToBitmap(R.drawable.ic_my_location)))
+                    markLocation(HospitalBody(location.latitude.toString(), location.longitude.toString()))
                     mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 14f))
                 } else {
                     requireActivity().toast(getString(R.string.location_error_message))
@@ -163,7 +149,7 @@ class HospitalFragment : Fragment() {
         }
     }
 
-    private fun vectorToBitmap(@DrawableRes id: Int, @ColorInt color: Int): BitmapDescriptor {
+    private fun vectorToBitmap(@DrawableRes id: Int): BitmapDescriptor {
         val vectorDrawable = ResourcesCompat.getDrawable(resources, id, null)
         if (vectorDrawable == null) {
             Log.e("BitmapHelper", "Resource not found")
@@ -176,7 +162,7 @@ class HospitalFragment : Fragment() {
         )
         val canvas = Canvas(bitmap)
         vectorDrawable.setBounds(0, 0, canvas.width, canvas.height)
-        DrawableCompat.setTint(vectorDrawable, color)
+        DrawableCompat.setTint(vectorDrawable, Color.BLUE)
         vectorDrawable.draw(canvas)
         return BitmapDescriptorFactory.fromBitmap(bitmap)
     }

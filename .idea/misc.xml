@@ -220,10 +220,34 @@
         <entry key="..\:/Users/educa/Downloads/C22-PS188/app/src/main/res/layout/item_list_history.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/educa/Downloads/C22-PS188/app/src/main/res/menu/articles_menu.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/educa/Downloads/C22-PS188/app/src/main/res/menu/button_nav_menu.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/educa/Downloads/LukaKuApp/app/src/main/res/drawable/ic_bookmark.xml" value="0.146" />
+        <entry key="..\:/Users/educa/Downloads/LukaKuApp/app/src/main/res/drawable/ic_enable_navigation.xml" value="0.1485" />
+        <entry key="..\:/Users/educa/Downloads/LukaKuApp/app/src/main/res/drawable/ic_my_location.xml" value="0.1485" />
+        <entry key="..\:/Users/educa/Downloads/LukaKuApp/app/src/main/res/drawable/ic_no_messages.xml" value="0.146" />
+        <entry key="..\:/Users/educa/Downloads/LukaKuApp/app/src/main/res/drawable/ic_no_notif.xml" value="0.1485" />
+        <entry key="..\:/Users/educa/Downloads/LukaKuApp/app/src/main/res/drawable/ic_no_updates.xml" value="0.146" />
         <entry key="..\:/Users/educa/Downloads/LukaKuApp/app/src/main/res/layout/activity_main.xml" value="0.221025641025641" />
+        <entry key="..\:/Users/educa/Downloads/LukaKuApp/app/src/main/res/layout/fragment_about.xml" value="0.221025641025641" />
         <entry key="..\:/Users/educa/Downloads/LukaKuApp/app/src/main/res/layout/fragment_app_settings.xml" value="0.25" />
+        <entry key="..\:/Users/educa/Downloads/LukaKuApp/app/src/main/res/layout/fragment_bookmarks.xml" value="0.221025641025641" />
+        <entry key="..\:/Users/educa/Downloads/LukaKuApp/app/src/main/res/layout/fragment_detail_article.xml" value="0.221025641025641" />
+        <entry key="..\:/Users/educa/Downloads/LukaKuApp/app/src/main/res/layout/fragment_home.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/educa/Downloads/LukaKuApp/app/src/main/res/layout/fragment_hospital.xml" value="0.19074074074074074" />
+        <entry key="..\:/Users/educa/Downloads/LukaKuApp/app/src/main/res/layout/fragment_messages.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/educa/Downloads/LukaKuApp/app/src/main/res/layout/fragment_notification.xml" value="0.33" />
+        <entry key="..\:/Users/educa/Downloads/LukaKuApp/app/src/main/res/layout/fragment_notifs.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/educa/Downloads/LukaKuApp/app/src/main/res/layout/fragment_profile.xml" value="0.221025641025641" />
+        <entry key="..\:/Users/educa/Downloads/LukaKuApp/app/src/main/res/layout/fragment_result.xml" value="0.221025641025641" />
+        <entry key="..\:/Users/educa/Downloads/LukaKuApp/app/src/main/res/layout/include_bookmark.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/educa/Downloads/LukaKuApp/app/src/main/res/layout/include_history.xml" value="0.221025641025641" />
+        <entry key="..\:/Users/educa/Downloads/LukaKuApp/app/src/main/res/layout/include_maintenance.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/educa/Downloads/LukaKuApp/app/src/main/res/layout/include_messages.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/educa/Downloads/LukaKuApp/app/src/main/res/layout/include_notifications.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/educa/Downloads/LukaKuApp/app/src/main/res/layout/include_shimmer_article.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/educa/Downloads/LukaKuApp/app/src/main/res/layout/include_updates.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/educa/Downloads/LukaKuApp/app/src/main/res/layout/item_list_article.xml" value="0.25" />
+        <entry key="..\:/Users/educa/Downloads/LukaKuApp/app/src/main/res/layout/item_list_drug.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/educa/Downloads/LukaKuApp/app/src/main/res/layout/item_list_first_aid.xml" value="0.221025641025641" />
         <entry key="..\:/Users/educa/Downloads/LukaKuApp/app/src/main/res/layout/item_list_headline.xml" value="0.221025641025641" />
         <entry key="..\:/Users/educa/Downloads/LukaKuApp/app/src/main/res/layout/item_list_history.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/educa/Downloads/LukaKuApp/app/src/main/res/menu/button_nav_menu.xml" value="0.221025641025641" />

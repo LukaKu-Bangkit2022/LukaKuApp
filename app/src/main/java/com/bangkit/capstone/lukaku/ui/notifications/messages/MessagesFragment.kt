@@ -5,10 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.bangkit.capstone.lukaku.databinding.FragmentNotifsBinding
+import com.bangkit.capstone.lukaku.databinding.FragmentMessagesBinding
 
 class MessagesFragment : Fragment() {
-    private var _binding: FragmentNotifsBinding? = null
+    private var _binding: FragmentMessagesBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -16,14 +16,12 @@ class MessagesFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentNotifsBinding.inflate(inflater, container, false)
+        _binding = FragmentMessagesBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        binding.textView.text = "This is Notif Messages."
     }
 
     override fun onDestroyView() {

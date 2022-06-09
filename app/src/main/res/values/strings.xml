@@ -154,4 +154,8 @@
     <string name="title_open">Open media</string>
     <string name="error_style_find">Can\'t find style. Error: %s</string>
     <string name="error_style_parsing">Style parsing failed.</string>
+    <string name="updates_status">No updates yet</string>
+    <string name="updates_message">When you get updates, they\'ll\nshow up here</string>
+    <string name="messages_status">No messages yet</string>
+    <string name="message_text">Get or send a message and it\nshows up here</string>
 </resources>

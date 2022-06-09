@@ -1,141 +1,179 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.appsettings.AppSettingsFragment">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/mainToolbar"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/iv_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="@string/back"
-            android:src="@drawable/ic_arrow_back_black" />
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?attr/colorPrimaryVariant"
+            app:layout_scrollFlags="noScroll"
+            app:toolbarId="@+id/toolbar">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvSettings"
-            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:fontFamily="@font/nunito_extrabold"
-            android:text="@string/app_settings"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/mainToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize">
 
-    </androidx.appcompat.widget.Toolbar>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tvTheme"
-        style="@style/TextSubSettings"
+                    <ImageView
+                        android:id="@+id/iv_back"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:contentDescription="@string/back"
+                        android:src="@drawable/ic_arrow_back_black"
+                        app:tint="?attr/colorSecondary" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="36dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/nunito_extrabold"
+                        android:gravity="center"
+                        android:text="@string/app_settings"
+                        android:textColor="?attr/colorSecondary"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/theme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mainToolbar" />
+        android:layout_height="match_parent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        tools:ignore="SpeakableTextPresentCheck">
 
-    <com.google.android.material.switchmaterial.SwitchMaterial
-        android:id="@+id/swTheme"
-        style="@style/TextDescSettings"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/dark_mode"
-        app:layout_constraintEnd_toEndOf="@id/tvTheme"
-        app:layout_constraintStart_toStartOf="@id/tvTheme"
-        app:layout_constraintTop_toBottomOf="@+id/tvTheme" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <com.google.android.material.divider.MaterialDivider
-        android:id="@+id/div1"
-        style="@style/DivStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="@id/swTheme"
-        app:layout_constraintStart_toStartOf="@id/swTheme"
-        app:layout_constraintTop_toBottomOf="@+id/swTheme" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvTheme"
+                style="@style/TextSubSettings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/theme"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tvCommon"
-        style="@style/TextSubSettings"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/common"
-        app:layout_constraintEnd_toEndOf="@id/div1"
-        app:layout_constraintStart_toStartOf="@id/div1"
-        app:layout_constraintTop_toBottomOf="@id/div1" />
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/swTheme"
+                style="@style/TextDescSettings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/dark_mode"
+                app:layout_constraintEnd_toEndOf="@id/tvTheme"
+                app:layout_constraintStart_toStartOf="@id/tvTheme"
+                app:layout_constraintTop_toBottomOf="@+id/tvTheme" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tvChangeLanguage"
-        style="@style/TextDescSettings"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/change_language"
-        app:drawableRightCompat="@drawable/ic_double_arrow_right"
-        app:layout_constraintEnd_toEndOf="@id/tvCommon"
-        app:layout_constraintStart_toStartOf="@id/tvCommon"
-        app:layout_constraintTop_toBottomOf="@id/tvCommon" />
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/div1"
+                style="@style/DivStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="@id/swTheme"
+                app:layout_constraintStart_toStartOf="@id/swTheme"
+                app:layout_constraintTop_toBottomOf="@+id/swTheme" />
 
-    <com.google.android.material.divider.MaterialDivider
-        android:id="@+id/div2"
-        style="@style/DivStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvChangeLanguage" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvCommon"
+                style="@style/TextSubSettings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/common"
+                app:layout_constraintEnd_toEndOf="@id/div1"
+                app:layout_constraintStart_toStartOf="@id/div1"
+                app:layout_constraintTop_toBottomOf="@id/div1" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tv_feedback"
-        style="@style/TextDescSettings"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:text="@string/feedback"
-        app:drawableRightCompat="@drawable/ic_double_arrow_right"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/div2" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvChangeLanguage"
+                style="@style/TextDescSettings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/change_language"
+                app:drawableRightCompat="@drawable/ic_double_arrow_right"
+                app:layout_constraintEnd_toEndOf="@id/tvCommon"
+                app:layout_constraintStart_toStartOf="@id/tvCommon"
+                app:layout_constraintTop_toBottomOf="@id/tvCommon" />
 
-    <com.google.android.material.divider.MaterialDivider
-        android:id="@+id/div3"
-        style="@style/DivStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_about" />
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/div2"
+                style="@style/DivStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvChangeLanguage" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tv_about"
-        style="@style/TextDescSettings"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:text="@string/about"
-        app:drawableRightCompat="@drawable/ic_double_arrow_right"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_feedback" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_feedback"
+                style="@style/TextDescSettings"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:text="@string/feedback"
+                app:drawableRightCompat="@drawable/ic_double_arrow_right"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/div2" />
 
-    <com.google.android.material.divider.MaterialDivider
-        android:id="@+id/div"
-        style="@style/DivStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_feedback" />
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/div3"
+                style="@style/DivStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_about" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_about"
+                style="@style/TextDescSettings"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:text="@string/about"
+                app:drawableRightCompat="@drawable/ic_double_arrow_right"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_feedback" />
+
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/div"
+                style="@style/DivStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_feedback" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
