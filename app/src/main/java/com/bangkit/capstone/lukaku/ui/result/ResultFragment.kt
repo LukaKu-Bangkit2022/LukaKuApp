@@ -158,6 +158,11 @@ class ResultFragment : Fragment(), OnClickListener {
                     super.onPageScrolled(position, positionOffset, positionOffsetPixels)
                     index = position
                 }
+
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+                    closeFABMenu()
+                }
             })
         }
     }
