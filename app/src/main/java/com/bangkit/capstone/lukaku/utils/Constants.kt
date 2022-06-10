@@ -9,6 +9,7 @@ object Constants {
     const val KEY_EVENT_ACTION = "key_event_action"
     const val KEY_EVENT_EXTRA = "key_event_extra"
     const val FILENAME_FORMAT = "dd-MMM-yyyy"
+    const val DATE_FORMAT = "dd/MM/yyyy HH:mm:ss"
     const val PHOTO_EXTENSION = ".jpg"
     const val ANIMATION_FAST_MILLIS = 50L
     const val ANIMATION_SLOW_MILLIS = 100L
@@ -19,8 +20,8 @@ object Constants {
     const val DB_NAME = "Lukaku_database"
     const val COPY = "Copied"
     const val RESPOND_OK = "OK"
-    const val MAIL_ADDRESS = "lukaku.det@gmail.com"
-    const val MAIL_SUBJECT = "Ask Lukaku"
-    const val GITHUB = "https://github.com/LukaKu-Bangkit2022"
-    const val LINKEDIN = "https://www.linkedin.com/company/lukaku/"
+    const val MAIL_ADDRESS_US = "lukaku.det@gmail.com"
+    const val MAIL_SUBJECT_US = "Ask Lukaku"
+    const val GITHUB_US = "https://github.com/LukaKu-Bangkit2022"
+    const val LINKEDIN_US = "https://www.linkedin.com/company/lukaku/"
 }

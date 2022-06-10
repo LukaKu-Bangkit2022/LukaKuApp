@@ -63,9 +63,7 @@ class OnboardingFragment : Fragment() {
 
     private fun checkUser() {
         val firebaseUser = auth.currentUser
-        // Check if user logged in or not
         if (firebaseUser != null) {
-            // User is already logged in
             findNavController().navigate(R.id.action_onboardingFragment_to_navigation_home)
         } else onboardingFinished()
     }

@@ -1,11 +1,11 @@
 package com.bangkit.capstone.lukaku.ui.article.detail
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import com.bangkit.capstone.lukaku.R
 import com.bangkit.capstone.lukaku.data.local.entity.ArticleEntity
 import com.bangkit.capstone.lukaku.databinding.FragmentDetailArticleBinding
@@ -50,10 +50,15 @@ class DetailArticleFragment : Fragment() {
         binding.apply {
             ivPhoto.loadImage(item.imageUrl)
             tvTitle.text = item.title
-            if (item.category == "Kesehatan" || item.category == "Health") {
+            if (item.category == CATEGORY || item.category == CATEGORY_EN) {
                 tvContent.background.setTint(ContextCompat.getColor(requireContext(), R.color.pink))
             } else {
-                tvContent.background.setTint(ContextCompat.getColor(requireContext(), R.color.yellow))
+                tvContent.background.setTint(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.yellow
+                    )
+                )
             }
             tvContent.text = item.category
             tvDate.text = getString(R.string.line, item.publishedAt)
@@ -65,5 +70,10 @@ class DetailArticleFragment : Fragment() {
             tvTreatment.text = item.treatment_title
             tvTreatmentDescription.text = item.treatment_description
         }
+    }
+
+    companion object {
+        const val CATEGORY = "Kesehatan"
+        const val CATEGORY_EN = "Health"
     }
 }

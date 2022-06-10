@@ -2,7 +2,7 @@ package com.bangkit.capstone.lukaku.ui.feedback
 
 import androidx.lifecycle.ViewModel
 import com.bangkit.capstone.lukaku.data.models.Feedback
-import com.bangkit.capstone.lukaku.data.repository.drugstore.FeedbackRepository
+import com.bangkit.capstone.lukaku.data.repository.feedback.FeedbackRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

@@ -63,7 +63,6 @@ class FeedbackFragment : Fragment(), View.OnClickListener {
         }
     }
 
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
         requireActivity().onBackPressedDispatcher.addCallback(this, callback)

@@ -57,13 +57,11 @@ class SignFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // Configure Google Sign In
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
 
-        // Init Firebase Auth
         auth = Firebase.auth
         client = GoogleSignIn.getClient(requireActivity(), gso)
 
@@ -86,19 +84,17 @@ class SignFragment : Fragment() {
         val credential = GoogleAuthProvider.getCredential(idToken, null)
         auth.signInWithCredential(credential)
             .addOnSuccessListener { task ->
-                // Get LoggedIn User
                 val user = auth.currentUser
-                // Check if user is new or existing
                 val message = if (task.additionalUserInfo!!.isNewUser) {
                     getString(R.string.account_created_success_message)
                 } else {
                     getString(R.string.sign_in_welcome_message, user?.displayName)
                 }
+
                 requireActivity().toast(message)
                 moveToMainActivity()
             }
             .addOnFailureListener {
-                // Sign in failed
                 requireActivity().toast(getString(R.string.sign_in_failed_message))
                 dialog.dismiss()
             }

@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bangkit.capstone.lukaku.R
 import com.bangkit.capstone.lukaku.databinding.ItemListFirstAidBinding
+import com.bangkit.capstone.lukaku.databinding.ItemListFirstAidBinding.inflate
 import com.bangkit.capstone.lukaku.utils.Constants.COPY
 import com.bangkit.capstone.lukaku.utils.toast
 
@@ -17,8 +18,7 @@ class FirstAidsAdapter(
 ) : RecyclerView.Adapter<FirstAidsAdapter.FirstAidsViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FirstAidsViewHolder {
-        val binding =
-            ItemListFirstAidBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = inflate(LayoutInflater.from(parent.context), parent, false)
         return FirstAidsViewHolder(binding, parent.context)
     }
 

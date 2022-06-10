@@ -1,4 +1,4 @@
-package com.bangkit.capstone.lukaku.data.repository.drugstore
+package com.bangkit.capstone.lukaku.data.repository.feedback
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData

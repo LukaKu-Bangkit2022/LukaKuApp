@@ -15,7 +15,7 @@ class ArticlesViewModel @Inject constructor(
 
     fun getAllArticle() = articleRepository.getArticle()
 
-    suspend fun searchArticle(searchQuery: String) = articleRepository.searchArticle(searchQuery)
+    fun searchArticle(searchQuery: String) = articleRepository.searchArticle(searchQuery)
 
     fun saveArticle(articleEntity: ArticleEntity) {
         viewModelScope.launch {

@@ -1,5 +1,6 @@
 package com.bangkit.capstone.lukaku.helper
 
+import com.bangkit.capstone.lukaku.utils.Constants.DATE_FORMAT
 import java.text.DateFormat
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
@@ -12,7 +13,7 @@ fun String.withFirstUpperCase(): String {
 }
 
 fun String.withDateFormat(): String {
-    val format = SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.US)
+    val format = SimpleDateFormat(DATE_FORMAT, Locale.US)
     val date = format.parse(this) as Date
     val dateFormat = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.SHORT)
 

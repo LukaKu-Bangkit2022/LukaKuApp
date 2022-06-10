@@ -63,9 +63,9 @@ class DetectionAdapter(
                     it.findNavController().navigate(
                         R.id.action_global_resultFragment,
                         bundleOf(
-                            "id" to saved.id.toString(),
-                            "image" to imageFile,
-                            "result_parcelable" to saved.detectionResult
+                            ID_PAIR to saved.id.toString(),
+                            IMAGE_PAIR to imageFile,
+                            RESULT_PAIR to saved.detectionResult
                         )
                     )
                 }
@@ -74,6 +74,10 @@ class DetectionAdapter(
     }
 
     companion object {
+        private const val ID_PAIR = "id"
+        private const val IMAGE_PAIR = "image"
+        private const val RESULT_PAIR = "result_parcelable"
+
         val DIFF_CALLBACK: DiffUtil.ItemCallback<DetectionEntity> =
             object : DiffUtil.ItemCallback<DetectionEntity>() {
                 override fun areItemsTheSame(

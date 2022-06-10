@@ -10,9 +10,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bangkit.capstone.lukaku.R
+import com.bangkit.capstone.lukaku.adapters.ArticleAdapter.ArticleViewHolder
 import com.bangkit.capstone.lukaku.data.local.entity.ArticleEntity
 import com.bangkit.capstone.lukaku.databinding.ItemListArticleBinding
-import com.bangkit.capstone.lukaku.adapters.ArticleAdapter.ArticleViewHolder
+import com.bangkit.capstone.lukaku.databinding.ItemListArticleBinding.inflate
+import com.bangkit.capstone.lukaku.ui.article.detail.DetailArticleFragment.Companion.CATEGORY
+import com.bangkit.capstone.lukaku.ui.article.detail.DetailArticleFragment.Companion.CATEGORY_EN
 import com.bangkit.capstone.lukaku.utils.loadImage
 import com.bangkit.capstone.lukaku.utils.toast
 
@@ -22,8 +25,7 @@ class ArticleAdapter(private val onBookmarkClick: (ArticleEntity) -> Unit) :
     val differ = AsyncListDiffer(this, DIFF_CALLBACK)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
-        val binding =
-            ItemListArticleBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = inflate(LayoutInflater.from(parent.context), parent, false)
         return ArticleViewHolder(parent.context, binding)
     }
 
@@ -36,14 +38,16 @@ class ArticleAdapter(private val onBookmarkClick: (ArticleEntity) -> Unit) :
 
         ivBookmark.setOnClickListener {
             onBookmarkClick(article)
-            if (article.isBookmarked == true) {
+            if (article.isBookmarked) {
                 ivBookmark.setImageDrawable(
                     ContextCompat.getDrawable(
                         ivBookmark.context,
                         R.drawable.ic_bookmarked
                     )
                 )
-                holder.itemView.context.toast(holder.itemView.resources.getString(R.string.article_bookmarked))
+                holder.itemView.context.toast(
+                    holder.itemView.resources.getString(R.string.article_bookmarked)
+                )
             } else {
                 ivBookmark.setImageDrawable(
                     ContextCompat.getDrawable(
@@ -51,7 +55,9 @@ class ArticleAdapter(private val onBookmarkClick: (ArticleEntity) -> Unit) :
                         R.drawable.ic_bookmark
                     )
                 )
-                holder.itemView.context.toast(holder.itemView.resources.getString(R.string.article_removed_bookmark))
+                holder.itemView.context.toast(
+                    holder.itemView.resources.getString(R.string.article_removed_bookmark)
+                )
             }
         }
     }
@@ -64,13 +70,14 @@ class ArticleAdapter(private val onBookmarkClick: (ArticleEntity) -> Unit) :
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ArticleEntity) {
             binding.apply {
-                if (item.category == "Kesehatan" || item.category == "Health") {
-                    tvContent.background.setTint(ContextCompat.getColor(context, R.color.pink))
+                val background = if (item.category == CATEGORY || item.category == CATEGORY_EN) {
+                    ContextCompat.getColor(context, R.color.pink)
                 } else {
-                    tvContent.background.setTint(ContextCompat.getColor(context, R.color.yellow))
+                    ContextCompat.getColor(context, R.color.yellow)
                 }
-                tvContent.text = item.category
 
+                tvContent.background.setTint(background)
+                tvContent.text = item.category
                 ivPhoto.loadImage(item.imageUrl)
                 tvTitle.text = item.title
                 tvDate.text = context.getString(R.string.line, item.publishedAt)
@@ -92,24 +99,8 @@ class ArticleAdapter(private val onBookmarkClick: (ArticleEntity) -> Unit) :
         onItemClickListener = listener
     }
 
-    companion object {
-        val DIFF_CALLBACK: DiffUtil.ItemCallback<ArticleEntity> =
-            object : DiffUtil.ItemCallback<ArticleEntity>() {
-                override fun areItemsTheSame(
-                    oldItem: ArticleEntity,
-                    newItem: ArticleEntity
-                ): Boolean = oldItem.id == newItem.id
-
-                override fun areContentsTheSame(
-                    oldItem: ArticleEntity,
-                    newItem: ArticleEntity
-                ): Boolean = oldItem == newItem
-
-            }
-    }
-
     private fun isBookmarked(article: ArticleEntity, ivBookmark: ImageView) {
-        if (article.isBookmarked == true) {
+        if (article.isBookmarked) {
             ivBookmark.setImageDrawable(
                 ContextCompat.getDrawable(
                     ivBookmark.context,
@@ -124,5 +115,20 @@ class ArticleAdapter(private val onBookmarkClick: (ArticleEntity) -> Unit) :
                 )
             )
         }
+    }
+
+    companion object {
+        val DIFF_CALLBACK: DiffUtil.ItemCallback<ArticleEntity> =
+            object : DiffUtil.ItemCallback<ArticleEntity>() {
+                override fun areItemsTheSame(
+                    oldItem: ArticleEntity,
+                    newItem: ArticleEntity
+                ): Boolean = oldItem.id == newItem.id
+
+                override fun areContentsTheSame(
+                    oldItem: ArticleEntity,
+                    newItem: ArticleEntity
+                ): Boolean = oldItem == newItem
+            }
     }
 }

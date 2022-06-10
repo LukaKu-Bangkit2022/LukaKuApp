@@ -11,10 +11,10 @@ import androidx.fragment.app.Fragment
 import com.bangkit.capstone.lukaku.BuildConfig.VERSION_NAME
 import com.bangkit.capstone.lukaku.R
 import com.bangkit.capstone.lukaku.databinding.FragmentAboutBinding
-import com.bangkit.capstone.lukaku.utils.Constants.GITHUB
-import com.bangkit.capstone.lukaku.utils.Constants.LINKEDIN
-import com.bangkit.capstone.lukaku.utils.Constants.MAIL_ADDRESS
-import com.bangkit.capstone.lukaku.utils.Constants.MAIL_SUBJECT
+import com.bangkit.capstone.lukaku.utils.Constants.GITHUB_US
+import com.bangkit.capstone.lukaku.utils.Constants.LINKEDIN_US
+import com.bangkit.capstone.lukaku.utils.Constants.MAIL_ADDRESS_US
+import com.bangkit.capstone.lukaku.utils.Constants.MAIL_SUBJECT_US
 
 class AboutFragment : Fragment(), View.OnClickListener {
 
@@ -48,8 +48,8 @@ class AboutFragment : Fragment(), View.OnClickListener {
         when (view?.id) {
             R.id.iv_back -> requireActivity().onBackPressed()
             R.id.ib_email -> onSendMail()
-            R.id.ib_github -> onOpenMedia(GITHUB)
-            R.id.ib_linkedin -> onOpenMedia(LINKEDIN)
+            R.id.ib_github -> onOpenMedia(GITHUB_US)
+            R.id.ib_linkedin -> onOpenMedia(LINKEDIN_US)
         }
     }
 
@@ -72,10 +72,10 @@ class AboutFragment : Fragment(), View.OnClickListener {
     }
 
     private fun onSendMail() {
-        val uri = Uri.parse("mailto:")
+        val uri = Uri.parse(MAIL_URI)
             .buildUpon()
-            .appendQueryParameter("to", MAIL_ADDRESS)
-            .appendQueryParameter("subject", MAIL_SUBJECT)
+            .appendQueryParameter(MAIL_TO, MAIL_ADDRESS_US)
+            .appendQueryParameter(MAIL_SUBJECT, MAIL_SUBJECT_US)
             .build()
 
         val intent = Intent(ACTION_SENDTO, uri)
@@ -83,5 +83,11 @@ class AboutFragment : Fragment(), View.OnClickListener {
         if (intent.resolveActivity(requireActivity().packageManager) != null) {
             startActivity(createChooser(intent, getString(R.string.title_email)))
         }
+    }
+
+    companion object {
+        private const val MAIL_URI = "mailto:"
+        private const val MAIL_TO = "to"
+        private const val MAIL_SUBJECT = "subject"
     }
 }
