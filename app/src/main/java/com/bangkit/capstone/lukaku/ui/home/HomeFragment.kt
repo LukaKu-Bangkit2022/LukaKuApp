@@ -7,6 +7,7 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -73,6 +74,7 @@ class HomeFragment : Fragment() {
         initRecyclerView()
         onDetail()
         getAllArticle()
+        handleOnBackPressed()
     }
 
     override fun onResume() {
@@ -84,6 +86,16 @@ class HomeFragment : Fragment() {
         super.onDestroyView()
         bottomBar.visibility = GONE
         _binding = null
+    }
+
+    private fun handleOnBackPressed() {
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                requireActivity().finish()
+            }
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
     }
 
     private fun setProfile() {
