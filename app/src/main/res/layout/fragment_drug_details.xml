@@ -9,31 +9,91 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimaryVariant">
+        android:background="?attr/colorPrimaryVariant"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+            android:layout_height="300dp"
+            app:contentScrim="?attr/colorPrimaryVariant"
+            app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed|snap"
+            app:statusBarScrim="?attr/colorPrimaryVariant"
+            app:toolbarId="@id/mainToolbar">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/iv_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:transitionName="photo"
+                app:layout_collapseMode="parallax"
+                app:shapeAppearanceOverlay="@style/RoundImageView"
+                tools:src="@tools:sample/backgrounds/scenic" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/image_shadow" />
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/mainToolbar"
+                android:layout_width="wrap_content"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/Theme.AppCompat.Light">
+
+                <ImageView
+                    android:id="@+id/ivBack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/back"
+                    android:src="@drawable/ic_arrow_back_white" />
+
+            </androidx.appcompat.widget.Toolbar>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="16dp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/nunito_extrabold"
+                    android:maxLines="2"
+                    android:textColor="@color/white_smoke"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:transitionName="title"
+                    app:layout_constraintBottom_toTopOf="@+id/tv_piece"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:text="Betadine Salep 5 Gram" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_piece"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/lato"
+                    android:textColor="@color/white_smoke"
+                    android:transitionName="date"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:text="Harga: Rp 16.000" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <ImageView
-                    android:id="@+id/iv_image"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:contentDescription="@string/selected_image"
-                    android:visibility="visible"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintDimensionRatio="1:1"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/mainToolbar"
-                    tools:src="@tools:sample/avatars" />
-
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tv_content"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -44,36 +104,72 @@
                     android:textColor="@color/white_smoke"
                     android:textSize="12sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/iv_image"
+                    android:transitionName="category"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     tools:ignore="SmallSp"
                     tools:text="Burns" />
 
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/mainToolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_collapseMode="pin"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <ImageView
-                        android:id="@+id/iv_back"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="?attr/selectableItemBackgroundBorderless"
-                        android:contentDescription="@string/back"
-                        android:src="@drawable/ic_arrow_back_black"
-                        app:layout_collapseMode="pin"
-                        app:tint="@color/white_smoke"
-                        tools:ignore="RtlSymmetry"
-                        tools:layout_editor_absoluteX="16dp"
-                        tools:layout_editor_absoluteY="16dp" />
-
-                </androidx.appcompat.widget.Toolbar>
-
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent">-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/iv_image"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="0dp"-->
+<!--                    android:contentDescription="@string/selected_image"-->
+<!--                    android:visibility="visible"-->
+<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                    app:layout_constraintDimensionRatio="1:1"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="@+id/mainToolbar"-->
+<!--                    tools:src="@tools:sample/avatars" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_content"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:background="@drawable/bg_category"-->
+<!--                    android:backgroundTint="@color/green"-->
+<!--                    android:fontFamily="@font/lato"-->
+<!--                    android:gravity="center"-->
+<!--                    android:textColor="@color/white_smoke"-->
+<!--                    android:textSize="12sp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    app:layout_constraintBottom_toBottomOf="@+id/iv_image"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    tools:ignore="SmallSp"-->
+<!--                    tools:text="Burns" />-->
+
+<!--                <androidx.appcompat.widget.Toolbar-->
+<!--                    android:id="@+id/mainToolbar"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    app:layout_collapseMode="pin"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                    <ImageView-->
+<!--                        android:id="@+id/iv_back"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:background="?attr/selectableItemBackgroundBorderless"-->
+<!--                        android:contentDescription="@string/back"-->
+<!--                        android:src="@drawable/ic_arrow_back_black"-->
+<!--                        app:layout_collapseMode="pin"-->
+<!--                        app:tint="@color/white_smoke"-->
+<!--                        tools:ignore="RtlSymmetry"-->
+<!--                        tools:layout_editor_absoluteX="16dp"-->
+<!--                        tools:layout_editor_absoluteY="16dp" />-->
+
+<!--                </androidx.appcompat.widget.Toolbar>-->
+
+<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -83,66 +179,86 @@
         android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true"
-        app:layout_anchorGravity="start|center"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:ignore="SpeakableTextPresentCheck">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_margin="16dp">
 
-            <TextView
-                android:id="@+id/tv_name"
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_label_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:fontFamily="@font/lato_black"
-                android:overScrollMode="never"
-                android:padding="8dp"
-                android:textColor="?attr/colorOnPrimary"
-                android:textSize="24sp"
+                android:fontFamily="@font/nunito_extrabold"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="16sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="Betadine Salep 5 Gram" />
+                android:text="@string/drug_description" />
 
-            <TextView
-                android:id="@+id/tv_piece"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/nunito_extrabold"
-                android:padding="8dp"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="@+id/tv_name"
-                app:layout_constraintStart_toStartOf="@id/tv_name"
-                app:layout_constraintTop_toBottomOf="@+id/tv_name"
-                tools:text="Harga: Rp 16.000" />
+<!--            <TextView-->
+<!--                android:id="@+id/tv_name"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:fontFamily="@font/lato_black"-->
+<!--                android:overScrollMode="never"-->
+<!--                android:textColor="?attr/colorOnPrimary"-->
+<!--                android:textSize="24sp"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                tools:text="Betadine Salep 5 Gram" />-->
 
-            <TextView
-                android:id="@+id/tv_label_description"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:fontFamily="@font/lato_bold"
-                android:padding="8dp"
-                android:text="@string/drug_description"
-                android:textColor="?attr/colorOnPrimary"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="@+id/tv_piece"
-                app:layout_constraintStart_toStartOf="@+id/tv_piece"
-                app:layout_constraintTop_toBottomOf="@+id/tv_piece" />
+<!--            <TextView-->
+<!--                android:id="@+id/tv_piece"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:fontFamily="@font/nunito_extrabold"-->
+<!--                android:padding="8dp"-->
+<!--                android:textSize="18sp"-->
+<!--                app:layout_constraintEnd_toEndOf="@+id/tv_name"-->
+<!--                app:layout_constraintStart_toStartOf="@id/tv_name"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/tv_name"-->
+<!--                tools:text="Harga: Rp 16.000" />-->
 
-            <TextView
+<!--            <TextView-->
+<!--                android:id="@+id/tv_label_description"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="16dp"-->
+<!--                android:fontFamily="@font/lato_bold"-->
+<!--                android:padding="8dp"-->
+<!--                android:text="@string/drug_description"-->
+<!--                android:textColor="?attr/colorOnPrimary"-->
+<!--                android:textSize="18sp"-->
+<!--                app:layout_constraintEnd_toEndOf="@+id/tv_piece"-->
+<!--                app:layout_constraintStart_toStartOf="@+id/tv_piece"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/tv_piece" />-->
+
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_description"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
                 android:fontFamily="@font/lato"
-                android:padding="8dp"
+                android:transitionName="definition_description"
                 app:layout_constraintEnd_toEndOf="@+id/tv_label_description"
                 app:layout_constraintStart_toStartOf="@+id/tv_label_description"
                 app:layout_constraintTop_toBottomOf="@+id/tv_label_description"
                 tools:text="BETADINE SALEP mengandung zat aktif Povidone Iodine 10%. Obat ini digunakan sebagai salep antiseptik untuk membunuh kuman penyebab infeksi pada luka seperti luka bakar, luka sunat, luka tergores, dan luka kecil lainnya. Produk ini hanya untuk penggunaan luar tubuh." />
+
+<!--            <TextView-->
+<!--                android:id="@+id/tv_description"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:fontFamily="@font/lato"-->
+<!--                app:layout_constraintEnd_toEndOf="@+id/tv_label_description"-->
+<!--                app:layout_constraintStart_toStartOf="@+id/tv_label_description"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/tv_label_description"-->
+<!--                tools:text="BETADINE SALEP mengandung zat aktif Povidone Iodine 10%. Obat ini digunakan sebagai salep antiseptik untuk membunuh kuman penyebab infeksi pada luka seperti luka bakar, luka sunat, luka tergores, dan luka kecil lainnya. Produk ini hanya untuk penggunaan luar tubuh." />-->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

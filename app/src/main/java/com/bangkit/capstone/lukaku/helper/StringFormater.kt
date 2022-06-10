@@ -1,6 +1,5 @@
 package com.bangkit.capstone.lukaku.helper
 
-import android.util.Log
 import java.text.DateFormat
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
