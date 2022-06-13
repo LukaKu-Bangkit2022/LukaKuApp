@@ -1,6 +1,11 @@
 # LukaKu Project for Bangkit 2022 Product-based Capstone
 
+![LukaKu with Android](https://user-images.githubusercontent.com/51723168/173277452-df7c9aa1-4085-4b32-98aa-0279bf46c9a8.png)
+
 ## Team ID: C22-PS188
+
+## Overview
+We are designing UI/UX and application prototypes for user experience. Retrofit implementation to handle API data connections. The app has a login system with Firebase-Auth. Implementation of Datastore to store the Themes and Language of the application. The application uses Room for offline storage of History Detection & Bookmark Articles. CameraX implementation for detection feature consistency support.
 
 ## Active Team Member:
 - (ML) M2011F1159 - Firdaus Ryan Pratomo - Padjadjaran University
