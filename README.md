@@ -16,7 +16,7 @@ This project using the Architecture Components:
 - [x] Room
 - [x] Navigation
 
-Development Roadmap:
+## Development Roadmap:
 - [x] Kotlin
 - [x] Room
 - [x] Lifecycle-aware components
@@ -38,7 +38,6 @@ Development Roadmap:
 - [x] G-Maps API
 
 ## Screenshots:
-
 <p float="left">
   <img src="https://user-images.githubusercontent.com/61121146/173271431-097eafae-e07f-4720-be13-9bb5cec0b302.png" width="150" />
   <img src="https://user-images.githubusercontent.com/61121146/173271459-4de5b408-ebad-474e-a4e2-7a9337165e50.png" width="150" /> 
@@ -66,7 +65,7 @@ Development Roadmap:
   <img src="https://user-images.githubusercontent.com/61121146/173271957-d6739605-9d81-414c-bf85-902db57ff5e2.png" width="150" />
 </p>
 
-Features
+## Features:
 - [x] List Articles
 - [x] Search Articles
 - [x] Bookmark Articles & Result Prediction
